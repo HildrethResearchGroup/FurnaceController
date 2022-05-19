@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ORSSerial
 
 struct ContentView: View {
     
@@ -13,6 +14,19 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
+            HStack{
+                Picker("Select Port", selection: $controller.serialPort) {
+                    ForEach(controller.serialPortManager.availablePorts, id:\.self) { port in
+                        Text(port.name).tag(port as ORSSerialPort?)
+                    }
+                }
+                Button(controller.nextPortState)
+                    {controller.openOrClosePort()}
+            }
+            .padding(10)
+            Button("Send Command")
+                {controller.sendCommand()}
+            
             CurrentReadingView(controller: controller)
         }
     }

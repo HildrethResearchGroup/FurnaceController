@@ -21,6 +21,8 @@ class ArduinoController: ObservableObject {
     var tempUnit = "C"
     var flowUnit = "L/min"
     
+    @Published var nextPortState = "Open"
+    
     @Published var serialPort: ORSSerialPort? {
         didSet {
             serialPort?.parity = .none
@@ -41,5 +43,22 @@ class ArduinoController: ObservableObject {
             return
         }
         self.isRecording = true
+    }
+    
+    func sendCommand() {
+        print("Sending \"Hello, World!\"")
+        self.serialPort?.send("Hello, World!".data(using: .utf8)!)
+    }
+    
+    func openOrClosePort() {
+        if let port = self.serialPort {
+            if (port.isOpen) {
+                port.close()
+                nextPortState = "Open"
+            } else {
+                port.open()
+                nextPortState = "Close"
+            }
+        }
     }
 }
