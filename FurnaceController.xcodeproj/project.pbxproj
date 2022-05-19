@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */; };
+		3F12F122283446CD006B0368 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F121283446CD006B0368 /* ContentView.swift */; };
+		3F12F124283446CD006B0368 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F123283446CD006B0368 /* Assets.xcassets */; };
+		3F12F127283446CD006B0368 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F126283446CD006B0368 /* Preview Assets.xcassets */; };
+		3F12F132283446CE006B0368 /* FurnaceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F131283446CE006B0368 /* FurnaceControllerTests.swift */; };
+		3F12F13C283446CE006B0368 /* FurnaceControllerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F13B283446CE006B0368 /* FurnaceControllerUITests.swift */; };
+		3F12F13E283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F13D283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift */; };
+		3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F14A2834493C006B0368 /* ArduinoController.swift */; };
+		3F12F14E283449A5006B0368 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = 3F12F14D283449A5006B0368 /* ORSSerial */; };
+		3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */; };
+		3F8E0DB928356ABE00AE7D9A /* SerialCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E0DB828356ABE00AE7D9A /* SerialCommunicator.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3F12F12E283446CE006B0368 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F12F114283446CD006B0368 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F12F11B283446CD006B0368;
+			remoteInfo = FurnaceController;
+		};
+		3F12F138283446CE006B0368 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3F12F114283446CD006B0368 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3F12F11B283446CD006B0368;
+			remoteInfo = FurnaceController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3F12F11C283446CD006B0368 /* FurnaceController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FurnaceController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerApp.swift; sourceTree = "<group>"; };
+		3F12F121283446CD006B0368 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		3F12F123283446CD006B0368 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3F12F126283446CD006B0368 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3F12F128283446CD006B0368 /* FurnaceController.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FurnaceController.entitlements; sourceTree = "<group>"; };
+		3F12F12D283446CE006B0368 /* FurnaceControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FurnaceControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F12F131283446CE006B0368 /* FurnaceControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerTests.swift; sourceTree = "<group>"; };
+		3F12F137283446CE006B0368 /* FurnaceControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FurnaceControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F12F13B283446CE006B0368 /* FurnaceControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerUITests.swift; sourceTree = "<group>"; };
+		3F12F13D283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		3F12F14A2834493C006B0368 /* ArduinoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoController.swift; sourceTree = "<group>"; };
+		3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentReadingView.swift; sourceTree = "<group>"; };
+		3F8E0DB828356ABE00AE7D9A /* SerialCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialCommunicator.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3F12F119283446CD006B0368 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F12F14E283449A5006B0368 /* ORSSerial in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F12F12A283446CE006B0368 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F12F134283446CE006B0368 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F12F113283446CD006B0368 = {
+			isa = PBXGroup;
+			children = (
+				3F12F11E283446CD006B0368 /* FurnaceController */,
+				3F12F130283446CE006B0368 /* FurnaceControllerTests */,
+				3F12F13A283446CE006B0368 /* FurnaceControllerUITests */,
+				3F12F11D283446CD006B0368 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3F12F11D283446CD006B0368 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F11C283446CD006B0368 /* FurnaceController.app */,
+				3F12F12D283446CE006B0368 /* FurnaceControllerTests.xctest */,
+				3F12F137283446CE006B0368 /* FurnaceControllerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F12F11E283446CD006B0368 /* FurnaceController */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */,
+				3F12F121283446CD006B0368 /* ContentView.swift */,
+				3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */,
+				3F12F14A2834493C006B0368 /* ArduinoController.swift */,
+				3F8E0DB828356ABE00AE7D9A /* SerialCommunicator.swift */,
+				3F12F123283446CD006B0368 /* Assets.xcassets */,
+				3F12F128283446CD006B0368 /* FurnaceController.entitlements */,
+				3F12F125283446CD006B0368 /* Preview Content */,
+			);
+			path = FurnaceController;
+			sourceTree = "<group>";
+		};
+		3F12F125283446CD006B0368 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F126283446CD006B0368 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3F12F130283446CE006B0368 /* FurnaceControllerTests */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F131283446CE006B0368 /* FurnaceControllerTests.swift */,
+			);
+			path = FurnaceControllerTests;
+			sourceTree = "<group>";
+		};
+		3F12F13A283446CE006B0368 /* FurnaceControllerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3F12F13B283446CE006B0368 /* FurnaceControllerUITests.swift */,
+				3F12F13D283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift */,
+			);
+			path = FurnaceControllerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3F12F11B283446CD006B0368 /* FurnaceController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F12F141283446CE006B0368 /* Build configuration list for PBXNativeTarget "FurnaceController" */;
+			buildPhases = (
+				3F12F118283446CD006B0368 /* Sources */,
+				3F12F119283446CD006B0368 /* Frameworks */,
+				3F12F11A283446CD006B0368 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FurnaceController;
+			packageProductDependencies = (
+				3F12F14D283449A5006B0368 /* ORSSerial */,
+			);
+			productName = FurnaceController;
+			productReference = 3F12F11C283446CD006B0368 /* FurnaceController.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3F12F12C283446CE006B0368 /* FurnaceControllerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F12F144283446CE006B0368 /* Build configuration list for PBXNativeTarget "FurnaceControllerTests" */;
+			buildPhases = (
+				3F12F129283446CE006B0368 /* Sources */,
+				3F12F12A283446CE006B0368 /* Frameworks */,
+				3F12F12B283446CE006B0368 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F12F12F283446CE006B0368 /* PBXTargetDependency */,
+			);
+			name = FurnaceControllerTests;
+			productName = FurnaceControllerTests;
+			productReference = 3F12F12D283446CE006B0368 /* FurnaceControllerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3F12F136283446CE006B0368 /* FurnaceControllerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3F12F147283446CE006B0368 /* Build configuration list for PBXNativeTarget "FurnaceControllerUITests" */;
+			buildPhases = (
+				3F12F133283446CE006B0368 /* Sources */,
+				3F12F134283446CE006B0368 /* Frameworks */,
+				3F12F135283446CE006B0368 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3F12F139283446CE006B0368 /* PBXTargetDependency */,
+			);
+			name = FurnaceControllerUITests;
+			productName = FurnaceControllerUITests;
+			productReference = 3F12F137283446CE006B0368 /* FurnaceControllerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3F12F114283446CD006B0368 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					3F12F11B283446CD006B0368 = {
+						CreatedOnToolsVersion = 13.3;
+					};
+					3F12F12C283446CE006B0368 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 3F12F11B283446CD006B0368;
+					};
+					3F12F136283446CE006B0368 = {
+						CreatedOnToolsVersion = 13.3;
+						TestTargetID = 3F12F11B283446CD006B0368;
+					};
+				};
+			};
+			buildConfigurationList = 3F12F117283446CD006B0368 /* Build configuration list for PBXProject "FurnaceController" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3F12F113283446CD006B0368;
+			packageReferences = (
+				3F12F14C283449A5006B0368 /* XCRemoteSwiftPackageReference "ORSSerialPort" */,
+			);
+			productRefGroup = 3F12F11D283446CD006B0368 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3F12F11B283446CD006B0368 /* FurnaceController */,
+				3F12F12C283446CE006B0368 /* FurnaceControllerTests */,
+				3F12F136283446CE006B0368 /* FurnaceControllerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3F12F11A283446CD006B0368 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F12F127283446CD006B0368 /* Preview Assets.xcassets in Resources */,
+				3F12F124283446CD006B0368 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F12F12B283446CE006B0368 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F12F135283446CE006B0368 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3F12F118283446CD006B0368 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F8E0DB928356ABE00AE7D9A /* SerialCommunicator.swift in Sources */,
+				3F12F122283446CD006B0368 /* ContentView.swift in Sources */,
+				3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */,
+				3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */,
+				3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F12F129283446CE006B0368 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F12F132283446CE006B0368 /* FurnaceControllerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3F12F133283446CE006B0368 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3F12F13C283446CE006B0368 /* FurnaceControllerUITests.swift in Sources */,
+				3F12F13E283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3F12F12F283446CE006B0368 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F12F11B283446CD006B0368 /* FurnaceController */;
+			targetProxy = 3F12F12E283446CE006B0368 /* PBXContainerItemProxy */;
+		};
+		3F12F139283446CE006B0368 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3F12F11B283446CD006B0368 /* FurnaceController */;
+			targetProxy = 3F12F138283446CE006B0368 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		3F12F13F283446CE006B0368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3F12F140283446CE006B0368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		3F12F142283446CE006B0368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FurnaceController/FurnaceController.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FurnaceController/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.mines.furnace-controllers.FurnaceController";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		3F12F143283446CE006B0368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FurnaceController/FurnaceController.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FurnaceController/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.mines.furnace-controllers.FurnaceController";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		3F12F145283446CE006B0368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.mines.furnace-controllers.FurnaceControllerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FurnaceController.app/Contents/MacOS/FurnaceController";
+			};
+			name = Debug;
+		};
+		3F12F146283446CE006B0368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.mines.furnace-controllers.FurnaceControllerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FurnaceController.app/Contents/MacOS/FurnaceController";
+			};
+			name = Release;
+		};
+		3F12F148283446CE006B0368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.mines.furnace-controllers.FurnaceControllerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = FurnaceController;
+			};
+			name = Debug;
+		};
+		3F12F149283446CE006B0368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "edu.mines.furnace-controllers.FurnaceControllerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = FurnaceController;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3F12F117283446CD006B0368 /* Build configuration list for PBXProject "FurnaceController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F12F13F283446CE006B0368 /* Debug */,
+				3F12F140283446CE006B0368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F12F141283446CE006B0368 /* Build configuration list for PBXNativeTarget "FurnaceController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F12F142283446CE006B0368 /* Debug */,
+				3F12F143283446CE006B0368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F12F144283446CE006B0368 /* Build configuration list for PBXNativeTarget "FurnaceControllerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F12F145283446CE006B0368 /* Debug */,
+				3F12F146283446CE006B0368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3F12F147283446CE006B0368 /* Build configuration list for PBXNativeTarget "FurnaceControllerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3F12F148283446CE006B0368 /* Debug */,
+				3F12F149283446CE006B0368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3F12F14C283449A5006B0368 /* XCRemoteSwiftPackageReference "ORSSerialPort" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/armadsen/ORSSerialPort.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F12F14D283449A5006B0368 /* ORSSerial */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F12F14C283449A5006B0368 /* XCRemoteSwiftPackageReference "ORSSerialPort" */;
+			productName = ORSSerial;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3F12F114283446CD006B0368 /* Project object */;
+}
