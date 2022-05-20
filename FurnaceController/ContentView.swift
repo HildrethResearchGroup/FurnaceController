@@ -20,23 +20,21 @@ struct ContentView: View {
                         Text(port.name).tag(port as ORSSerialPort?)
                     }
                 }
+                
                 Button(controller.nextPortState) {controller.openOrClosePort()}
             }
             .padding(10)
+            
             HStack {
                 TextField("", text: $controller.nextCommand)
-                Button("Send Command")
-                    {controller.testCommand()}
+                Button("Send Command") {controller.sendCommand()}
             }
             
+            Text("Last response: \"\(controller.lastResponse)\"")
             
             CurrentReadingView(controller: controller)
         }
     }
-}
-
-extension ORSSerialPort: Identifiable {
-    public var id: ORSSerialPort {return self}
 }
 
 struct ContentView_Previews: PreviewProvider {

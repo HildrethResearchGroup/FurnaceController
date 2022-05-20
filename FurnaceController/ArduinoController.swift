@@ -10,22 +10,23 @@ import ORSSerial
 
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
-    enum RequestType: Int {
-        case readData = 1
-    }
-    
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
     
-    var lastTemp = 0
-    var lastFlowN2 = 0
-    var lastFlowAr = 0
+    // All of these published variables are used to keep the app display updated.
+    // The @Published modifier makes the view watch the variable to see if it
+    // needs to be updated on the display
+    @Published var nextCommand = ""
+    @Published var lastResponse = ""
     
-    var tempUnit = "C"
-    var flowUnit = "L/min"
+    @Published var lastTemp = 0
+    @Published var lastFlowN2 = 0
+    @Published var lastFlowAr = 0
+    
+    @Published var tempUnit = "C"
+    @Published var flowUnit = "L/min"
     
     @Published var nextPortState = "Open"
-    @Published var nextCommand = ""
-    @Published var isRecording = false
+    @Published var isRecording = false // currently unused
     
     @Published var serialPort: ORSSerialPort? {
         didSet {
@@ -36,6 +37,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
+    // these next 2 functions are not used either... yet...
     func getRecordButton() -> String {
         if self.isRecording {
             return "Stop Recording"
@@ -51,13 +53,14 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         self.isRecording = true
     }
     
+    // sends whatever command is entered into the textbox. Currently triggered by a button.
     func sendCommand() {
         if let port = self.serialPort{
-            print("Sending \"\(self.nextCommand)\" to \(port.path) which is open (\(port.isOpen))")
             port.send(self.nextCommand.data(using: .utf8)!)
         }
     }
     
+    // opens/closes the serial port. controlled by a button
     func openOrClosePort() {
         if let port = self.serialPort {
             if (port.isOpen) {
@@ -68,17 +71,12 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
-    func serialPort(_ serialPort: ORSSerialPort, didReceive data: Data, to request: ORSSerialRequest) {
-        let string = String(data: data, encoding: .utf8)
-        print("Got \(string) from the serial port! POG!")
-    }
-    
-    func serialPort(_ serialPort: ORSSerialPort, didReceive data: Data) {
-        print(String(data: data, encoding: .utf8))
-    }
-    
-    func serialPort(_ serialPort: ORSSerialPort, requestDidTimeout response: ORSSerialRequest){
-        print("timed out")
+    // the serialPort functions all respond to incoming packets recieved from the serial port
+    // if the ORSSerial{PacketDescriptor sees a command from arduino, it will call the first function
+    func serialPort(_ serialPort: ORSSerialPort, didReceivePacket packetData: Data, matching descriptor: ORSSerialPacketDescriptor) {
+        if let dataAsList = String(data: packetData, encoding: String.Encoding.ascii)?.components(separatedBy: " ") {
+            self.lastResponse = dataAsList[1...dataAsList.count - 2].joined(separator: " ")
+        }
     }
     
     func serialPort(_ serialPort: ORSSerialPort, didEncounterError error: Error) {
@@ -86,21 +84,14 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     }
     
     func serialPortWasRemovedFromSystem(_ serialPort: ORSSerialPort) {
-        print("Port was removed")
+        self.serialPort = nil
     }
     
-    func testCommand(){
-        let command = "!!testing;;".data(using: String.Encoding.ascii)!
-        let responseDescriptor = ORSSerialPacketDescriptor(prefixString: "!", suffixString: ";", maximumPacketLength: 100, userInfo: nil)
-        let request = ORSSerialRequest(dataToSend: command,
-            userInfo: nil,
-            timeoutInterval: 2,
-            responseDescriptor: responseDescriptor)
-        serialPort?.send(request)
-        print("request sent")
-    }
-    
+    // called when a serial port is opened, and adds the packet descriptor to the port
     func serialPortWasOpened(_ serialPort: ORSSerialPort) {
+        let descriptor = ORSSerialPacketDescriptor(prefixString: "$", suffixString: ";", maximumPacketLength: 1024, userInfo: nil)
+        serialPort.startListeningForPackets(matching: descriptor)
+        
         print("Port \(serialPort.path) is open")
         self.nextPortState = "Close"
     }
