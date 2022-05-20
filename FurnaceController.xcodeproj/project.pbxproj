@@ -17,7 +17,6 @@
 		3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F14A2834493C006B0368 /* ArduinoController.swift */; };
 		3F12F14E283449A5006B0368 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = 3F12F14D283449A5006B0368 /* ORSSerial */; };
 		3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */; };
-		3F8E0DB928356ABE00AE7D9A /* SerialCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E0DB828356ABE00AE7D9A /* SerialCommunicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +50,6 @@
 		3F12F13D283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3F12F14A2834493C006B0368 /* ArduinoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoController.swift; sourceTree = "<group>"; };
 		3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentReadingView.swift; sourceTree = "<group>"; };
-		3F8E0DB828356ABE00AE7D9A /* SerialCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialCommunicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +105,6 @@
 				3F12F121283446CD006B0368 /* ContentView.swift */,
 				3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */,
 				3F12F14A2834493C006B0368 /* ArduinoController.swift */,
-				3F8E0DB828356ABE00AE7D9A /* SerialCommunicator.swift */,
 				3F12F123283446CD006B0368 /* Assets.xcassets */,
 				3F12F128283446CD006B0368 /* FurnaceController.entitlements */,
 				3F12F125283446CD006B0368 /* Preview Content */,
@@ -276,7 +273,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F8E0DB928356ABE00AE7D9A /* SerialCommunicator.swift in Sources */,
 				3F12F122283446CD006B0368 /* ContentView.swift in Sources */,
 				3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */,
 				3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */,
