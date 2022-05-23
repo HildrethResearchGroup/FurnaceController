@@ -16,17 +16,18 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     // The @Published modifier makes the view watch the variable to see if it
     // needs to be updated on the display
     @Published var nextCommand = ""
-    @Published var lastResponse = ""
+    @Published var lastResponse = "" // possibly just a debugging variable, possibly not
     
     @Published var lastTemp = 0
     @Published var lastFlowN2 = 0
     @Published var lastFlowAr = 0
-    
     @Published var tempUnit = "C"
     @Published var flowUnit = "L/min"
     
+    private var thermocoupleID = ""
+    private var 
+    
     @Published var nextPortState = "Open"
-    @Published var isRecording = false // currently unused
     
     @Published var serialPort: ORSSerialPort? {
         didSet {
@@ -37,26 +38,19 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
-    // these next 2 functions are not used either... yet...
-    func getRecordButton() -> String {
-        if self.isRecording {
-            return "Stop Recording"
-        }
-        return "Start Recording"
-    }
-    
-    func record() {
-        if self.isRecording {
-            self.isRecording = false
-            return
-        }
-        self.isRecording = true
-    }
-    
     // sends whatever command is entered into the textbox. Currently triggered by a button.
     func sendCommand() {
         if let port = self.serialPort{
-            port.send(self.nextCommand.data(using: .utf8)!)
+            let command = "$ \(self.nextCommand) ;"
+            
+            port.send(command.data(using: .utf8)!)
+        }
+    }
+    
+    func readTemperature() {
+        if let port = self.serialPort{
+            let command = "$ ? \(self.thermocoupleID) ;"
+            port.send(command.data(using: .utf8)!)
         }
     }
     

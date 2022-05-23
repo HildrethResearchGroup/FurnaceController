@@ -30,7 +30,7 @@ struct ContentView: View {
                 Button("Send Command") {controller.sendCommand()}
             }
             
-            Text("Last response: \"\(controller.lastResponse)\"")
+            Text("Last response: \(controller.lastResponse)")
             
             CurrentReadingView(controller: controller)
         }
