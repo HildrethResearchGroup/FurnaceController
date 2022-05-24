@@ -92,12 +92,12 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         if let dataAsList = String(data: packetData, encoding: String.Encoding.ascii)?.components(separatedBy: " ") {
             self.lastResponse = dataAsList[1...dataAsList.count - 2].joined(separator: " ")
             
-            let requestType = self.requestTypes[Int(dataAsList[1])!] // gets the type of command sent according to the ID
+            //let requestType = self.requestTypes[Int(dataAsList[1])!] // gets the type of command sent according to the ID
             let requestData = dataAsList[2] // this is arbitrary string data, used in if statements
             
-            if requestType == ArduinoController.QUERY_TEMP {
-                self.lastTemp = Int(dataAsList[2])!
-            }
+//            if requestType == ArduinoController.QUERY_TEMP {
+//                self.lastTemp = Int(dataAsList[2])!
+//            }
         }
     }
     

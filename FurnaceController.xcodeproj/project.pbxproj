@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0EBD76283D5D73006CB301 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0EBD75283D5D73006CB301 /* DataGraph.framework */; };
+		3F0EBD77283D5D73006CB301 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0EBD75283D5D73006CB301 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3F0EBD8A283D616C006CB301 /* XZData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7B283D616C006CB301 /* XZData.swift */; };
+		3F0EBD8B283D616C006CB301 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7C283D616C006CB301 /* DataModel.swift */; };
+		3F0EBD8C283D616C006CB301 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7D283D616C006CB301 /* GraphController.swift */; };
+		3F0EBD8D283D616C006CB301 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7E283D616C006CB301 /* GraphView.swift */; };
+		3F0EBD8E283D616C006CB301 /* GraphViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7F283D616C006CB301 /* GraphViewRepresentable.swift */; };
+		3F0EBD8F283D616C006CB301 /* Content.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD81283D616C006CB301 /* Content.plist */; };
+		3F0EBD90283D616C006CB301 /* PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD83283D616C006CB301 /* PkgInfo */; };
+		3F0EBD91283D616C006CB301 /* Preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD85283D616C006CB301 /* Preview.png */; };
+		3F0EBD92283D616C006CB301 /* Thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD86283D616C006CB301 /* Thumbnail.png */; };
+		3F0EBD93283D616C006CB301 /* Spotlight.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD87283D616C006CB301 /* Spotlight.plist */; };
+		3F0EBD94283D616C006CB301 /* Columns.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD88283D616C006CB301 /* Columns.plist */; };
 		3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */; };
 		3F12F122283446CD006B0368 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F121283446CD006B0368 /* ContentView.swift */; };
 		3F12F124283446CD006B0368 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F123283446CD006B0368 /* Assets.xcassets */; };
@@ -36,7 +49,34 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3F0EBD78283D5D73006CB301 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3F0EBD77283D5D73006CB301 /* DataGraph.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		3F0EBD75283D5D73006CB301 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
+		3F0EBD79283D5DDC006CB301 /* FurnaceController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FurnaceController-Bridging-Header.h"; sourceTree = "<group>"; };
+		3F0EBD7B283D616C006CB301 /* XZData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZData.swift; sourceTree = "<group>"; };
+		3F0EBD7C283D616C006CB301 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		3F0EBD7D283D616C006CB301 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
+		3F0EBD7E283D616C006CB301 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		3F0EBD7F283D616C006CB301 /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
+		3F0EBD81283D616C006CB301 /* Content.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Content.plist; sourceTree = "<group>"; };
+		3F0EBD83283D616C006CB301 /* PkgInfo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PkgInfo; sourceTree = "<group>"; };
+		3F0EBD85283D616C006CB301 /* Preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Preview.png; sourceTree = "<group>"; };
+		3F0EBD86283D616C006CB301 /* Thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumbnail.png; sourceTree = "<group>"; };
+		3F0EBD87283D616C006CB301 /* Spotlight.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Spotlight.plist; sourceTree = "<group>"; };
+		3F0EBD88283D616C006CB301 /* Columns.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Columns.plist; sourceTree = "<group>"; };
 		3F12F11C283446CD006B0368 /* FurnaceController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FurnaceController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerApp.swift; sourceTree = "<group>"; };
 		3F12F121283446CD006B0368 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F12F14E283449A5006B0368 /* ORSSerial in Frameworks */,
+				3F0EBD76283D5D73006CB301 /* DataGraph.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +119,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F0EBD74283D5D73006CB301 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F0EBD75283D5D73006CB301 /* DataGraph.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3F0EBD7A283D616C006CB301 /* DataGraph Test Views */ = {
+			isa = PBXGroup;
+			children = (
+				3F0EBD7B283D616C006CB301 /* XZData.swift */,
+				3F0EBD7C283D616C006CB301 /* DataModel.swift */,
+				3F0EBD7D283D616C006CB301 /* GraphController.swift */,
+				3F0EBD7E283D616C006CB301 /* GraphView.swift */,
+				3F0EBD7F283D616C006CB301 /* GraphViewRepresentable.swift */,
+				3F0EBD80283D616C006CB301 /* Basic Script.dgraph */,
+			);
+			name = "DataGraph Test Views";
+			path = "Setup Files and Instructions/DataGraph Test Views";
+			sourceTree = SOURCE_ROOT;
+		};
+		3F0EBD80283D616C006CB301 /* Basic Script.dgraph */ = {
+			isa = PBXGroup;
+			children = (
+				3F0EBD81283D616C006CB301 /* Content.plist */,
+				3F0EBD82283D616C006CB301 /* Contents */,
+				3F0EBD84283D616C006CB301 /* QuickLook */,
+				3F0EBD87283D616C006CB301 /* Spotlight.plist */,
+				3F0EBD88283D616C006CB301 /* Columns.plist */,
+				3F0EBD89283D616C006CB301 /* Graphics */,
+			);
+			path = "Basic Script.dgraph";
+			sourceTree = "<group>";
+		};
+		3F0EBD82283D616C006CB301 /* Contents */ = {
+			isa = PBXGroup;
+			children = (
+				3F0EBD83283D616C006CB301 /* PkgInfo */,
+			);
+			path = Contents;
+			sourceTree = "<group>";
+		};
+		3F0EBD84283D616C006CB301 /* QuickLook */ = {
+			isa = PBXGroup;
+			children = (
+				3F0EBD85283D616C006CB301 /* Preview.png */,
+				3F0EBD86283D616C006CB301 /* Thumbnail.png */,
+			);
+			path = QuickLook;
+			sourceTree = "<group>";
+		};
+		3F0EBD89283D616C006CB301 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
 		3F12F113283446CD006B0368 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +185,7 @@
 				3F12F130283446CE006B0368 /* FurnaceControllerTests */,
 				3F12F13A283446CE006B0368 /* FurnaceControllerUITests */,
 				3F12F11D283446CD006B0368 /* Products */,
+				3F0EBD74283D5D73006CB301 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +202,7 @@
 		3F12F11E283446CD006B0368 /* FurnaceController */ = {
 			isa = PBXGroup;
 			children = (
+				3F0EBD7A283D616C006CB301 /* DataGraph Test Views */,
 				3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */,
 				3F12F121283446CD006B0368 /* ContentView.swift */,
 				3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */,
@@ -108,6 +210,7 @@
 				3F12F123283446CD006B0368 /* Assets.xcassets */,
 				3F12F128283446CD006B0368 /* FurnaceController.entitlements */,
 				3F12F125283446CD006B0368 /* Preview Content */,
+				3F0EBD79283D5DDC006CB301 /* FurnaceController-Bridging-Header.h */,
 			);
 			path = FurnaceController;
 			sourceTree = "<group>";
@@ -147,6 +250,7 @@
 				3F12F118283446CD006B0368 /* Sources */,
 				3F12F119283446CD006B0368 /* Frameworks */,
 				3F12F11A283446CD006B0368 /* Resources */,
+				3F0EBD78283D5D73006CB301 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -247,8 +351,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0EBD94283D616C006CB301 /* Columns.plist in Resources */,
+				3F0EBD91283D616C006CB301 /* Preview.png in Resources */,
 				3F12F127283446CD006B0368 /* Preview Assets.xcassets in Resources */,
+				3F0EBD90283D616C006CB301 /* PkgInfo in Resources */,
 				3F12F124283446CD006B0368 /* Assets.xcassets in Resources */,
+				3F0EBD92283D616C006CB301 /* Thumbnail.png in Resources */,
+				3F0EBD93283D616C006CB301 /* Spotlight.plist in Resources */,
+				3F0EBD8F283D616C006CB301 /* Content.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,10 +383,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0EBD8A283D616C006CB301 /* XZData.swift in Sources */,
 				3F12F122283446CD006B0368 /* ContentView.swift in Sources */,
 				3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */,
 				3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */,
+				3F0EBD8E283D616C006CB301 /* GraphViewRepresentable.swift in Sources */,
 				3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */,
+				3F0EBD8C283D616C006CB301 /* GraphController.swift in Sources */,
+				3F0EBD8B283D616C006CB301 /* DataModel.swift in Sources */,
+				3F0EBD8D283D616C006CB301 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +432,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -347,6 +463,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -369,6 +486,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "FurnaceController/FurnaceController-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -377,6 +495,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = x86_64;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -407,6 +526,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -422,6 +542,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OBJC_BRIDGING_HEADER = "FurnaceController/FurnaceController-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
@@ -436,7 +557,12 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FurnaceController/Preview Content\"";
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -461,7 +587,12 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"FurnaceController/Preview Content\"";
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
