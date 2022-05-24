@@ -10,13 +10,30 @@ import ORSSerial
 
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
+    struct Command {
+        var id: Int
+        var type: String
+        var receivedResponse: Bool
+        
+        init(id: Int, type: String){
+            self.id = id
+            self.type = type
+            self.receivedResponse = false
+        }
+    }
+    
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
     
     // All of these published variables are used to keep the app display updated.
     // The @Published modifier makes the view watch the variable to see if it
     // needs to be updated on the display
+    private static let QUERY_TEMP = "temp?"
+    
     @Published var nextCommand = ""
     @Published var lastResponse = "" // possibly just a debugging variable, possibly not
+    
+    private var commands: [Command] = []
+    private var nextID = 0
     
     @Published var lastTemp = 0
     @Published var lastFlowN2 = 0
@@ -24,9 +41,9 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     @Published var tempUnit = "C"
     @Published var flowUnit = "L/min"
     
-    private var thermocoupleID = ""
-    private var 
-    
+    private let thermocoupleID = "T"
+    private let nitrogenFlowID = "N"
+    private let argonFlowID = "A"
     @Published var nextPortState = "Open"
     
     @Published var serialPort: ORSSerialPort? {
@@ -49,8 +66,12 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     func readTemperature() {
         if let port = self.serialPort{
-            let command = "$ ? \(self.thermocoupleID) ;"
-            port.send(command.data(using: .utf8)!)
+            let command = Command(id: self.nextID, type: ArduinoController.QUERY_TEMP)
+            self.nextID += 1
+            
+            port.send("$ \(command.id) \(self.thermocoupleID)\r ;".data(using: .utf8)!)
+            
+            self.commands.append(command)
         }
     }
     
@@ -70,6 +91,13 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     func serialPort(_ serialPort: ORSSerialPort, didReceivePacket packetData: Data, matching descriptor: ORSSerialPacketDescriptor) {
         if let dataAsList = String(data: packetData, encoding: String.Encoding.ascii)?.components(separatedBy: " ") {
             self.lastResponse = dataAsList[1...dataAsList.count - 2].joined(separator: " ")
+            
+            let requestType = self.requestTypes[Int(dataAsList[1])!] // gets the type of command sent according to the ID
+            let requestData = dataAsList[2] // this is arbitrary string data, used in if statements
+            
+            if requestType == ArduinoController.QUERY_TEMP {
+                self.lastTemp = Int(dataAsList[2])!
+            }
         }
     }
     
