@@ -8,9 +8,12 @@
 import SwiftUI
 import ORSSerial
 
+
 struct ContentView: View {
     
     @ObservedObject var controller = ArduinoController()
+    @ObservedObject var graphController = GraphController()
+    
     
     var body: some View {
         VStack{
@@ -32,8 +35,16 @@ struct ContentView: View {
             
             Text("Last response: \(controller.lastResponse)")
             
+            
             CurrentReadingView(controller: controller)
+        
+            //let graph:GraphViewRepresentable = GraphViewRepresentable(graphController: <#T##GraphController#>)
+            //graph.makeNSView(context: <#T##Context#>)
+            //graph.makeNSView(context: <#T##Context#>)
+            
+            GraphViewRepresentable(graphController: graphController).frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
         }
+        .padding()
     }
 }
 
