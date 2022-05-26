@@ -1,0 +1,70 @@
+Import DataGraph.framework
+
+- Make sure the Framework is installed/placed in the Folder after the .proj file
+
+- Add the DataGraph.framework to your Target:
+	- Targets → General → Frameworks, Libraries, and Embedded Content
+	- Select: + button
+	- Select: "Add Other" → Add Files
+	- Select: the DataGraph.Framework Folder
+
+
+
+- Create a .h file named: YourApplicationName-Bridging-Header.h
+	- Select the top-level folder in your project (just under the blue project icon
+	- Select: Menubar → File → New File
+	- Select: Under Source → Header File
+	- Name your file:  yourApplicaitonName-Bridging_Header.h
+	- Make sure Targets is checked "Yes"
+
+
+- Copy-Paste the supplied Bridging-Header information into your .h bridging-header file
+
+
+
+- Make sure the path to the Bridging Header is correct
+    	- Project → Build Settings → All
+	- Swift Compiler - General → Objective-C Bridging Header:  <Internal Path: e.g. TestApp/TestApp-Bridging-Header.h>
+
+
+- Switch Architecture to x86_64 on both the Project and the Target
+
+- Under Build Settings, in Packaging, make sure the Defines Module setting for the framework target is set to Yes.
+	- Project → Build Settings → All
+	- Packaging → Defines Module:  Yes
+
+- Turn OFF Hardened Runtime
+	- Targets → Signing and Capabilities → Hardened Runtime 
+	- There is a small, grey "x" in the upper left corner of the Hardened Runtime settings (just below the dividing line).  
+	- Click "x" to remove all hardened runtime.
+
+
+Test the Importing of the Framework:
+ 	- Drag and Drop the files from the unzipped DataGraph Test Views.zip folder
+		- Located under Files → DataGraph Framework → DataGraph Text Views.zip
+	- Compile your application
+	- Make sure there are no Compile Errors
+
+	- Try to make a DataGraph View
+
+struct ContentView: View {
+    @ObservedObject var graphController = GraphController()
+    
+    var body: some View {
+        VStack{
+            HStack {
+                Slider(value: $graphController.adjustableValue, in: 0.0...10.0) {
+                    Text(String(format: "%.2f", graphController.adjustableValue))
+                }
+                Text(String(format: "%.2f", graphController.computedValue))
+            }
+            
+            Button("Increment"){graphController.updateData()}
+            GraphViewRepresentable(graphController: graphController)
+                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+        }
+        .padding()
+    }
+}
+
+
