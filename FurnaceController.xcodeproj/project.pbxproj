@@ -259,6 +259,7 @@
 			name = FurnaceController;
 			packageProductDependencies = (
 				3F12F14D283449A5006B0368 /* ORSSerial */,
+				3FE942062836B75100C634AF /* ORSSerial */,
 			);
 			productName = FurnaceController;
 			productReference = 3F12F11C283446CD006B0368 /* FurnaceController.app */;
@@ -334,6 +335,7 @@
 			mainGroup = 3F12F113283446CD006B0368;
 			packageReferences = (
 				3F12F14C283449A5006B0368 /* XCRemoteSwiftPackageReference "ORSSerialPort" */,
+				3FE942052836B75100C634AF /* XCRemoteSwiftPackageReference "ORSSerialPort" */,
 			);
 			productRefGroup = 3F12F11D283446CD006B0368 /* Products */;
 			projectDirPath = "";
@@ -725,10 +727,23 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		3FE942052836B75100C634AF /* XCRemoteSwiftPackageReference "ORSSerialPort" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/armadsen/ORSSerialPort.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		3F12F14D283449A5006B0368 /* ORSSerial */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F12F14C283449A5006B0368 /* XCRemoteSwiftPackageReference "ORSSerialPort" */;
+			productName = ORSSerial;
+		};
+		3FE942062836B75100C634AF /* ORSSerial */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3F12F14C283449A5006B0368 /* XCRemoteSwiftPackageReference "ORSSerialPort" */;
 			productName = ORSSerial;
