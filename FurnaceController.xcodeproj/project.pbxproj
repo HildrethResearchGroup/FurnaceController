@@ -9,17 +9,17 @@
 /* Begin PBXBuildFile section */
 		3F0EBD76283D5D73006CB301 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0EBD75283D5D73006CB301 /* DataGraph.framework */; };
 		3F0EBD77283D5D73006CB301 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0EBD75283D5D73006CB301 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		3F0EBD8A283D616C006CB301 /* XZData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7B283D616C006CB301 /* XZData.swift */; };
-		3F0EBD8B283D616C006CB301 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7C283D616C006CB301 /* DataModel.swift */; };
-		3F0EBD8C283D616C006CB301 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7D283D616C006CB301 /* GraphController.swift */; };
-		3F0EBD8D283D616C006CB301 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7E283D616C006CB301 /* GraphView.swift */; };
-		3F0EBD8E283D616C006CB301 /* GraphViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBD7F283D616C006CB301 /* GraphViewRepresentable.swift */; };
-		3F0EBD8F283D616C006CB301 /* Content.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD81283D616C006CB301 /* Content.plist */; };
-		3F0EBD90283D616C006CB301 /* PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD83283D616C006CB301 /* PkgInfo */; };
-		3F0EBD91283D616C006CB301 /* Preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD85283D616C006CB301 /* Preview.png */; };
-		3F0EBD92283D616C006CB301 /* Thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD86283D616C006CB301 /* Thumbnail.png */; };
-		3F0EBD93283D616C006CB301 /* Spotlight.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD87283D616C006CB301 /* Spotlight.plist */; };
-		3F0EBD94283D616C006CB301 /* Columns.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBD88283D616C006CB301 /* Columns.plist */; };
+		3F0EBDDB283D786A006CB301 /* XZData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBDCC283D786A006CB301 /* XZData.swift */; };
+		3F0EBDDC283D786A006CB301 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBDCD283D786A006CB301 /* DataModel.swift */; };
+		3F0EBDDD283D786A006CB301 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBDCE283D786A006CB301 /* GraphController.swift */; };
+		3F0EBDDE283D786A006CB301 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBDCF283D786A006CB301 /* GraphView.swift */; };
+		3F0EBDDF283D786A006CB301 /* GraphViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBDD0283D786A006CB301 /* GraphViewRepresentable.swift */; };
+		3F0EBDE0283D786A006CB301 /* Content.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBDD2283D786A006CB301 /* Content.plist */; };
+		3F0EBDE1283D786A006CB301 /* PkgInfo in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBDD4283D786A006CB301 /* PkgInfo */; };
+		3F0EBDE2283D786A006CB301 /* Preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBDD6283D786A006CB301 /* Preview.png */; };
+		3F0EBDE3283D786A006CB301 /* Thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBDD7283D786A006CB301 /* Thumbnail.png */; };
+		3F0EBDE4283D786A006CB301 /* Spotlight.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBDD8283D786A006CB301 /* Spotlight.plist */; };
+		3F0EBDE5283D786A006CB301 /* Columns.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F0EBDD9283D786A006CB301 /* Columns.plist */; };
 		3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */; };
 		3F12F122283446CD006B0368 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F121283446CD006B0368 /* ContentView.swift */; };
 		3F12F124283446CD006B0368 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F12F123283446CD006B0368 /* Assets.xcassets */; };
@@ -66,17 +66,17 @@
 /* Begin PBXFileReference section */
 		3F0EBD75283D5D73006CB301 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
 		3F0EBD79283D5DDC006CB301 /* FurnaceController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FurnaceController-Bridging-Header.h"; sourceTree = "<group>"; };
-		3F0EBD7B283D616C006CB301 /* XZData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZData.swift; sourceTree = "<group>"; };
-		3F0EBD7C283D616C006CB301 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		3F0EBD7D283D616C006CB301 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
-		3F0EBD7E283D616C006CB301 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		3F0EBD7F283D616C006CB301 /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
-		3F0EBD81283D616C006CB301 /* Content.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Content.plist; sourceTree = "<group>"; };
-		3F0EBD83283D616C006CB301 /* PkgInfo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PkgInfo; sourceTree = "<group>"; };
-		3F0EBD85283D616C006CB301 /* Preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Preview.png; sourceTree = "<group>"; };
-		3F0EBD86283D616C006CB301 /* Thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumbnail.png; sourceTree = "<group>"; };
-		3F0EBD87283D616C006CB301 /* Spotlight.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Spotlight.plist; sourceTree = "<group>"; };
-		3F0EBD88283D616C006CB301 /* Columns.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Columns.plist; sourceTree = "<group>"; };
+		3F0EBDCC283D786A006CB301 /* XZData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZData.swift; sourceTree = "<group>"; };
+		3F0EBDCD283D786A006CB301 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		3F0EBDCE283D786A006CB301 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
+		3F0EBDCF283D786A006CB301 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		3F0EBDD0283D786A006CB301 /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
+		3F0EBDD2283D786A006CB301 /* Content.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Content.plist; sourceTree = "<group>"; };
+		3F0EBDD4283D786A006CB301 /* PkgInfo */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PkgInfo; sourceTree = "<group>"; };
+		3F0EBDD6283D786A006CB301 /* Preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Preview.png; sourceTree = "<group>"; };
+		3F0EBDD7283D786A006CB301 /* Thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Thumbnail.png; sourceTree = "<group>"; };
+		3F0EBDD8283D786A006CB301 /* Spotlight.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Spotlight.plist; sourceTree = "<group>"; };
+		3F0EBDD9283D786A006CB301 /* Columns.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Columns.plist; sourceTree = "<group>"; };
 		3F12F11C283446CD006B0368 /* FurnaceController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FurnaceController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerApp.swift; sourceTree = "<group>"; };
 		3F12F121283446CD006B0368 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -127,51 +127,50 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3F0EBD7A283D616C006CB301 /* DataGraph Test Views */ = {
+		3F0EBDCB283D786A006CB301 /* DataGraph Test Views */ = {
 			isa = PBXGroup;
 			children = (
-				3F0EBD7B283D616C006CB301 /* XZData.swift */,
-				3F0EBD7C283D616C006CB301 /* DataModel.swift */,
-				3F0EBD7D283D616C006CB301 /* GraphController.swift */,
-				3F0EBD7E283D616C006CB301 /* GraphView.swift */,
-				3F0EBD7F283D616C006CB301 /* GraphViewRepresentable.swift */,
-				3F0EBD80283D616C006CB301 /* Basic Script.dgraph */,
+				3F0EBDCC283D786A006CB301 /* XZData.swift */,
+				3F0EBDCD283D786A006CB301 /* DataModel.swift */,
+				3F0EBDCE283D786A006CB301 /* GraphController.swift */,
+				3F0EBDCF283D786A006CB301 /* GraphView.swift */,
+				3F0EBDD0283D786A006CB301 /* GraphViewRepresentable.swift */,
+				3F0EBDD1283D786A006CB301 /* Basic Script.dgraph */,
 			);
-			name = "DataGraph Test Views";
-			path = "Setup Files and Instructions/DataGraph Test Views";
-			sourceTree = SOURCE_ROOT;
+			path = "DataGraph Test Views";
+			sourceTree = "<group>";
 		};
-		3F0EBD80283D616C006CB301 /* Basic Script.dgraph */ = {
+		3F0EBDD1283D786A006CB301 /* Basic Script.dgraph */ = {
 			isa = PBXGroup;
 			children = (
-				3F0EBD81283D616C006CB301 /* Content.plist */,
-				3F0EBD82283D616C006CB301 /* Contents */,
-				3F0EBD84283D616C006CB301 /* QuickLook */,
-				3F0EBD87283D616C006CB301 /* Spotlight.plist */,
-				3F0EBD88283D616C006CB301 /* Columns.plist */,
-				3F0EBD89283D616C006CB301 /* Graphics */,
+				3F0EBDD2283D786A006CB301 /* Content.plist */,
+				3F0EBDD3283D786A006CB301 /* Contents */,
+				3F0EBDD5283D786A006CB301 /* QuickLook */,
+				3F0EBDD8283D786A006CB301 /* Spotlight.plist */,
+				3F0EBDD9283D786A006CB301 /* Columns.plist */,
+				3F0EBDDA283D786A006CB301 /* Graphics */,
 			);
 			path = "Basic Script.dgraph";
 			sourceTree = "<group>";
 		};
-		3F0EBD82283D616C006CB301 /* Contents */ = {
+		3F0EBDD3283D786A006CB301 /* Contents */ = {
 			isa = PBXGroup;
 			children = (
-				3F0EBD83283D616C006CB301 /* PkgInfo */,
+				3F0EBDD4283D786A006CB301 /* PkgInfo */,
 			);
 			path = Contents;
 			sourceTree = "<group>";
 		};
-		3F0EBD84283D616C006CB301 /* QuickLook */ = {
+		3F0EBDD5283D786A006CB301 /* QuickLook */ = {
 			isa = PBXGroup;
 			children = (
-				3F0EBD85283D616C006CB301 /* Preview.png */,
-				3F0EBD86283D616C006CB301 /* Thumbnail.png */,
+				3F0EBDD6283D786A006CB301 /* Preview.png */,
+				3F0EBDD7283D786A006CB301 /* Thumbnail.png */,
 			);
 			path = QuickLook;
 			sourceTree = "<group>";
 		};
-		3F0EBD89283D616C006CB301 /* Graphics */ = {
+		3F0EBDDA283D786A006CB301 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -202,7 +201,7 @@
 		3F12F11E283446CD006B0368 /* FurnaceController */ = {
 			isa = PBXGroup;
 			children = (
-				3F0EBD7A283D616C006CB301 /* DataGraph Test Views */,
+				3F0EBDCB283D786A006CB301 /* DataGraph Test Views */,
 				3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */,
 				3F12F121283446CD006B0368 /* ContentView.swift */,
 				3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */,
@@ -351,14 +350,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F0EBD94283D616C006CB301 /* Columns.plist in Resources */,
-				3F0EBD91283D616C006CB301 /* Preview.png in Resources */,
+				3F0EBDE5283D786A006CB301 /* Columns.plist in Resources */,
+				3F0EBDE2283D786A006CB301 /* Preview.png in Resources */,
 				3F12F127283446CD006B0368 /* Preview Assets.xcassets in Resources */,
-				3F0EBD90283D616C006CB301 /* PkgInfo in Resources */,
+				3F0EBDE1283D786A006CB301 /* PkgInfo in Resources */,
 				3F12F124283446CD006B0368 /* Assets.xcassets in Resources */,
-				3F0EBD92283D616C006CB301 /* Thumbnail.png in Resources */,
-				3F0EBD93283D616C006CB301 /* Spotlight.plist in Resources */,
-				3F0EBD8F283D616C006CB301 /* Content.plist in Resources */,
+				3F0EBDE3283D786A006CB301 /* Thumbnail.png in Resources */,
+				3F0EBDE4283D786A006CB301 /* Spotlight.plist in Resources */,
+				3F0EBDE0283D786A006CB301 /* Content.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,15 +382,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F0EBD8A283D616C006CB301 /* XZData.swift in Sources */,
+				3F0EBDDB283D786A006CB301 /* XZData.swift in Sources */,
 				3F12F122283446CD006B0368 /* ContentView.swift in Sources */,
 				3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */,
 				3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */,
-				3F0EBD8E283D616C006CB301 /* GraphViewRepresentable.swift in Sources */,
+				3F0EBDDF283D786A006CB301 /* GraphViewRepresentable.swift in Sources */,
 				3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */,
-				3F0EBD8C283D616C006CB301 /* GraphController.swift in Sources */,
-				3F0EBD8B283D616C006CB301 /* DataModel.swift in Sources */,
-				3F0EBD8D283D616C006CB301 /* GraphView.swift in Sources */,
+				3F0EBDDD283D786A006CB301 /* GraphController.swift in Sources */,
+				3F0EBDDC283D786A006CB301 /* DataModel.swift in Sources */,
+				3F0EBDDE283D786A006CB301 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
