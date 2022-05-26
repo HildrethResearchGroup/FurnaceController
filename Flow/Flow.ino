@@ -1,81 +1,193 @@
 #include <SoftwareSerial.h>
+#define rxPin 10
+#define txPin 11
 
-#define HAS_DATA "1 "
-#define NO_DATA "0 "
-#define rxPin 0 
-#define txPin 1 // red is Tx
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 256
 
+// \r\n
+// clear the buffer
+
+#define EOT ';' // End of transmission
+#define BOT '$' // Beginning of transmission
+
+enum STATE {READ_CMD = 0, WRITE_CMD = 1, WAIT_FOR_DATA = 2, WAITING = 3};
+enum STATE current_state;
 
 // Set up a new SoftwareSerial object
-SoftwareSerial flowSerial =  SoftwareSerial(rxPin, txPin, true);
+SoftwareSerial flowSerial =  SoftwareSerial(rxPin, txPin, false);
+
 // data from fluid flow sensor
 char flow_data[BUFFER_SIZE];
-// data from mac application
+
+// input str from mac application
 char input_data[BUFFER_SIZE];
+int input_pos;
+
+// parsed tokens from input_data
+char* input_tokens[BUFFER_SIZE];
+int tokens_length;
+
+int UID;
+
+bool writing_flow_data;
+
+const char space_delim[2] = " ";
+
+// Fills passed in buf with buf_size - 2 data. Last character of sequence is always null terminating char
+// Returns number of characters written
+int fill_buffer_from_stream(Stream &data, char buf[], int buf_size) {
+  memset(buf, '\0', sizeof(char)*buf_size);
+  int i = 0;
+  if (data.available() > 0) {
+    char c;
+    while ( (c = data.read()) != -1 && i < buf_size - 1) {
+      buf[i++] = c;
+    }
+  }
+  return i;
+}
+// Writes a message to the serial Stream
+void write_message(int uid, const char* msg) {
+
+
+  Serial.write(BOT);
+  Serial.write(" ");
+  Serial.write("30");
+  Serial.write(" ");
+  Serial.write(msg);
+  Serial.write(" ");
+  Serial.write(EOT);
+}
+
+// parses input_data and fills input_tokens and sets tokens_length
+void parse_cmd() {
+  char input_data_cpy[BUFFER_SIZE];
+  // strtok changes the passed in array and place '\0' where the delim chars are
+  memcpy(input_data_cpy, input_data, BUFFER_SIZE);
+
+  int i = 0;
+  char *token = strtok(input_data_cpy, space_delim);
+  while (token != NULL) {
+    input_tokens[i++] = token;
+    token = strtok(NULL, space_delim);
+  }
+  tokens_length = i + 1;
+}
+
+// returns true on End of Transmission Signal encountered
+// returns false if data still needs to be read
+bool read_serial_in() {
+  if (Serial.available() > 0) {
+    char c;
+    while ((c = Serial.read()) != -1 && input_pos < BUFFER_SIZE - 1) {
+      if (c == EOT) {
+        input_data[input_pos] = '\0';
+        input_pos = 0;
+        return true;
+      }
+      input_data[input_pos++] = c;
+    }
+    if (input_pos == BUFFER_SIZE - 1) {
+      write_message(-1, "ERROR input buffer stream overflow");
+      // clear the stream so the next message can procceed from a defined input_data state
+      input_pos = 0;
+      memset(input_data, '\0', BUFFER_SIZE);
+    }
+  }
+  return false;
+}
+
 
 void setup()  {
-    // Define pin modes for TX and RX
-    pinMode(rxPin, INPUT);
-    pinMode(txPin, OUTPUT);
-    
-    // Set the baud rate for the SoftwareSerial object
-    flowSerial.begin(19200);
+  // Define pin modes for TX and RX
+  pinMode(rxPin, INPUT);
+  pinMode(txPin, OUTPUT);
 
-    // Baud rate for USB connection to computer
-    Serial.begin(9600);
+  // Set the baud rate for the SoftwareSerial object
+  flowSerial.begin(9600);
 
-    // tell the alicat to begin streaming data
-    flowSerial.write("@@=@\r");
-    // set stream interval
-    flowSerial.write("@W91=50\r");
+  // Baud rate for USB connection to computer
+  Serial.begin(9600);
+  while (!Serial);
+
+  // initalize state
+  // initally we're just waiting for some sort of command to come in over serial
+  current_state = WAITING;
+  input_pos = 0;
+  UID = -1;
+
+  writing_flow_data = false;
 }
 
-void getDataFromFlowSensor(){
-    // zero out memory char buffer
-    memset(flow_data, '\0', sizeof(char)*BUFFER_SIZE);
-    
-    // poll for data
-    flowSerial.listen();
-    if (flowSerial.available() > 0) {
-        char c;
-        int i = 0;
-        while ( (c = flowSerial.read()) != -1 && i < BUFFER_SIZE - 1){
-          flow_data[i] = c;
-          ++i;
-        } 
-        Serial.print(HAS_DATA);
-        Serial.println(flow_data);
-        // print the results to USB
-    }else{
-      Serial.print(NO_DATA);
-      Serial.println(flow_data);
-    }
-}
-
-// Fills buf with buf_size - 2 data. Last character is null terminating char
-void fill_buffer_from_stream(Stream &data, char buf[], int buf_size){
-    memset(buf, '\0', sizeof(char)*BUFFER_SIZE);
-    if (data.available() > 0) {
-        char c;
-        int i = 0;
-        while ( (c = data.read()) != -1 && i < BUFFER_SIZE - 1){
-          buf[i] = c;
-          ++i;
-        } 
-    }
-}
 
 void loop() {
-    //getDataFromFlowSensor();
-//    char in = ' ';
-//    if (Serial.available() > 0){
-//      in = Serial.read();
-//      Serial.println(in);
-//      delay(1000);
-//    }
-  delay(500);
-  fill_buffer_from_stream(Serial, input_data, BUFFER_SIZE);
-  input_data[0] = "k";
-  Serial.println(input_data);
+  switch (current_state)
+  {
+    case READ_CMD:
+      {
+        if (read_serial_in()) {
+          current_state = WRITE_CMD;
+        }
+      }
+      break;
+    case WRITE_CMD:
+      {
+        // Parse command in input_data and put into input_tokens
+        parse_cmd();
+
+        if (tokens_length < 2) {
+          write_message(-1, "ERROR malformed input");
+          current_state = WAITING;
+        } else {
+          UID = atoi(input_tokens[0]);
+        }
+        // $ UID COMMAND ;
+        // input_tokens[1] is the actual command
+        // COMMAND has no delimiters
+
+        char* COMMAND = input_tokens[1];
+        flowSerial.write(COMMAND);
+        flowSerial.write("\r");
+        // delay(100);
+        current_state = WAIT_FOR_DATA;
+      }
+      break;
+    case WAIT_FOR_DATA:
+      {
+        // wait for data
+        // when data arrives send it and go back to waiting
+        if (flowSerial.available() > 0) {
+          if (writing_flow_data == false) {
+            // first time beginning of transmission
+            writing_flow_data = true;
+            Serial.write(BOT);
+            Serial.write(" ");
+            Serial.print(UID, DEC);
+            Serial.write(" ");
+          }
+          char c;
+          while ((c = flowSerial.read()) != -1) {
+            if (c == '\r') {
+              Serial.write(" ");
+              Serial.write(EOT);
+              current_state = WAITING;
+              writing_flow_data = false;
+            } else {
+              Serial.write(c);
+            }
+          }
+        }
+      }
+      break;
+    case WAITING:
+      {
+        // Wait for a beginning of transmission signal to come through
+        if (Serial.available() > 0) {
+          if (Serial.read() == BOT) {
+            current_state = READ_CMD;
+          }
+        }
+      }
+      break;
+  }
 }
