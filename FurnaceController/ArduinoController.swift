@@ -40,9 +40,9 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     private var commands: [Int: Command] = [:]
     private var nextID = 0
     
-    @Published var lastTemp = 0
-    @Published var lastFlowN2 = 0
-    @Published var lastFlowAr = 0
+    @Published var lastTemp = 0.0
+    @Published var lastFlowN2 = 0.0
+    @Published var lastFlowAr = 0.0
     @Published var tempUnit = "C"
     @Published var flowUnit = "L/min"
     
@@ -99,12 +99,17 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     // the serialPort functions all respond to incoming packets recieved from the serial port
     // if the ORSSerial{PacketDescriptor sees a command from arduino, it will call the first function
     func serialPort(_ serialPort: ORSSerialPort, didReceivePacket packetData: Data, matching descriptor: ORSSerialPacketDescriptor) {
-        if let dataAsList = String(data: packetData, encoding: String.Encoding.ascii)?.components(separatedBy: " ")
-        {
-            if var command = commands[Int(dataAsList[1])!]
-            {
-                // CAREFUL This next line might infinitely loop...
+        if let dataAsList = String(data: packetData, encoding: String.Encoding.ascii)?.components(separatedBy: " ") {
+            let UID = Int(dataAsList[1])!
+            
+            if var command = commands[UID] {
                 command.response = dataAsList.joined(separator: " ")
+                
+                if (dataAsList[2] == "TIMEDOUT") {
+                    print("Command \"\(command.request)\" timed out.")
+                    self.sendCommand(command: command)
+                    return
+                }
                 
                 if command.type == .QUERY_TEMP {
                     self.lastTemp = Int(dataAsList[2])!
@@ -134,7 +139,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     // called when a serial port is opened, and adds the packet descriptor to the port
     func serialPortWasOpened(_ serialPort: ORSSerialPort) {
-        let descriptor = ORSSerialPacketDescriptor(prefixString: "$", suffixString: ";", maximumPacketLength: 1024, userInfo: nil)
+        let descriptor = ORSSerialPacketDescriptor(prefixString: "$", suffixString: ";", maximumPacketLength: 4096, userInfo: nil)
         serialPort.startListeningForPackets(matching: descriptor)
         
         print("Port \(serialPort.path) is open")
@@ -142,6 +147,8 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     }
     
     func serialPortWasClosed(_ serialPort: ORSSerialPort) {
+        serialPort.stopListeningForPackets(matching: serialPort.packetDescriptors.first!)
+        
         print("Port \(serialPort.path) is closed")
         self.nextPortState = "Open"
     }
