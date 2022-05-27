@@ -112,14 +112,14 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 }
                 
                 if command.type == .QUERY_TEMP {
-                    self.lastTemp = Int(dataAsList[2])!
+                    self.lastTemp = Double(dataAsList[2])!
                 }
                 // maybe add a confirmation that we are, in fact, reading Nitrogen data (response includes Gas Type)
                 else if command.type == .QUERY_NITROGEN {
-                    self.lastFlowN2 = Int(dataAsList[6])!
+                    self.lastFlowN2 = Double(dataAsList[6])!
                 }
                 else if command.type == .QUERY_ARGON {
-                    self.lastFlowAr = Int(dataAsList[6])!
+                    self.lastFlowAr = Double(dataAsList[6])!
                 }
                 else if command.type == .GENERAL {
                     self.lastResponse = command.response
