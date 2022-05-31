@@ -22,7 +22,6 @@ class GraphView: NSView {
         
         graph = DPDrawingView()
         
-        graph = DPDrawingView()
         graph.frame = newFrame
         graph.autoresizingMask = [.width, .height]
         

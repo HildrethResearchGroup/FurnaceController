@@ -21,10 +21,12 @@
 		3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */; };
 		E179ADEA283D726000A7CA2E /* DataGraph Test Views in Resources */ = {isa = PBXBuildFile; fileRef = E179ADE9283D726000A7CA2E /* DataGraph Test Views */; };
 		E179ADEC283D745F00A7CA2E /* WireframeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADEB283D745F00A7CA2E /* WireframeView.swift */; };
-		E179ADEE283EB25000A7CA2E /* GraphViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADED283EB25000A7CA2E /* GraphViewRepresentable.swift */; };
-		E179ADF0283EB25500A7CA2E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADEF283EB25500A7CA2E /* GraphView.swift */; };
-		E179ADF2283EB27400A7CA2E /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADF1283EB27400A7CA2E /* GraphController.swift */; };
-		E179ADF4283EB27F00A7CA2E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADF3283EB27F00A7CA2E /* DataModel.swift */; };
+		E179ADFA283FE77400A7CA2E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADF9283FE77400A7CA2E /* DataModel.swift */; };
+		E179ADFC283FE77800A7CA2E /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADFB283FE77800A7CA2E /* GraphController.swift */; };
+		E179ADFE283FE77D00A7CA2E /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADFD283FE77D00A7CA2E /* GraphView.swift */; };
+		E179AE00283FE77F00A7CA2E /* XZData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179ADFF283FE77F00A7CA2E /* XZData.swift */; };
+		E179AE05283FE9E200A7CA2E /* GraphViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179AE04283FE9E200A7CA2E /* GraphViewRepresentable.swift */; };
+		E179AE07283FEFA800A7CA2E /* Basic Script.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = E179AE06283FE9E600A7CA2E /* Basic Script.dgraph */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,11 +78,12 @@
 		3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentReadingView.swift; sourceTree = "<group>"; };
 		E179ADE9283D726000A7CA2E /* DataGraph Test Views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "DataGraph Test Views"; sourceTree = "<group>"; };
 		E179ADEB283D745F00A7CA2E /* WireframeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WireframeView.swift; sourceTree = "<group>"; };
-		E179ADED283EB25000A7CA2E /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
-		E179ADEF283EB25500A7CA2E /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		E179ADF1283EB27400A7CA2E /* GraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
-		E179ADF3283EB27F00A7CA2E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		E179ADF5283EBE8500A7CA2E /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Basic Script.dgraph"; sourceTree = "<group>"; };
+		E179ADF9283FE77400A7CA2E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		E179ADFB283FE77800A7CA2E /* GraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
+		E179ADFD283FE77D00A7CA2E /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		E179ADFF283FE77F00A7CA2E /* XZData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XZData.swift; sourceTree = "<group>"; };
+		E179AE04283FE9E200A7CA2E /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
+		E179AE06283FE9E600A7CA2E /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Basic Script.dgraph"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,12 +147,13 @@
 			children = (
 				E179ADE9283D726000A7CA2E /* DataGraph Test Views */,
 				3F12F11F283446CD006B0368 /* FurnaceControllerApp.swift */,
-				E179ADF5283EBE8500A7CA2E /* Basic Script.dgraph */,
-				E179ADF1283EB27400A7CA2E /* GraphController.swift */,
-				E179ADF3283EB27F00A7CA2E /* DataModel.swift */,
+				E179ADFF283FE77F00A7CA2E /* XZData.swift */,
+				E179AE06283FE9E600A7CA2E /* Basic Script.dgraph */,
+				E179AE04283FE9E200A7CA2E /* GraphViewRepresentable.swift */,
+				E179ADFD283FE77D00A7CA2E /* GraphView.swift */,
+				E179ADFB283FE77800A7CA2E /* GraphController.swift */,
+				E179ADF9283FE77400A7CA2E /* DataModel.swift */,
 				3F12F121283446CD006B0368 /* ContentView.swift */,
-				E179ADEF283EB25500A7CA2E /* GraphView.swift */,
-				E179ADED283EB25000A7CA2E /* GraphViewRepresentable.swift */,
 				3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */,
 				3F12F14A2834493C006B0368 /* ArduinoController.swift */,
 				3F12F123283446CD006B0368 /* Assets.xcassets */,
@@ -297,6 +301,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E179AE07283FEFA800A7CA2E /* Basic Script.dgraph in Resources */,
 				3F12F127283446CD006B0368 /* Preview Assets.xcassets in Resources */,
 				3F12F124283446CD006B0368 /* Assets.xcassets in Resources */,
 				E179ADEA283D726000A7CA2E /* DataGraph Test Views in Resources */,
@@ -326,13 +331,14 @@
 			files = (
 				3F12F122283446CD006B0368 /* ContentView.swift in Sources */,
 				3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */,
-				E179ADF0283EB25500A7CA2E /* GraphView.swift in Sources */,
 				3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */,
 				E179ADEC283D745F00A7CA2E /* WireframeView.swift in Sources */,
-				E179ADEE283EB25000A7CA2E /* GraphViewRepresentable.swift in Sources */,
-				E179ADF2283EB27400A7CA2E /* GraphController.swift in Sources */,
 				3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */,
-				E179ADF4283EB27F00A7CA2E /* DataModel.swift in Sources */,
+				E179ADFC283FE77800A7CA2E /* GraphController.swift in Sources */,
+				E179AE05283FE9E200A7CA2E /* GraphViewRepresentable.swift in Sources */,
+				E179ADFA283FE77400A7CA2E /* DataModel.swift in Sources */,
+				E179AE00283FE77F00A7CA2E /* XZData.swift in Sources */,
+				E179ADFE283FE77D00A7CA2E /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

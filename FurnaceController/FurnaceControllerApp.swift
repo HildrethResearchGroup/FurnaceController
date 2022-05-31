@@ -17,8 +17,8 @@ struct FurnaceControllerApp: App {
             HStack{
                 
                 ContentView()
-                    .frame(width: 400, height: 400, alignment: .center)
-                ControlView()
+                    .frame(width: 1500, height: 1000, alignment: .center)
+                //ControlView()
             }
             
         }

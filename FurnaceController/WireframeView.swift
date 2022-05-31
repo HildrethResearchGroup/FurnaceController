@@ -79,9 +79,41 @@ struct GasFlowView: View {
     
     
 }
+struct InfoView: View {
+    
+    @ObservedObject var controller = ArduinoController()
+    
+    @State private var start: String = ""
+    private func Start() -> Void {
+        print(start)
+    }
+    
+    var body: some View {
+        VStack{
+            
+            Button("Start Recording", action: Start)
+            
+            HStack{
+                Picker("Select Port", selection: $controller.serialPort) {
+                    ForEach(controller.serialPortManager.availablePorts, id:\.self) { port in
+                        Text(port.name).tag(port as ORSSerialPort?)
+                    }
+                }
+                
+                Button(controller.nextPortState) {controller.openOrClosePort()}
+            }
+            .padding(10)
+            
+            
+            
+            Text("Last response: \(controller.lastResponse)")
+            
+            
+            CurrentReadingView(controller: controller)
+        }
 
-
-
+    }
+}
 
 struct TemperatureView: View {
     @ObservedObject var controller = ArduinoController()
@@ -152,7 +184,8 @@ struct ControlView: View {
             */
             VStack{
                 
-                Text("Furnace Controller").font(.system(size: 30, design: .serif))
+                
+                InfoView()
                 
                 TemperatureView()
                     .padding()

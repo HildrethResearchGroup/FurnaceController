@@ -9,47 +9,107 @@ import SwiftUI
 import ORSSerial
 
 
-struct ContentView: View {
+struct StopwatchView: View {
     
-    @ObservedObject var controller = ArduinoController()
-    @ObservedObject var graphController = GraphController()
+    var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
+    let status = "Start Recording"
+    @State var progressTime = 0
+    
+    var hours: Int {
+      progressTime / 3600
+    }
+
+    var minutes: Int {
+      (progressTime % 3600) / 60
+    }
+
+    var seconds: Int {
+      progressTime % 60
+    }
+    
     
     
     var body: some View {
-        VStack{
-            HStack{
-                Picker("Select Port", selection: $controller.serialPort) {
-                    ForEach(controller.serialPortManager.availablePorts, id:\.self) { port in
-                        Text(port.name).tag(port as ORSSerialPort?)
-                    }
-                }
-                
-                Button(controller.nextPortState) {controller.openOrClosePort()}
-            }
-            .padding(10)
-            
-            HStack {
-                TextField("", text: $controller.nextCommand)
-                Button("Send Command") {controller.sendCommand()}
-            }
-            
-            Text("Last response: \(controller.lastResponse)")
-            
-            
-            CurrentReadingView(controller: controller)
+        let stringHours = String(format: "%02d", hours)
+        let stringMinutes = String(format: "%02d", minutes)
+        let stringSeconds = String(format: "%02d", seconds)
+        Text("\(stringHours):\(stringMinutes):\(stringSeconds)").font(.system(size: 25, design: .serif))
         
-            //let graph:GraphViewRepresentable = GraphViewRepresentable(graphController: <#T##GraphController#>)
-            //graph.makeNSView(context: <#T##Context#>)
-            //graph.makeNSView(context: <#T##Context#>)
+        
+        
+    }
+    
+    
+    
+    func startOrStopRecord() -> Void {
+        
+        if(status == "Start Recording"){
+            status = "Stop Recording"
             
-            GraphViewRepresentable(graphController: graphController).frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
+            
+            
+           // .onReceive(timer) { _ in
+            //    progressTime = progressTime + 1
+           //     }
+            
+            //StopwatchView()
+            
         }
-        .padding()
+        else{
+            status = "Start Recording"
+            //self.showSavePanel()
+        }
+
+    }
+    
+}
+
+
+
+
+struct ContentView: View {
+    var status = "Start Recording"
+    @StateObject var controller = ArduinoController()
+    @ObservedObject var graphController = GraphController()
+    @State private var start: String = ""
+    private func Start() -> Void {
+        print(start)
+    }
+    
+    
+    
+    var body: some View {
+        
+        HSplitView{
+            
+            VStack {
+                
+                GraphViewRepresentable(graphController: graphController)
+                    .frame(minWidth: 800, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
+            
+                Button(graphController.status, action: graphController.startOrStopRecord)
+                
+                
+                //Label("Lightning", systemImage: "bolt.fill")
+                //StopwatchView()
+                let time = StopwatchView()
+                
+                time
+                
+            }
+            ControlView()
+            
+        }
     }
 }
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
 }
+
