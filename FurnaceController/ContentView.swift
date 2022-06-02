@@ -11,6 +11,7 @@ import ORSSerial
 struct ContentView: View {
     
     var controller = AppController()
+    @ObservedObject var watch = StopWatch()
     
     var body: some View {
         GeometryReader { geo in
@@ -18,6 +19,8 @@ struct ContentView: View {
                 
                 VStack {
                     GraphViewRepresentable(graphController: controller.graph).padding()
+                    Button(watch.status, action: watch.startOrStopRecord)
+                    Text("\(String(format:"%02d", (watch.progressTime/3600) )):\(String(format:"%02d",  (watch.progressTime % 3600 / 60) )):\(String(format:"%02d", watch.progressTime % 60))").font(.system(size: 25, design: .serif))
                 }
                 
                 VStack{
