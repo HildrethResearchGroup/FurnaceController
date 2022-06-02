@@ -41,8 +41,10 @@ struct TemperatureView: View {
     
     @State private var temp: String = ""
     
-    private func getTemp() -> Void {
-        print(temp)
+    var controller: AppController?
+    
+    init(controller: AppController) {
+        self.controller = controller
     }
     
     var body: some View {
@@ -50,13 +52,15 @@ struct TemperatureView: View {
             //curent temp
             HStack {
                 Text("Current Temperature(ºK):")
-                TextField("\(temp)", text: $temp).disabled(true)
+                Text(String((controller?.ardiono.lastTemp)!))
             }.frame(alignment: .leading)
 
             //set temp
             HStack {
                 TextField("", text: $temp)
-                Button("Set Temperature", action: getTemp)
+                Button("Set Temperature"){
+                    print("set")
+                }
             }
             
         }
@@ -89,9 +93,7 @@ struct GasFlowView: View {
 }
 
 struct CurrentReadingView: View {
-    
     var controller: ArduinoController
-    
     
     init(controller: ArduinoController){
         self.controller = controller
