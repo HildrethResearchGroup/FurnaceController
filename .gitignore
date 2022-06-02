@@ -1,0 +1,12 @@
+## User settings
+xcuserdata/
+
+## Xcode 8 and earlier
+*.xcscmblueprint
+*.xccheckout
+
+## Obj-C/Swift specific
+*.hmap
+
+## .DS_Store
+.DS_Store

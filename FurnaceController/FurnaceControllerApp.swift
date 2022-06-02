@@ -9,10 +9,18 @@ import SwiftUI
 
 @main
 struct FurnaceControllerApp: App {
+    
+    
     var body: some Scene {
+        
         WindowGroup {
-            ContentView()
-                .frame(width: 400, height: 400, alignment: .center)
+            HStack{
+                
+                ContentView()
+                    .frame(width: 1500, height: 1000, alignment: .center)
+                //ControlView()
+            }
+            
         }
     }
 }

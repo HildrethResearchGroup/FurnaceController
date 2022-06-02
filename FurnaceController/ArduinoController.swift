@@ -11,15 +11,22 @@ import ORSSerial
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     struct Command {
-        var id: Int
-        var type: String
-        var receivedResponse: Bool
+        var type: CommandType // this is to handle what to do with a response to the command
+        var request: String // this is just the command part of the serial string sent to arduino. does not include the UID
+        var response: String // Full response (just atm, for debugging)
         
-        init(id: Int, type: String){
-            self.id = id
+        init(request: String, type: CommandType){
             self.type = type
-            self.receivedResponse = false
+            self.request = request
+            self.response = ""
         }
+    }
+    
+    enum CommandType {
+        case QUERY_TEMP
+        case QUERY_NITROGEN
+        case QUERY_ARGON
+        case GENERAL
     }
     
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
@@ -27,22 +34,20 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     // All of these published variables are used to keep the app display updated.
     // The @Published modifier makes the view watch the variable to see if it
     // needs to be updated on the display
-    private static let QUERY_TEMP = "temp?"
-    
     @Published var nextCommand = ""
     @Published var lastResponse = "" // possibly just a debugging variable, possibly not
     
-    private var commands: [Command] = []
+    private var commands: [Int: Command] = [:]
     private var nextID = 0
     
-    @Published var lastTemp = 0
-    @Published var lastFlowN2 = 0
-    @Published var lastFlowAr = 0
+    @Published var lastTemp = 0.0
+    @Published var lastFlowN2 = 0.0
+    @Published var lastFlowAr = 0.0
     @Published var tempUnit = "C"
     @Published var flowUnit = "L/min"
     
     private let thermocoupleID = "T"
-    private let nitrogenFlowID = "N"
+    private let nitrogenFlowID = "B"
     private let argonFlowID = "A"
     @Published var nextPortState = "Open"
     
@@ -55,24 +60,29 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
-    // sends whatever command is entered into the textbox. Currently triggered by a button.
-    func sendCommand() {
+    func sendCommand(command: Command) {
         if let port = self.serialPort{
-            let command = "$ \(self.nextCommand) ;"
+            port.send("$ \(self.nextID) \(command.request) ;".data(using: .utf8)!)
             
-            port.send(command.data(using: .utf8)!)
+            self.commands[self.nextID] = command
+            self.nextID += 1
         }
     }
     
+    // sends whatever command is entered into the textbox. Currently triggered by a button.
+    func sendCommand() {
+        let command = Command(request: self.nextCommand, type: .GENERAL)
+        self.sendCommand(command: command)
+    }
+
     func readTemperature() {
-        if let port = self.serialPort{
-            let command = Command(id: self.nextID, type: ArduinoController.QUERY_TEMP)
-            self.nextID += 1
-            
-            port.send("$ \(command.id) \(self.thermocoupleID)\r ;".data(using: .utf8)!)
-            
-            self.commands.append(command)
-        }
+        let command = Command(request: self.thermocoupleID, type: .QUERY_TEMP)
+        self.sendCommand(command: command)
+    }
+    
+    func readArgonFlow() {
+        let command = Command(request: self.argonFlowID, type: .QUERY_ARGON)
+        self.sendCommand(command: command)
     }
     
     // opens/closes the serial port. controlled by a button
@@ -90,14 +100,31 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     // if the ORSSerial{PacketDescriptor sees a command from arduino, it will call the first function
     func serialPort(_ serialPort: ORSSerialPort, didReceivePacket packetData: Data, matching descriptor: ORSSerialPacketDescriptor) {
         if let dataAsList = String(data: packetData, encoding: String.Encoding.ascii)?.components(separatedBy: " ") {
-            self.lastResponse = dataAsList[1...dataAsList.count - 2].joined(separator: " ")
+            let UID = Int(dataAsList[1])!
             
-            //let requestType = self.requestTypes[Int(dataAsList[1])!] // gets the type of command sent according to the ID
-            let requestData = dataAsList[2] // this is arbitrary string data, used in if statements
-            
-//            if requestType == ArduinoController.QUERY_TEMP {
-//                self.lastTemp = Int(dataAsList[2])!
-//            }
+            if var command = commands[UID] {
+                command.response = dataAsList.joined(separator: " ")
+                
+                if (dataAsList[2] == "ERROR") {
+                    print("Command \"\(command.request)\" timed out.")
+                    return
+                }
+                
+                if command.type == .QUERY_TEMP {
+                    self.lastTemp = Double(dataAsList[2])!
+                }
+                // maybe add a confirmation that we are, in fact, reading Nitrogen data (response includes Gas Type)
+                else if command.type == .QUERY_NITROGEN {
+                    self.lastFlowN2 = Double(dataAsList[6])!
+                }
+                else if command.type == .QUERY_ARGON {
+                    self.lastFlowAr = Double(dataAsList[6])!
+                }
+                else if command.type == .GENERAL {
+                    self.lastResponse = command.response
+                    print(command.response)
+                }
+            }
         }
     }
     
@@ -111,7 +138,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     // called when a serial port is opened, and adds the packet descriptor to the port
     func serialPortWasOpened(_ serialPort: ORSSerialPort) {
-        let descriptor = ORSSerialPacketDescriptor(prefixString: "$", suffixString: ";", maximumPacketLength: 1024, userInfo: nil)
+        let descriptor = ORSSerialPacketDescriptor(prefixString: "$", suffixString: ";", maximumPacketLength: 4096, userInfo: nil)
         serialPort.startListeningForPackets(matching: descriptor)
         
         print("Port \(serialPort.path) is open")
@@ -119,7 +146,9 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     }
     
     func serialPortWasClosed(_ serialPort: ORSSerialPort) {
-        print("Port \(serialPort.path) is open")
+        serialPort.stopListeningForPackets(matching: serialPort.packetDescriptors.first!)
+        
+        print("Port \(serialPort.path) is closed")
         self.nextPortState = "Open"
     }
 }
