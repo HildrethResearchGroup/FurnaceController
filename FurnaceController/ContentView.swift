@@ -9,17 +9,15 @@ import SwiftUI
 import ORSSerial
 
 struct ContentView: View {
-    @StateObject var controller = ArduinoController()
-    @ObservedObject var graphController = GraphController()
     
-    
+    var controller = AppController()
     
     var body: some View {
         
         HSplitView{
             
             VStack {
-            GraphViewRepresentable(graphController: graphController)
+                GraphViewRepresentable(graphController: controller.graph)
                 .frame(minWidth: 800, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
             }
             VStack{

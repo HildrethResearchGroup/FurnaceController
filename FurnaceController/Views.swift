@@ -7,37 +7,6 @@
 import SwiftUI
 import ORSSerial
 
-
-struct GasFlowView: View {
-    @ObservedObject var controller = ArduinoController()
-    
-    @State private var flow: String = ""
-    
-    
-    private func getRate() -> Void {
-        print(flow)
-    }
-    var body: some View {
-        VStack {
-            
-            //current flow rate
-            HStack {
-                Text("Current Flow Rate(Liters/minute):")
-                TextField("\(flow)", text: $flow).disabled(true)
-            }.frame(alignment: .leading)
-
-            //setting flow rate
-            HStack {
-                TextField("", text: $flow)
-                Button("Set Flow Rate", action: getRate)
-            }
-            
-            
-        }
-    }
-    
-    
-}
 struct InfoView: View {
     
     @ObservedObject var controller = ArduinoController()
@@ -61,18 +30,14 @@ struct InfoView: View {
                         Text(port.name).tag(port as ORSSerialPort?)
                     }
                 }
-                
                 Button(controller.nextPortState) {controller.openOrClosePort()}
             }
             .padding(10)
-            
         }
-
     }
 }
 
 struct TemperatureView: View {
-    @ObservedObject var controller = ArduinoController()
     
     @State private var temp: String = ""
     
@@ -82,8 +47,6 @@ struct TemperatureView: View {
     
     var body: some View {
         VStack {
-
-            
             //curent temp
             HStack {
                 Text("Current Temperature(ºK):")
@@ -96,6 +59,31 @@ struct TemperatureView: View {
                 Button("Set Temperature", action: getTemp)
             }
             
+        }
+    }
+}
+
+struct GasFlowView: View {
+    
+    @State private var flow: String = ""
+    
+    private func getRate() -> Void {
+        print(flow)
+    }
+    
+    var body: some View {
+        VStack {
+            //current flow rate
+            HStack {
+                Text("Current Flow Rate(Liters/minute):")
+                TextField("\(flow)", text: $flow).disabled(true)
+            }.frame(alignment: .leading)
+
+            //setting flow rate
+            HStack {
+                TextField("", text: $flow)
+                Button("Set Flow Rate", action: getRate)
+            }
         }
     }
 }
