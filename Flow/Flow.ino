@@ -3,7 +3,7 @@
 #define txPin 11
 
 #define BUFFER_SIZE 256
-#define TIMEOUT_DURATION 10000 // in miliseconds
+#define TIMEOUT_DURATION 3000 // 3 seconds in miliseconds
 
 
 #define EOT ';' // End of transmission
@@ -151,15 +151,20 @@ void loop() {
         // $ UID COMMAND ;
         // input_tokens[1] is the actual command
         // COMMAND has no delimiters
-
-        // Send the flow sensor the command
+          // Send the flow sensor the command
         char* COMMAND = input_tokens[1];
+        if (strcmp(COMMAND, "TEMP") == 0){
+          // can just read it and send it over
+          write_message(UID, "5");
+          current_state = WAITING;
+        }else{
         flowSerial.write(COMMAND);
         flowSerial.write("\r");
 
         // start the timeout timer
         time_d.start_t = millis();
         current_state = WAIT_FOR_DATA;
+        }
       }
       break;
     case WAIT_FOR_DATA:
@@ -186,9 +191,12 @@ void loop() {
               Serial.write(c);
             }
           }
-          // No data recived & no data seen before & 
-        }else if (writing_flow_data == false && ){
-          // TODO time
+
+        }
+        // If no data is recived go back to waiiting
+        if (writing_flow_data == false && (millis() - time_d.start_t > TIMEOUT_DURATION)) {
+          write_message(UID, "ERROR serial communication with flow sensor timeout"); 
+          current_state = WAITING;
         }
       }
       break;
@@ -203,4 +211,5 @@ void loop() {
       }
       break;
   }
+  Serial.println(current_state, DEC);
 }
