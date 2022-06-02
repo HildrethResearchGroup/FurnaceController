@@ -21,8 +21,8 @@ struct ContentView: View {
                 }
                 
                 VStack{
-                    InfoView(controller: controller.ardiono).padding()
-                    
+                    InfoView(controller: controller.arduino)
+                        .padding()
                     TemperatureView(controller: controller)
                         .padding()
                     ArgonFlowView(controller: controller)

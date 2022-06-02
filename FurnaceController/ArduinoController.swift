@@ -24,12 +24,13 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     enum CommandType {
         case QUERY_TEMP
-        case QUERY_NITROGEN
         case QUERY_ARGON
+        case QUERY_NITROGEN
         case GENERAL
     }
     
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
+    var dataController = DataController()
     
     // All of these published variables are used to keep the app display updated.
     // The @Published modifier makes the view watch the variable to see if it
@@ -41,14 +42,16 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     private var nextID = 0
     
     @Published var lastTemp = 0.0
-    @Published var lastFlowN2 = 0.0
     @Published var lastFlowAr = 0.0
+    @Published var lastFlowN2 = 0.0
     @Published var tempUnit = "C"
     @Published var flowUnit = "L/min"
     
+    var values: [Double] = [-1, -1, -1]
+    
     private let thermocoupleID = "T"
-    private let nitrogenFlowID = "B"
     private let argonFlowID = "A"
+    private let nitrogenFlowID = "B"
     @Published var nextPortState = "Open"
     
     @Published var serialPort: ORSSerialPort? {
@@ -85,6 +88,11 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         self.sendCommand(command: command)
     }
     
+    func readNitrogenFlow() {
+        let command = Command(request: self.nitrogenFlowID, type: .QUERY_NITROGEN)
+        self.sendCommand(command: command)
+    }
+    
     // opens/closes the serial port. controlled by a button
     func openOrClosePort() {
         if let port = self.serialPort {
@@ -112,17 +120,27 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 
                 if command.type == .QUERY_TEMP {
                     self.lastTemp = Double(dataAsList[2])!
+                    self.values[0] = self.lastTemp
                 }
                 // maybe add a confirmation that we are, in fact, reading Nitrogen data (response includes Gas Type)
-                else if command.type == .QUERY_NITROGEN {
-                    self.lastFlowN2 = Double(dataAsList[6])!
-                }
                 else if command.type == .QUERY_ARGON {
                     self.lastFlowAr = Double(dataAsList[6])!
+                    self.values[1] = self.lastFlowAr
+                }
+                else if command.type == .QUERY_NITROGEN {
+                    self.lastFlowN2 = Double(dataAsList[6])!
+                    self.values[2] = self.lastFlowN2
                 }
                 else if command.type == .GENERAL {
                     self.lastResponse = command.response
                     print(command.response)
+                }
+                
+                if (self.values[0] != -1 && self.values[1] != -1 && self.values[2] != -1) {
+                    let nextLine = Date.now.formatted(.iso8601) + "," + String(values[0])
+                    dataController.writeLine(data: nextLine)
+                    
+                    self.values = [-1, -1, -1]
                 }
             }
         }

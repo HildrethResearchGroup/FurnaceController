@@ -56,7 +56,7 @@ struct TemperatureView: View {
             //curent temp
             HStack {
                 Text("Temperature (ºK):")
-                Text(String((controller?.ardiono.lastTemp)!))
+                Text(String((controller?.arduino.lastTemp)!))
             }.frame(alignment: .leading)
 
             //set temp
@@ -86,7 +86,7 @@ struct ArgonFlowView: View {
             //current flow rate
             HStack {
                 Text("Argon Flowrate (L/min)")
-                Text(String((controller?.ardiono.lastFlowAr)!))
+                Text(String((controller?.arduino.lastFlowAr)!))
             }.frame(alignment: .leading)
 
             //setting flow rate
@@ -115,7 +115,7 @@ struct NitrogenFlowView: View {
             //current flow rate
             HStack {
                 Text("Nitrogen Flowrate (L/min)")
-                Text(String((controller?.ardiono.lastFlowAr)!))
+                Text(String((controller?.arduino.lastFlowAr)!))
             }.frame(alignment: .leading)
 
             //setting flow rate

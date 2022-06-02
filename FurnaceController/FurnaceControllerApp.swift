@@ -12,15 +12,9 @@ struct FurnaceControllerApp: App {
     
     
     var body: some Scene {
-        
         WindowGroup {
-            HStack{
-                
-                ContentView()
-                    .frame(width: 1500, height: 1000, alignment: .center)
-                //ControlView()
-            }
-            
+            ContentView()
+                .frame(width: 1000, height: 800, alignment: .center)
         }
     }
 }

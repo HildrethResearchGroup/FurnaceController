@@ -8,7 +8,15 @@
 import Foundation
 
 class AppController {
-    var ardiono = ArduinoController()
+    var arduino = ArduinoController()
     var graph = GraphController()
+    
+    func pollForData() {
+        arduino.readTemperature()
+        arduino.readArgonFlow()
+        arduino.readNitrogenFlow()
+    }
+    
+    
     
 }
