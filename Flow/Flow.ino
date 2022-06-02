@@ -3,15 +3,21 @@
 #define txPin 11
 
 #define BUFFER_SIZE 256
+#define TIMEOUT_DURATION 10000 // in miliseconds
 
-// \r\n
-// clear the buffer
 
 #define EOT ';' // End of transmission
 #define BOT '$' // Beginning of transmission
 
 enum STATE {READ_CMD = 0, WRITE_CMD = 1, WAIT_FOR_DATA = 2, WAITING = 3};
 enum STATE current_state;
+
+struct time_delta {
+  long int start_t;
+  long int end_t;
+} time_d;
+
+bool time_waiting = false;
 
 // Set up a new SoftwareSerial object
 SoftwareSerial flowSerial =  SoftwareSerial(rxPin, txPin, false);
@@ -48,8 +54,6 @@ int fill_buffer_from_stream(Stream &data, char buf[], int buf_size) {
 }
 // Writes a message to the serial Stream
 void write_message(int uid, const char* msg) {
-
-
   Serial.write(BOT);
   Serial.write(" ");
   Serial.write("30");
@@ -116,6 +120,9 @@ void setup()  {
   input_pos = 0;
   UID = -1;
 
+  time_d.start_t = 0;
+  time_d.end_t = 0;
+
   writing_flow_data = false;
 }
 
@@ -145,10 +152,13 @@ void loop() {
         // input_tokens[1] is the actual command
         // COMMAND has no delimiters
 
+        // Send the flow sensor the command
         char* COMMAND = input_tokens[1];
         flowSerial.write(COMMAND);
         flowSerial.write("\r");
-        // delay(100);
+
+        // start the timeout timer
+        time_d.start_t = millis();
         current_state = WAIT_FOR_DATA;
       }
       break;
@@ -176,6 +186,9 @@ void loop() {
               Serial.write(c);
             }
           }
+          // No data recived & no data seen before & 
+        }else if (writing_flow_data == false && ){
+          // TODO time
         }
       }
       break;
