@@ -8,32 +8,6 @@ import SwiftUI
 import ORSSerial
 
 
-struct Measure{
-    let temp: Double
-}
-
-
-private func getTemperatures() -> [Measure]{
-    var temps = [Measure]()
-    
-    for _ in 1...20{
-        let value = Measure(temp:Double.random(in: 100...300))
-        temps.append(value)
-    }
-    
-    return temps
-}
-
-
-private func getYearlyLabels() -> [String] {
-    return(2015...2021).map { String($0)}
-}
-
-
-
-
-
-
 struct GasFlowView: View {
     @ObservedObject var controller = ArduinoController()
     
@@ -132,9 +106,6 @@ struct TemperatureView: View {
 
 
 struct ControlView: View {
-    
-    let temps = getTemperatures().map{Int($0.temp)}
-    let labels = getYearlyLabels()
     
     //var controlLabel: Label<Title:"Furnace Controller", <#Icon: View#>>;
     // controlLabel.font = controlLabel.font.withSize(20)
