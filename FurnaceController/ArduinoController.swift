@@ -105,9 +105,8 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
             if var command = commands[UID] {
                 command.response = dataAsList.joined(separator: " ")
                 
-                if (dataAsList[2] == "TIMEDOUT") {
+                if (dataAsList[2] == "ERROR") {
                     print("Command \"\(command.request)\" timed out.")
-                    self.sendCommand(command: command)
                     return
                 }
                 
