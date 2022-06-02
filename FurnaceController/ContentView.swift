@@ -13,25 +13,24 @@ struct ContentView: View {
     var controller = AppController()
     
     var body: some View {
-        HSplitView{
-            VStack {
-                GraphViewRepresentable(graphController: controller.graph)
-                .frame(minWidth: 800, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
-            }
-            VStack{
-                InfoView(controller: controller.ardiono)
+        GeometryReader { geo in
+            HSplitView{
                 
-                TemperatureView(controller: controller)
-                    .padding()
-                    .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-                ArgonFlowView(controller: controller)
-                    .padding()
-                    .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-                NitrogenFlowView(controller: controller)
-                    .padding()
-                    .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
+                VStack {
+                    GraphViewRepresentable(graphController: controller.graph).padding()
+                }.frame(minWidth: geo.size.width * 0.2, idealWidth: geo.size.width * 0.5, maxWidth: geo.size.width * 0.8)
+                
+                VStack{
+                    InfoView(controller: controller.ardiono).padding()
+                    
+                    TemperatureView(controller: controller)
+                        .padding()
+                    ArgonFlowView(controller: controller)
+                        .padding()
+                    NitrogenFlowView(controller: controller)
+                        .padding()
+                }.frame(minWidth: geo.size.width * 0.2, idealWidth: geo.size.width * 0.5, maxWidth: geo.size.width * 0.8)
             }
-            
         }
     }
 }
