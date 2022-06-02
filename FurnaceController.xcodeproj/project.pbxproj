@@ -34,7 +34,6 @@
 		3FB1A3EF28401C1700782DA4 /* Columns.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FB1A3E328401C1700782DA4 /* Columns.plist */; };
 		E19D015F28491371006C0B52 /* ControlCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19D015E28491371006C0B52 /* ControlCenter.swift */; };
 		E19D0161284917A0006C0B52 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19D0160284917A0006C0B52 /* StopWatch.swift */; };
-		E19D016328491C58006C0B52 /* Basic Script.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = E19D016228491C58006C0B52 /* Basic Script.dgraph */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,7 +97,6 @@
 		3FB1A3E328401C1700782DA4 /* Columns.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Columns.plist; sourceTree = "<group>"; };
 		E19D015E28491371006C0B52 /* ControlCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCenter.swift; sourceTree = "<group>"; };
 		E19D0160284917A0006C0B52 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
-		E19D016228491C58006C0B52 /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Basic Script.dgraph"; path = "../../../FurnaceController copy/Basic Script.dgraph"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +205,6 @@
 			children = (
 				3FB1A3D628401C1700782DA4 /* XZData.swift */,
 				3FB1A3D728401C1700782DA4 /* DataModel.swift */,
-				E19D016228491C58006C0B52 /* Basic Script.dgraph */,
 				3FB1A3D828401C1700782DA4 /* GraphController.swift */,
 				3FB1A3D928401C1700782DA4 /* GraphView.swift */,
 				3FB1A3DA28401C1700782DA4 /* GraphViewRepresentable.swift */,
@@ -372,7 +369,6 @@
 				3FB1A3EB28401C1700782DA4 /* PkgInfo in Resources */,
 				3F12F124283446CD006B0368 /* Assets.xcassets in Resources */,
 				3FB1A3ED28401C1700782DA4 /* Thumbnail.png in Resources */,
-				E19D016328491C58006C0B52 /* Basic Script.dgraph in Resources */,
 				3FB1A3EE28401C1700782DA4 /* Spotlight.plist in Resources */,
 				3FB1A3EA28401C1700782DA4 /* Content.plist in Resources */,
 			);
