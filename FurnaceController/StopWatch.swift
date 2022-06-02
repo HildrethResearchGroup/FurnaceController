@@ -14,13 +14,6 @@ class StopWatch: ObservableObject{
     @Published var progressTime: Int = 0
     var timer:Timer?
     
-    //let stringHours = String(format: "%02d", hours)
-    //let stringMinutes = String(format: "%02d", minutes)
-    //let stringSeconds = String(format: "%02d", seconds)
-    
-    
-
-    
     func startOrStopRecord() -> Void {
         if(self.status == "Start Recording"){
             self.status = "Stop Recording"
@@ -29,12 +22,7 @@ class StopWatch: ObservableObject{
                 self.progressTime = self.progressTime + 1
 
             }
-                
             print("1")
-
-            
-
-            //StopwatchView()
             
         }
         else{
@@ -42,17 +30,5 @@ class StopWatch: ObservableObject{
             //self.showSavePanel()
             print("2")
         }
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
