@@ -19,15 +19,15 @@ struct ContentView: View {
                 .frame(minWidth: 800, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
             }
             VStack{
-                InfoView()
+                InfoView(controller: controller.ardiono)
                 
                 TemperatureView(controller: controller)
                     .padding()
                     .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-                GasFlowView(label: "Argon Flow Rate (L/min): ")
+                ArgonFlowView(controller: controller)
                     .padding()
                     .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-                GasFlowView(label: "Nitrogen Flow Rate (L/min): ")
+                NitrogenFlowView(controller: controller)
                     .padding()
                     .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
             }

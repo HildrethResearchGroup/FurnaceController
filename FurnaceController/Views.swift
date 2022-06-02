@@ -9,7 +9,11 @@ import ORSSerial
 
 struct InfoView: View {
     
-    @ObservedObject var controller = ArduinoController()
+    @ObservedObject var controller: ArduinoController
+    
+    init(controller: ArduinoController) {
+        self.controller = controller
+    }
     
     @State private var start: String = ""
     private func Start() -> Void {
@@ -51,7 +55,7 @@ struct TemperatureView: View {
         VStack {
             //curent temp
             HStack {
-                Text("Current Temperature(ºK):")
+                Text("Temperature (ºK):")
                 Text(String((controller?.ardiono.lastTemp)!))
             }.frame(alignment: .leading)
 
@@ -67,32 +71,59 @@ struct TemperatureView: View {
     }
 }
 
-struct GasFlowView: View {
+struct ArgonFlowView: View {
     
-    @State private var label: String
-    @State private var flow: String
+    @State private var flow: String = ""
     
-    init(label: String) {
-        self.label = label
-        self.flow = ""
-    }
+    var controller: AppController?
     
-    private func getRate() -> Void {
-        print(flow)
+    init(controller: AppController) {
+        self.controller = controller
     }
     
     var body: some View {
         VStack {
             //current flow rate
             HStack {
-                Text(label)
-                TextField("\(flow)", text: $flow).disabled(true)
+                Text("Argon Flowrate (L/min)")
+                Text(String((controller?.ardiono.lastFlowAr)!))
             }.frame(alignment: .leading)
 
             //setting flow rate
             HStack {
                 TextField("", text: $flow)
-                Button("Set Flow Rate", action: getRate)
+                Button("Set Flow Rate"){
+                    print("")
+                }
+            }
+        }
+    }
+}
+
+struct NitrogenFlowView: View {
+    
+    @State private var flow: String = ""
+    
+    var controller: AppController?
+    
+    init(controller: AppController) {
+        self.controller = controller
+    }
+    
+    var body: some View {
+        VStack {
+            //current flow rate
+            HStack {
+                Text("Nitrogen Flowrate (L/min)")
+                Text(String((controller?.ardiono.lastFlowAr)!))
+            }.frame(alignment: .leading)
+
+            //setting flow rate
+            HStack {
+                TextField("", text: $flow)
+                Button("Set Flow Rate"){
+                    print("")
+                }
             }
         }
     }
