@@ -18,7 +18,7 @@ struct ContentView: View {
                 
                 VStack {
                     GraphViewRepresentable(graphController: controller.graph).padding()
-                }.frame(minWidth: geo.size.width * 0.2, idealWidth: geo.size.width * 0.5, maxWidth: geo.size.width * 0.8)
+                }
                 
                 VStack{
                     InfoView(controller: controller.ardiono).padding()
@@ -29,7 +29,7 @@ struct ContentView: View {
                         .padding()
                     NitrogenFlowView(controller: controller)
                         .padding()
-                }.frame(minWidth: geo.size.width * 0.2, idealWidth: geo.size.width * 0.5, maxWidth: geo.size.width * 0.8)
+                }.frame(minWidth: geo.size.width * 0.2, idealWidth: geo.size.width * 0.6, maxWidth: geo.size.width * 0.6)
             }
         }
     }
