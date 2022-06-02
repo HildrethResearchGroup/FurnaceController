@@ -1,11 +1,9 @@
 #include <SoftwareSerial.h>
+
 #define rxPin 10
 #define txPin 11
-
 #define BUFFER_SIZE 256
 #define TIMEOUT_DURATION 3000 // 3 seconds in miliseconds
-
-
 #define EOT ';' // End of transmission
 #define BOT '$' // Beginning of transmission
 
@@ -148,10 +146,10 @@ void loop() {
         } else {
           UID = atoi(input_tokens[0]);
         }
-        // $ UID COMMAND ;
+        // $ <UID> <COMMAND> ;
         // input_tokens[1] is the actual command
         // COMMAND has no delimiters
-          // Send the flow sensor the command
+        // Send the flow sensor the command
         char* COMMAND = input_tokens[1];
         if (strcmp(COMMAND, "TEMP") == 0){
           // can just read it and send it over
@@ -160,7 +158,6 @@ void loop() {
         }else{
         flowSerial.write(COMMAND);
         flowSerial.write("\r");
-
         // start the timeout timer
         time_d.start_t = millis();
         current_state = WAIT_FOR_DATA;
@@ -182,16 +179,16 @@ void loop() {
           }
           char c;
           while ((c = flowSerial.read()) != -1) {
-            if (c == '\r') {
+            if (c != '\r'){
+              Serial.write(c);
+            }else{
               Serial.write(" ");
               Serial.write(EOT);
               current_state = WAITING;
               writing_flow_data = false;
-            } else {
-              Serial.write(c);
+              break;
             }
           }
-
         }
         // If no data is recived go back to waiiting
         if (writing_flow_data == false && (millis() - time_d.start_t > TIMEOUT_DURATION)) {
@@ -211,5 +208,4 @@ void loop() {
       }
       break;
   }
-  Serial.println(current_state, DEC);
 }
