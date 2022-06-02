@@ -126,37 +126,3 @@ struct TemperatureView: View {
     }
 }
 
-
-
-    
-
-
-struct ControlView: View {
-    
-    let temps = getTemperatures().map{Int($0.temp)}
-    let labels = getYearlyLabels()
-    
-    //var controlLabel: Label<Title:"Furnace Controller", <#Icon: View#>>;
-    // controlLabel.font = controlLabel.font.withSize(20)
-    //controlLabel.font = UIFont(name: "ArialRoundedMTBold", size: 20.0)
-    var body: some View {
-            VStack{
-                
-                
-                InfoView()
-                
-                TemperatureView()
-                    .padding()
-                    .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-                GasFlowView()
-                    .padding()
-                    .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-                GasFlowView()
-                    .padding()
-                    .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-            }
-     
-        
-        
-    }
-}
