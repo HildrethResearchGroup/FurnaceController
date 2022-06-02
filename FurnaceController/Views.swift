@@ -65,7 +65,13 @@ struct TemperatureView: View {
 
 struct GasFlowView: View {
     
-    @State private var flow: String = ""
+    @State private var label: String
+    @State private var flow: String
+    
+    init(label: String) {
+        self.label = label
+        self.flow = ""
+    }
     
     private func getRate() -> Void {
         print(flow)
@@ -75,7 +81,7 @@ struct GasFlowView: View {
         VStack {
             //current flow rate
             HStack {
-                Text("Current Flow Rate(Liters/minute):")
+                Text(label)
                 TextField("\(flow)", text: $flow).disabled(true)
             }.frame(alignment: .leading)
 

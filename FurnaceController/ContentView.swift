@@ -26,10 +26,10 @@ struct ContentView: View {
                 TemperatureView()
                     .padding()
                     .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-                GasFlowView()
+                GasFlowView(label: "Argon Flow Rate (L/min): ")
                     .padding()
                     .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
-                GasFlowView()
+                GasFlowView(label: "Nitrogen Flow Rate (L/min): ")
                     .padding()
                     .frame(minWidth: 200, maxWidth: 300, minHeight: 100, maxHeight: 200)
             }
