@@ -10,6 +10,8 @@ import ORSSerial
 
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
+    let TIMEOUT = 2 // the amount of timeout to give a command in seconds
+    
     struct Command {
         var type: CommandType // this is to handle what to do with a response to the command
         var request: String // this is just the command part of the serial string sent to arduino. does not include the UID
@@ -83,6 +85,15 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     func readArgonFlow() {
         let command = Command(request: self.argonFlowID, type: .QUERY_ARGON)
         self.sendCommand(command: command)
+    }
+    
+    func readNitrogenFlow() {
+        let command = Command(request: self.nitrogenFlowID, type: .QUERY_ARGON)
+        self.sendCommand(command: command)
+    }
+    
+    func recordTime() {
+        
     }
     
     // opens/closes the serial port. controlled by a button

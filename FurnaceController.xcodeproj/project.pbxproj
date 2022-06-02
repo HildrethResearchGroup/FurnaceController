@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0521EC2846B95800E6A163 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0521EB2846B95800E6A163 /* DataController.swift */; };
 		3F0EBD76283D5D73006CB301 /* DataGraph.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0EBD75283D5D73006CB301 /* DataGraph.framework */; };
 		3F0EBD77283D5D73006CB301 /* DataGraph.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0EBD75283D5D73006CB301 /* DataGraph.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3F0EBDDB283D786A006CB301 /* XZData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0EBDCC283D786A006CB301 /* XZData.swift */; };
@@ -29,6 +30,7 @@
 		3F12F13E283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F13D283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift */; };
 		3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F14A2834493C006B0368 /* ArduinoController.swift */; };
 		3F12F14E283449A5006B0368 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = 3F12F14D283449A5006B0368 /* ORSSerial */; };
+		3F17946728414BE600D278FB /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F17946628414BE600D278FB /* AppController.swift */; };
 		3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3F0521EB2846B95800E6A163 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		3F0EBD75283D5D73006CB301 /* DataGraph.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DataGraph.framework; sourceTree = "<group>"; };
 		3F0EBD79283D5DDC006CB301 /* FurnaceController-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FurnaceController-Bridging-Header.h"; sourceTree = "<group>"; };
 		3F0EBDCC283D786A006CB301 /* XZData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZData.swift; sourceTree = "<group>"; };
@@ -89,6 +92,7 @@
 		3F12F13B283446CE006B0368 /* FurnaceControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerUITests.swift; sourceTree = "<group>"; };
 		3F12F13D283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3F12F14A2834493C006B0368 /* ArduinoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoController.swift; sourceTree = "<group>"; };
+		3F17946628414BE600D278FB /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentReadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +210,8 @@
 				3F12F121283446CD006B0368 /* ContentView.swift */,
 				3F8E0DB6283535CD00AE7D9A /* CurrentReadingView.swift */,
 				3F12F14A2834493C006B0368 /* ArduinoController.swift */,
+				3F0521EB2846B95800E6A163 /* DataController.swift */,
+				3F17946628414BE600D278FB /* AppController.swift */,
 				3F12F123283446CD006B0368 /* Assets.xcassets */,
 				3F12F128283446CD006B0368 /* FurnaceController.entitlements */,
 				3F12F125283446CD006B0368 /* Preview Content */,
@@ -383,9 +389,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F0EBDDB283D786A006CB301 /* XZData.swift in Sources */,
+				3F17946728414BE600D278FB /* AppController.swift in Sources */,
 				3F12F122283446CD006B0368 /* ContentView.swift in Sources */,
 				3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */,
 				3F12F120283446CD006B0368 /* FurnaceControllerApp.swift in Sources */,
+				3F0521EC2846B95800E6A163 /* DataController.swift in Sources */,
 				3F0EBDDF283D786A006CB301 /* GraphViewRepresentable.swift in Sources */,
 				3F8E0DB7283535CD00AE7D9A /* CurrentReadingView.swift in Sources */,
 				3F0EBDDD283D786A006CB301 /* GraphController.swift in Sources */,
