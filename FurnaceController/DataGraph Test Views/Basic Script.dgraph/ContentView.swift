@@ -1,4 +1,4 @@
-//  This is a test comment
+//
 //  ContentView.swift
 //  FurnaceController
 //
