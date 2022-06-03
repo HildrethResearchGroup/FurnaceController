@@ -6,6 +6,7 @@
 #define TIMEOUT_DURATION 3000 // 3 seconds in miliseconds
 #define EOT ';' // End of transmission
 #define BOT '$' // Beginning of transmission
+#define NELEMS(x) (sizeof(x) / sizeof((x)[0])) // num elments in array
 
 enum STATE {READ_CMD = 0, WRITE_CMD = 1, WAIT_FOR_DATA = 2, WAITING = 3};
 enum STATE current_state;
@@ -15,13 +16,11 @@ struct time_delta {
   long int end_t;
 } time_d;
 
+
 bool time_waiting = false;
 
 // Set up a new SoftwareSerial object
 SoftwareSerial flowSerial =  SoftwareSerial(rxPin, txPin, false);
-
-// data from fluid flow sensor
-char flow_data[BUFFER_SIZE];
 
 // input str from mac application
 char input_data[BUFFER_SIZE];
@@ -54,7 +53,7 @@ int fill_buffer_from_stream(Stream &data, char buf[], int buf_size) {
 void write_message(int uid, const char* msg) {
   Serial.write(BOT);
   Serial.write(" ");
-  Serial.write("30");
+  Serial.print(uid, DEC);
   Serial.write(" ");
   Serial.write(msg);
   Serial.write(" ");
@@ -151,7 +150,7 @@ void loop() {
         // COMMAND has no delimiters
         // Send the flow sensor the command
         char* COMMAND = input_tokens[1];
-        if (strcmp(COMMAND, "TEMP") == 0){
+        if (strncmp(COMMAND, "TEMP", 4) == 0){
           // can just read it and send it over
           write_message(UID, "5");
           current_state = WAITING;
@@ -192,7 +191,7 @@ void loop() {
         }
         // If no data is recived go back to waiiting
         if (writing_flow_data == false && (millis() - time_d.start_t > TIMEOUT_DURATION)) {
-          write_message(UID, "ERROR serial communication with flow sensor timeout"); 
+          write_message(UID, "ERROR serial communication with flow sensor timeout");
           current_state = WAITING;
         }
       }
