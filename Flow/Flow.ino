@@ -1,12 +1,16 @@
 #include <SoftwareSerial.h>
 
+// variable pre-processor declarations
 #define rxPin 10
 #define txPin 11
 #define BUFFER_SIZE 256
 #define TIMEOUT_DURATION 3000 // 3 seconds in miliseconds
 #define EOT ';' // End of transmission
 #define BOT '$' // Beginning of transmission
-#define NELEMS(x) (sizeof(x) / sizeof((x)[0])) // num elments in array
+// function pre-processor declarations
+// Number of elements in a statically allocated array
+// Only use on an array d-type a[] not an a* which points to the first elm of the array
+#define NELEMS(x) (sizeof(x) / sizeof((x)[0])) 
 
 enum STATE {READ_CMD = 0, WRITE_CMD = 1, WAIT_FOR_DATA = 2, WAITING = 3};
 enum STATE current_state;
