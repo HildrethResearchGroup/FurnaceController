@@ -12,7 +12,7 @@ class DataController {
     var fileURL: URL?
     
     init() {
-        self.fileURL = URL(fileURLWithPath: "/Users/student/Documents/data.csv")
+        self.fileURL = URL(fileURLWithPath: "/Users/student/Documents/\(Date.now.formatted(.iso8601)).csv")
         print(self.fileURL?.absoluteString)
     }
     
@@ -27,6 +27,5 @@ class DataController {
             try? "".data(using: String.Encoding.ascii)?.write(to: self.fileURL!)
         }
     }
-    
 }
 

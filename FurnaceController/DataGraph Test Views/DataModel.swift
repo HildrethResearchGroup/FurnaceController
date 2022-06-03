@@ -16,12 +16,12 @@ class DataModel {
         for (index, value) in yData.enumerated() {
             yData[index] = value * -2
         }
+        
         let x_start = xData.first ?? 0.0
         let x_last = xData.last ?? 0.0
         xData.insert(x_start - 1, at: 0)
         yData.insert(1.0, at: 0)
         xData.append(x_last + 1)
         yData.append(1.0)
-        
     }
 }

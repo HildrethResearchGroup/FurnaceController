@@ -137,7 +137,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 }
                 
                 if (self.values[0] != -1 && self.values[1] != -1 && self.values[2] != -1) {
-                    let nextLine = Date.now.formatted(.iso8601) + "," + String(values[0])
+                    let nextLine = Date.now.formatted(.iso8601) + "," + String(values[0]) + "," + String(values[1]) + "," + String(values[2])
                     dataController.writeLine(data: nextLine)
                     
                     self.values = [-1, -1, -1]

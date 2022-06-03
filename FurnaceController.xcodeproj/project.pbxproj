@@ -18,9 +18,9 @@
 		3F12F13E283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F13D283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift */; };
 		3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F12F14A2834493C006B0368 /* ArduinoController.swift */; };
 		3F12F14E283449A5006B0368 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = 3F12F14D283449A5006B0368 /* ORSSerial */; };
+		3F1357CC2849AC4F00985E79 /* Basic Script.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 3F1357CB2849AC4F00985E79 /* Basic Script.dgraph */; };
 		3F4A689C284917ED00257872 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4A689B284917ED00257872 /* DataController.swift */; };
 		3F5184D7284924AE005F5964 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5184D6284924AE005F5964 /* AppController.swift */; };
-		3F5184DB28495766005F5964 /* Basic Script.dgraph in Resources */ = {isa = PBXBuildFile; fileRef = 3F5184DA28495766005F5964 /* Basic Script.dgraph */; };
 		3F5184DD28495B45005F5964 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5184DC28495B45005F5964 /* StopWatch.swift */; };
 		3FB1A3D428401C0300782DA4 /* ORSSerial in Frameworks */ = {isa = PBXBuildFile; productRef = 3FE942062836B75100C634AF /* ORSSerial */; };
 		3FB1A3E528401C1700782DA4 /* XZData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB1A3D628401C1700782DA4 /* XZData.swift */; };
@@ -77,9 +77,9 @@
 		3F12F13B283446CE006B0368 /* FurnaceControllerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerUITests.swift; sourceTree = "<group>"; };
 		3F12F13D283446CE006B0368 /* FurnaceControllerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FurnaceControllerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		3F12F14A2834493C006B0368 /* ArduinoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArduinoController.swift; sourceTree = "<group>"; };
+		3F1357CB2849AC4F00985E79 /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Basic Script.dgraph"; path = "DataGraphFramework 2/UsingDataGraphFramework/UsingDataGraphFramework/Views/GraphView/Basic Script.dgraph"; sourceTree = SOURCE_ROOT; };
 		3F4A689B284917ED00257872 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		3F5184D6284924AE005F5964 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
-		3F5184DA28495766005F5964 /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "Basic Script.dgraph"; sourceTree = "<group>"; };
 		3F5184DC28495B45005F5964 /* StopWatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		3FB1A3D628401C1700782DA4 /* XZData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZData.swift; sourceTree = "<group>"; };
 		3FB1A3D728401C1700782DA4 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 				3FB1A3D828401C1700782DA4 /* GraphController.swift */,
 				3FB1A3D928401C1700782DA4 /* GraphView.swift */,
 				3FB1A3DA28401C1700782DA4 /* GraphViewRepresentable.swift */,
-				3F5184DA28495766005F5964 /* Basic Script.dgraph */,
+				3F1357CB2849AC4F00985E79 /* Basic Script.dgraph */,
 			);
 			path = "DataGraph Test Views";
 			sourceTree = "<group>";
@@ -316,7 +316,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F5184DB28495766005F5964 /* Basic Script.dgraph in Resources */,
+				3F1357CC2849AC4F00985E79 /* Basic Script.dgraph in Resources */,
 				3F12F127283446CD006B0368 /* Preview Assets.xcassets in Resources */,
 				3F12F124283446CD006B0368 /* Assets.xcassets in Resources */,
 			);
