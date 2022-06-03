@@ -22,6 +22,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
+    // types of commands that require handling a response
     enum CommandType {
         case QUERY_TEMP
         case QUERY_ARGON
@@ -30,6 +31,8 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     }
     
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
+    
+    // dataController is used to read and write data from the savefile
     var dataController = DataController()
     
     // All of these published variables are used to keep the app display updated.
@@ -47,9 +50,10 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     @Published var tempUnit = "C"
     @Published var flowUnit = "L/min"
     
+    // this is used to see if all 3 sensors have collected data, so we can write it to a file
     var values: [Double] = [-1, -1, -1]
     
-    private let thermocoupleID = "T"
+    private let thermocoupleID = "TEMP"
     private let argonFlowID = "A"
     private let nitrogenFlowID = "B"
     @Published var nextPortState = "Open"
@@ -63,6 +67,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
+    // sends a generic command type, using the request field as the <DATA> of the command (see Command language specs)
     func sendCommand(command: Command) {
         if let port = self.serialPort{
             port.send("$ \(self.nextID) \(command.request) ;".data(using: .utf8)!)
@@ -72,12 +77,13 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
-    // sends whatever command is entered into the textbox. Currently triggered by a button.
-    func sendCommand() {
-        let command = Command(request: self.nextCommand, type: .GENERAL)
-        self.sendCommand(command: command)
-    }
-
+// sends whatever command is entered into the textbox. Currently triggered by a button. Used for debugging
+//    func sendCommand() {
+//        let command = Command(request: self.nextCommand, type: .GENERAL)
+//        self.sendCommand(command: command)
+//    }
+    
+    // next 3 functions are to read in sensor data
     func readTemperature() {
         let command = Command(request: self.thermocoupleID, type: .QUERY_TEMP)
         self.sendCommand(command: command)
@@ -168,5 +174,10 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         
         print("Port \(serialPort.path) is closed")
         self.nextPortState = "Open"
+    }
+    
+    // pipes data from DataController to app and graph controllers
+    func getData() -> [[Double]] {
+        return try! dataController.getData()
     }
 }
