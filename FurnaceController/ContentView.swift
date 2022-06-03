@@ -14,37 +14,42 @@ struct ContentView: View {
     
     var body: some View {
         GeometryReader { geo in
-            HSplitView{
+            HSplitView {
                 
                 VStack {
-                    GraphViewRepresentable(graphController: controller.graph).padding()
                     
-                    Button(controller.recordButtonLabel, action: controller.startOrStopRecord)
-                    Text("\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))").font(.system(size: 25, design: .serif))
-                    HStack {
-                        Text("Minutes / Sample: ")
-                        TextField("Minutes / Sample", text: $controller.minutesPerSample)
-                    }
+                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
+                    
+                    StopWatchView(controller: controller).padding()                         // stopwatch
+                    
+                    /*
                     Button("update graph") {
                         controller.graph.updateData()
-                    }
+                     */
                     
                 }
+                    
                 
                 VStack{
-                    InfoView(controller: controller.arduino)
+                    
+                    InfoView(controller: controller.arduino)                // title and port status
                         .padding()
-                    TemperatureView(controller: controller)
+                    
+                    TemperatureView(controller: controller)                 // temperature data and setting
                         .padding()
-                    ArgonFlowView(controller: controller)
+                    
+                    ArgonFlowView(controller: controller)                   // argon flowrate data and setting
                         .padding()
-                    NitrogenFlowView(controller: controller)
+                    
+                    NitrogenFlowView(controller: controller)                // nitrogen flowrate data and setting
                         .padding()
+                    
                 }.frame(minWidth: geo.size.width * 0.2, idealWidth: geo.size.width * 0.6, maxWidth: geo.size.width * 0.6)
             }
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
