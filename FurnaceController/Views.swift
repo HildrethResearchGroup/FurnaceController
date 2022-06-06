@@ -51,7 +51,11 @@ struct InfoView: View {
                 
                 // MARK: Open Port Button
                 // Button for opening port selected from dropdown menu
-                Button(controller.arduino.nextPortState) {controller.arduino.openOrClosePort()}
+                Button(controller.arduino.nextPortState) {
+                    controller.arduino.openOrClosePort()
+                    
+                    // TODO: insert status checking method
+                }
                 
             }
             .padding(10)
@@ -88,9 +92,16 @@ struct TemperatureView: View {
                 // Both the textfield and update button for setting a new temperature
                 // This is NONFUNCTIONAL at the moment
                 TextField("", text: $temp)
-                Button("Set Temperature"){
-                    print("set")
+                Button {
+                    
+                    // MARK: NONFUNCTIONAL BUTTON
+                    
+                } label: {
+                    
+                    Text("Set Temperature")
+                    
                 }
+
             }
             
         }
@@ -127,11 +138,19 @@ struct ArgonFlowView: View {
                 
                 // MARK: Update Flowrate
                 // Both the textfield and update button for setting a new flowrate
-                TextField("", text: $flow)
-                Button("Set Flow Rate"){
-                    print("")
                 
+                TextField("", text: $flow)
+                
+                Button {
+                    
+                    // TODO: Send set setpoint command to Arduino
+                    
+                } label: {
+                    
+                    Text("Set Flowrate")
+                    
                 }
+
             }
         }
     }
@@ -164,9 +183,16 @@ struct NitrogenFlowView: View {
                 // MARK: Update Flowrate
                 // Both the textfield and update button for setting a new flowrate
                 TextField("", text: $flow)
-                Button("Set Flow Rate"){
-                    print("")
+                Button {
+                    
+                    // TODO: Send set setpoint command to Arduino
+                    
+                } label: {
+                    
+                    Text("Set Flowrate")
+                
                 }
+
                 
             }
         }
