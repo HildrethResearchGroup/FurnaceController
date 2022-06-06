@@ -11,10 +11,13 @@ import ORSSerial
  */
 struct InfoView: View {
     
-    @ObservedObject var controller: ArduinoController
+    @ ObservedObject var controller: ArduinoController
+    
+    @ State var status: String
     
     init(controller: ArduinoController) {
         self.controller = controller
+        self.status = "Not Connected"
     }
     
     var body: some View {
@@ -24,9 +27,12 @@ struct InfoView: View {
                 // MARK: Connection Status
                 // Status text indicating if current state of connection to Arduino
                 Text("Status:")
-                Text("Connected")
-                
-            }.frame(alignment: .leading)
+                    .font(.body)
+                    .fontWeight(.semibold)
+                Text(status)
+                    .font(.body)
+                    .foregroundColor(.red)
+            }
             
             
             HStack{
@@ -172,8 +178,11 @@ struct StopWatchView: View {
     
     var body: some View {
         VStack {
-            Button(controller.recordButtonLabel, action: controller.startOrStopRecord)
-            Text("\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))").font(.system(size: 25, design: .serif))
+            Button(controller.recordButtonLabel, action: {
+                controller.startOrStopRecord
+            })
+            Text("\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))")
+                .font(.system(size: 25, design: .serif))
             HStack {
                 Text("Minutes / Sample: ")
                 TextField("Minutes / Sample", text: $controller.minutesPerSample)
