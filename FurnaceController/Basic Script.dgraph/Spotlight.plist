@@ -3,7 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>Labels</key>
-	<string>y vs x
+	<string>Time [hrs]
+Time [min]
+Flow Rate [L/min]
+Temperature [˚C]
+temp vs time
+temp vs time
+temp vs time
 </string>
 	<key>Text</key>
 	<string></string>

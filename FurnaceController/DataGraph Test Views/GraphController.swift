@@ -11,6 +11,7 @@ import SwiftUI
 class GraphController: ObservableObject {
     @Published var tempGraph: DGController?
     @Published var flowGraph: DGController?
+    
     private var data = DataModel()
     
     init() {
@@ -26,6 +27,8 @@ class GraphController: ObservableObject {
         data.update(time: time, temp: temp, flowAr: flowAr, flowN2: flowN2)
         tempGraph?.dataColumn(at: 1).setDataWith(data.time)
         tempGraph?.dataColumn(at: 2).setDataWith(data.temp)
+        
+        
     }
 }
 

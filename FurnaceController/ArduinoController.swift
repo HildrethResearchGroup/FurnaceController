@@ -7,6 +7,7 @@
 
 import Foundation
 import ORSSerial
+import SwiftUI
 
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
@@ -58,6 +59,8 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     private let argonFlowID = "A"
     private let nitrogenFlowID = "B"
     @Published var nextPortState = "Open"
+    @Published var connectionStatus: String = "Not Connected"
+    @Published var connectionColor: Color = Color.red
     
     @Published var serialPort: ORSSerialPort? {
         didSet {
@@ -141,6 +144,11 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 else if command.type == .GENERAL {
                     self.lastResponse = command.response
                     print(command.response)
+                }
+                
+                if values[0] != -1 && values[1] != -1 && values[2] != -1 {
+                    AppController.shared.recordData(temp: values[0], flowAr: values[1], flowN2: values[2])
+                    values = [-1, -1, -1]
                 }
                 
                 self.lastTime = Date.now

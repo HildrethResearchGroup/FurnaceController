@@ -18,7 +18,7 @@ struct ContentView: View {
                 
                 VStack {
                     
-                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
+                    
                     GraphViewRepresentable(graphController: controller.graph).padding()     // graph
                     
                     Spacer()
@@ -37,7 +37,7 @@ struct ContentView: View {
                 
                 VStack{
                     
-                    InfoView(controller: controller)                // title and port status
+                    InfoView(controller: controller.arduino)                // title and port status
                         .padding()
                         .frame(alignment: .top)
                     

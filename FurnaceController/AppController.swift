@@ -17,10 +17,6 @@ class AppController: ObservableObject {
     
     var startDate: Date?
     
-    // saved data
-    @Published var connectionStatus: String = "Not Connected"
-    @Published var connectionColor:Color = Color.red
-    
     // timer functions
     @Published var recordButtonLabel: String = "Start Recording"
     @Published var recordButtonColor: Color = Color.green
@@ -37,14 +33,16 @@ class AppController: ObservableObject {
         arduino.readTemperature()
         arduino.readArgonFlow()
         arduino.readNitrogenFlow()
-        
+    }
+    
+    func recordData(temp: Double, flowAr: Double, flowN2: Double) {
         // save data to the savefile
         //TODO: Move this data to csv conversion into DataController
-        let nextLine = String(self.progressTime) + "," + String(arduino.lastTemp) + "," + String(arduino.lastFlowAr) + "," + String(arduino.lastFlowN2)
+        let nextLine = String(self.progressTime) + "," + String(temp) + "," + String(flowAr) + "," + String(flowN2)
         dataController.writeLine(data: nextLine)
         
         // TODO: graph that data
-        graph.updateData(time: Double(self.progressTime), temp: arduino.lastTemp, flowAr: arduino.lastFlowAr, flowN2: arduino.lastFlowN2)
+        graph.updateData(time: Double(self.progressTime), temp: temp, flowAr: flowAr, flowN2: flowN2)
     }
     
     // starts and stops logic recording

@@ -11,9 +11,9 @@ import ORSSerial
  */
 struct InfoView: View {
     
-    @ ObservedObject var controller: AppController
+    @ ObservedObject var controller: ArduinoController
     
-    init(controller: AppController) {
+    init(controller: ArduinoController) {
         self.controller = controller
     }
     
@@ -43,16 +43,16 @@ struct InfoView: View {
                 
                 // MARK: Port Selection Dropdown
                 // Dropdown menu showing all available ports that can be connected to
-                Picker("Select Port", selection: $controller.arduino.serialPort) {
-                    ForEach(controller.arduino.serialPortManager.availablePorts, id:\.self) { port in
+                Picker("Select Port", selection: $controller.serialPort) {
+                    ForEach(controller.serialPortManager.availablePorts, id:\.self) { port in
                         Text(port.name).tag(port as ORSSerialPort?)
                     }
                 }
                 
                 // MARK: Open Port Button
                 // Button for opening port selected from dropdown menu
-                Button(controller.arduino.nextPortState) {
-                    controller.arduino.openOrClosePort()
+                Button(controller.nextPortState) {
+                    controller.openOrClosePort()
                     
                     // TODO: insert status checking method
                 }
@@ -211,6 +211,10 @@ struct StopWatchView: View {
             
             Text("\(String(format:"%02d", (controller.progressTime/86400) )):\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))")
                 .font(.title)
+                .toolbar {
+                    ToolbarItem{startStopToolbarButton()}
+                    //ToolbarItem{Button(action: controller.startOrStopRecord, label: Image("play"))}
+                }
             
             Button (action: {
                 controller.startOrStopRecord()
@@ -225,6 +229,7 @@ struct StopWatchView: View {
             Rectangle()
                 .background(Color.green) // *change the button background color to black*
                 .cornerRadius(10)
+            
         )
 
             
@@ -237,6 +242,11 @@ struct StopWatchView: View {
             }
             
         }
+    }
+    
+    @ViewBuilder
+    func startStopToolbarButton() -> some View {
+        Button(action: controller.startOrStopRecord) { Image(systemName:  "play") }
     }
 }
 
