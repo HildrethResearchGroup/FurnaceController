@@ -13,37 +13,44 @@ struct ContentView: View {
     @ObservedObject var controller = AppController()
     
     var body: some View {
-        HSplitView {
-            
-            VStack {
+        GeometryReader {geometry in
+            HSplitView {
                 
-                GraphViewRepresentable(graphController: controller.graph).padding()     // graph
+                VStack {
+                    
+                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
+                    
+                    Spacer()
+                    
+                    StopWatchView(controller: controller)                                   // stopwatch
+                        .padding(50)
+                    
+                    /*
+                    Button("update graph") {
+                        controller.graph.updateData()
+                     */
+                    
+                }
+                .frame(minWidth: geometry.size.width * 0.2, maxWidth: geometry.size.width * 0.8, minHeight: geometry.size.height, maxHeight: geometry.size.height)
+                    
                 
-                StopWatchView(controller: controller).padding()                         // stopwatch
-                
-                /*
-                Button("update graph") {
-                    controller.graph.updateData()
-                 */
-                
-            }
-                
-            
-            VStack{
-                
-                InfoView(controller: controller.arduino)                // title and port status
-                    .padding()
-                    .frame(alignment: .top)
-                
-                TemperatureView(controller: controller)                 // temperature data and setting
-                    .padding()
-                
-                ArgonFlowView(controller: controller)                   // argon flowrate data and setting
-                    .padding()
-                
-                NitrogenFlowView(controller: controller)                // nitrogen flowrate data and setting
-                    .padding()
-                
+                VStack{
+                    
+                    InfoView(controller: controller.arduino)                // title and port status
+                        .padding()
+                        .frame(alignment: .top)
+                    
+                    TemperatureView(controller: controller)                 // temperature data and setting
+                        .padding()
+                    
+                    ArgonFlowView(controller: controller)                   // argon flowrate data and setting
+                        .padding()
+                    
+                    NitrogenFlowView(controller: controller)                // nitrogen flowrate data and setting
+                        .padding()
+                    
+                }
+                .frame(minWidth: geometry.size.width * 0.2, maxWidth: geometry.size.width * 0.8, minHeight: geometry.size.height, maxHeight: geometry.size.height)
             }
         }
     }

@@ -22,8 +22,13 @@ struct InfoView: View {
     
     var body: some View {
         VStack{
+            // MARK: Title
+            Text("Furnace Controller")
+                .font(.title)
+                .fontWeight(.bold)
+                .frame(alignment: .top)
+            
             HStack {
-                
                 // MARK: Connection Status
                 // Status text indicating if current state of connection to Arduino
                 Text("Status:")
@@ -179,7 +184,7 @@ struct StopWatchView: View {
     var body: some View {
         VStack {
             Button(controller.recordButtonLabel, action: {
-                controller.startOrStopRecord
+                // controller.startOrStopRecord
             })
             Text("\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))")
                 .font(.system(size: 25, design: .serif))
