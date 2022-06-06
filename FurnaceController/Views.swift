@@ -34,7 +34,7 @@ struct InfoView: View {
                     .fontWeight(.semibold)
                 Text(controller.connectionStatus)
                     .font(.body)
-                    .foregroundColor(.red)
+                    .foregroundColor(controller.connectionColor)
             }
             
             

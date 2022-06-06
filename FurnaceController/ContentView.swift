@@ -10,7 +10,7 @@ import ORSSerial
 
 struct ContentView: View {
     
-    @ObservedObject var controller = AppController()
+    @ObservedObject var controller = AppController.shared
     
     var body: some View {
         GeometryReader {geometry in
@@ -18,6 +18,7 @@ struct ContentView: View {
                 
                 VStack {
                     
+                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
                     GraphViewRepresentable(graphController: controller.graph).padding()     // graph
                     
                     Spacer()

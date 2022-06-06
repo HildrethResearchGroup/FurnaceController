@@ -4,8 +4,11 @@
 //
 
 import Foundation
+import SwiftUI
 
 class AppController: ObservableObject {
+    
+    static let shared = AppController()
     
     // sub-controllers, used to manipulate data and graphs
     var arduino = ArduinoController()
@@ -16,9 +19,11 @@ class AppController: ObservableObject {
     
     // saved data
     @Published var connectionStatus: String = "Not Connected"
+    @Published var connectionColor:Color = Color.red
     
     // timer functions
     @Published var recordButtonLabel: String = "Start Recording"
+    @Published var recordButtonColor: Color = Color.green
     @Published var progressTime: Int = 0
     @Published var minutesPerSample = "1"
     
@@ -47,8 +52,10 @@ class AppController: ObservableObject {
         if(self.recordButtonLabel == "Start Recording"){
             // TODO: should this also handle RESETTING data? 
             
+            // on timer started
             let minsPerSamp = Double(self.minutesPerSample)
             self.recordButtonLabel = "Stop Recording"
+            self.recordButtonColor = Color.red
             
             self.progressTime = 0 // reset progress timer
             
