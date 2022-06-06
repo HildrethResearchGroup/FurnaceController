@@ -216,22 +216,6 @@ struct StopWatchView: View {
                     //ToolbarItem{Button(action: controller.startOrStopRecord, label: Image("play"))}
                 }
             
-            Button (action: {
-                controller.startOrStopRecord()
-            }, label: {
-                Text(controller.recordButtonLabel)
-            })
-            .buttonStyle(PlainButtonStyle())
-            .frame(width: 250, height: 60)
-
-            .foregroundColor(.black)
-            .background(
-            Rectangle()
-                .background(Color.green) // *change the button background color to black*
-                .cornerRadius(10)
-            
-        )
-
             
             
             HStack {
@@ -246,7 +230,7 @@ struct StopWatchView: View {
     
     @ViewBuilder
     func startStopToolbarButton() -> some View {
-        Button(action: controller.startOrStopRecord) { Image(systemName:  "play") }
+        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.circle"): Image(systemName:  "play.circle") }
     }
 }
 
