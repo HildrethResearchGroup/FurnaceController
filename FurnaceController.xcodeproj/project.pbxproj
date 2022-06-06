@@ -84,7 +84,7 @@
 		3FB1A3D928401C1700782DA4 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		3FB1A3DA28401C1700782DA4 /* GraphViewRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewRepresentable.swift; sourceTree = "<group>"; };
 		3FBB03E1284A618900CD7FAC /* Basic Script.dgraph */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Basic Script.dgraph"; sourceTree = "<group>"; };
-		E19D015E28491371006C0B52 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
+		E19D015E28491371006C0B52 /* Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Views.swift; path = FurnaceController/Views.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

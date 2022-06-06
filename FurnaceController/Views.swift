@@ -11,37 +11,51 @@ import ORSSerial
  */
 struct InfoView: View {
     
-    @ObservedObject var controller: ArduinoController
+    @ ObservedObject var controller: AppController
     
-    init(controller: ArduinoController) {
+    init(controller: AppController) {
         self.controller = controller
     }
     
     var body: some View {
         VStack{
+            // MARK: Title
+            Text("Furnace Controller")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .frame(alignment: .top)
+                .scaledToFit()
+            
             HStack {
-                
                 // MARK: Connection Status
                 // Status text indicating if current state of connection to Arduino
                 Text("Status:")
-                Text("Connected")
-                
-            }.frame(alignment: .leading)
+                    .font(.body)
+                    .fontWeight(.semibold)
+                Text(controller.connectionStatus)
+                    .font(.body)
+                    .foregroundColor(.red)
+            }
+            
             
             
             HStack{
                 
                 // MARK: Port Selection Dropdown
                 // Dropdown menu showing all available ports that can be connected to
-                Picker("Select Port", selection: $controller.serialPort) {
-                    ForEach(controller.serialPortManager.availablePorts, id:\.self) { port in
+                Picker("Select Port", selection: $controller.arduino.serialPort) {
+                    ForEach(controller.arduino.serialPortManager.availablePorts, id:\.self) { port in
                         Text(port.name).tag(port as ORSSerialPort?)
                     }
                 }
                 
                 // MARK: Open Port Button
                 // Button for opening port selected from dropdown menu
-                Button(controller.nextPortState) {controller.openOrClosePort()}
+                Button(controller.arduino.nextPortState) {
+                    controller.arduino.openOrClosePort()
+                    
+                    // TODO: insert status checking method
+                }
                 
             }
             .padding(10)
@@ -78,9 +92,16 @@ struct TemperatureView: View {
                 // Both the textfield and update button for setting a new temperature
                 // This is NONFUNCTIONAL at the moment
                 TextField("", text: $temp)
-                Button("Set Temperature"){
-                    print("set")
+                Button {
+                    
+                    // MARK: NONFUNCTIONAL BUTTON
+                    
+                } label: {
+                    
+                    Text("Set Temperature")
+                    
                 }
+
             }
             
         }
@@ -111,17 +132,25 @@ struct ArgonFlowView: View {
                 Text("Argon Flowrate (L/min)")
                 Text(String((controller?.arduino.lastFlowAr)!))
                 
-            }.frame(alignment: .leading)
+            }
 
             HStack {
                 
                 // MARK: Update Flowrate
                 // Both the textfield and update button for setting a new flowrate
-                TextField("", text: $flow)
-                Button("Set Flow Rate"){
-                    print("")
                 
+                TextField("", text: $flow)
+                
+                Button {
+                    
+                    // TODO: Send set setpoint command to Arduino
+                    
+                } label: {
+                    
+                    Text("Set Flowrate")
+                    
                 }
+
             }
         }
     }
@@ -147,16 +176,23 @@ struct NitrogenFlowView: View {
                 Text("Nitrogen Flowrate (L/min)")
                 Text(String((controller?.arduino.lastFlowAr)!))
                 
-            }.frame(alignment: .leading)
+            }
 
             HStack {
                 
                 // MARK: Update Flowrate
                 // Both the textfield and update button for setting a new flowrate
                 TextField("", text: $flow)
-                Button("Set Flow Rate"){
-                    print("")
+                Button {
+                    
+                    // TODO: Send set setpoint command to Arduino
+                    
+                } label: {
+                    
+                    Text("Set Flowrate")
+                
                 }
+
                 
             }
         }
@@ -172,12 +208,28 @@ struct StopWatchView: View {
     
     var body: some View {
         VStack {
-            Button(controller.recordButtonLabel, action: controller.startOrStopRecord)
-            Text("\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))").font(.system(size: 25, design: .serif))
+            
+            Text("\(String(format:"%02d", (controller.progressTime/86400) )):\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))")
+                .font(.title)
+            
+            Button {
+                controller.startOrStopRecord()
+            } label: {
+                Text("Start")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                
+            }
+
+            
+            
             HStack {
+                
                 Text("Minutes / Sample: ")
                 TextField("Minutes / Sample", text: $controller.minutesPerSample)
+                
             }
+            
         }
     }
 }

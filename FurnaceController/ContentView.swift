@@ -13,14 +13,17 @@ struct ContentView: View {
     @ObservedObject var controller = AppController()
     
     var body: some View {
-        GeometryReader { geo in
+        GeometryReader {geometry in
             HSplitView {
                 
                 VStack {
                     
                     GraphViewRepresentable(graphController: controller.graph).padding()     // graph
                     
-                    StopWatchView(controller: controller).padding()                         // stopwatch
+                    Spacer()
+                    
+                    StopWatchView(controller: controller)                                   // stopwatch
+                        .padding([.bottom, .top], 50)
                     
                     /*
                     Button("update graph") {
@@ -28,12 +31,14 @@ struct ContentView: View {
                      */
                     
                 }
+                .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
                     
                 
                 VStack{
                     
-                    InfoView(controller: controller.arduino)                // title and port status
+                    InfoView(controller: controller)                // title and port status
                         .padding()
+                        .frame(alignment: .top)
                     
                     TemperatureView(controller: controller)                 // temperature data and setting
                         .padding()
@@ -44,7 +49,8 @@ struct ContentView: View {
                     NitrogenFlowView(controller: controller)                // nitrogen flowrate data and setting
                         .padding()
                     
-                }.frame(minWidth: geo.size.width * 0.2, idealWidth: geo.size.width * 0.6, maxWidth: geo.size.width * 0.6)
+                }
+                .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
             }
         }
     }

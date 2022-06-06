@@ -16,6 +16,9 @@ class AppController: ObservableObject {
     
     var startDate: Date?
     
+    // saved data
+    @Published var connectionStatus: String = "Not Connected"
+    
     // timer functions
     @Published var recordButtonLabel: String = "Start Recording"
     @Published var progressTime: Int = 0
