@@ -9,24 +9,22 @@ import Foundation
 import SwiftUI
 
 class GraphController: ObservableObject {
-    @Published var tempGraph: DGController?
-    @Published var flowGraph: DGController?
+    @Published var graph: DGController?
     
     private var data = DataModel()
     
     init() {
-        if tempGraph == nil {
-            tempGraph = DGController(fileInBundle: "Basic Script")
-        }
-        if flowGraph == nil {
-            flowGraph = DGController(fileInBundle: "Basic Script")
+        if graph == nil {
+            graph = DGController(fileInBundle: "Basic Script")
         }
     }
     
     func updateData(time: Double, temp: Double, flowAr: Double, flowN2: Double) {
         data.update(time: time, temp: temp, flowAr: flowAr, flowN2: flowN2)
-        tempGraph?.dataColumn(at: 1).setDataWith(data.time)
-        tempGraph?.dataColumn(at: 2).setDataWith(data.temp)
+        graph?.dataColumn(at: 1).setDataWith(data.time)
+        graph?.dataColumn(at: 2).setDataWith(data.temp)
+        graph?.dataColumn(at: 3).setDataWith(data.flowAr)
+        graph?.dataColumn(at: 4).setDataWith(data.flowN2)
         
         
     }

@@ -27,7 +27,7 @@ class GraphView: NSView {
         graph.autoresizingMask = [.width, .height]
         
         self.addSubview(graph)
-        graphController?.tempGraph?.setDrawingView(graph)
+        graphController?.graph?.setDrawingView(graph)
         
     }
     
