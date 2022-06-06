@@ -11,13 +11,10 @@ import ORSSerial
  */
 struct InfoView: View {
     
-    @ ObservedObject var controller: ArduinoController
+    @ ObservedObject var controller: AppController
     
-    @ State var status: String
-    
-    init(controller: ArduinoController) {
+    init(controller: AppController) {
         self.controller = controller
-        self.status = "Not Connected"
     }
     
     var body: some View {
@@ -35,7 +32,7 @@ struct InfoView: View {
                 Text("Status:")
                     .font(.body)
                     .fontWeight(.semibold)
-                Text(status)
+                Text(controller.connectionStatus)
                     .font(.body)
                     .foregroundColor(.red)
             }
@@ -46,15 +43,15 @@ struct InfoView: View {
                 
                 // MARK: Port Selection Dropdown
                 // Dropdown menu showing all available ports that can be connected to
-                Picker("Select Port", selection: $controller.serialPort) {
-                    ForEach(controller.serialPortManager.availablePorts, id:\.self) { port in
+                Picker("Select Port", selection: $controller.arduino.serialPort) {
+                    ForEach(controller.arduino.serialPortManager.availablePorts, id:\.self) { port in
                         Text(port.name).tag(port as ORSSerialPort?)
                     }
                 }
                 
                 // MARK: Open Port Button
                 // Button for opening port selected from dropdown menu
-                Button(controller.nextPortState) {controller.openOrClosePort()}
+                Button(controller.arduino.nextPortState) {controller.arduino.openOrClosePort()}
                 
             }
             .padding(10)

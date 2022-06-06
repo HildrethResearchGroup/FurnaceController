@@ -13,6 +13,9 @@ class AppController: ObservableObject {
     var arduino = ArduinoController()
     var graph = GraphController()
     
+    // saved data
+    @Published var connectionStatus: String = "Not Connected"
+    
     // timer functions
     @Published var recordButtonLabel: String = "Start Recording"
     @Published var progressTime: Int = 0
