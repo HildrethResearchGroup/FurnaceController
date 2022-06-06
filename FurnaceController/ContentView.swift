@@ -15,8 +15,8 @@ import ORSSerial
 
 struct ContentView: View {
     @StateObject var controller = ArduinoController()
-    @ObservedObject var graphController = GraphController()
-    @ObservedObject var watch = StopWatch()
+    @StateObject var graphController = GraphController()
+    @StateObject var watch = StopWatch()
 
     @State private var start: String = ""
     
