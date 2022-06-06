@@ -24,9 +24,10 @@ struct InfoView: View {
         VStack{
             // MARK: Title
             Text("Furnace Controller")
-                .font(.title)
+                .font(.largeTitle)
                 .fontWeight(.bold)
                 .frame(alignment: .top)
+                .scaledToFit()
             
             HStack {
                 // MARK: Connection Status
@@ -38,6 +39,7 @@ struct InfoView: View {
                     .font(.body)
                     .foregroundColor(.red)
             }
+            
             
             
             HStack{
@@ -122,7 +124,7 @@ struct ArgonFlowView: View {
                 Text("Argon Flowrate (L/min)")
                 Text(String((controller?.arduino.lastFlowAr)!))
                 
-            }.frame(alignment: .leading)
+            }
 
             HStack {
                 
@@ -158,7 +160,7 @@ struct NitrogenFlowView: View {
                 Text("Nitrogen Flowrate (L/min)")
                 Text(String((controller?.arduino.lastFlowAr)!))
                 
-            }.frame(alignment: .leading)
+            }
 
             HStack {
                 
@@ -183,15 +185,28 @@ struct StopWatchView: View {
     
     var body: some View {
         VStack {
-            Button(controller.recordButtonLabel, action: {
-                // controller.startOrStopRecord
-            })
-            Text("\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))")
-                .font(.system(size: 25, design: .serif))
+            
+            Text("\(String(format:"%02d", (controller.progressTime/86400) )):\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))")
+                .font(.title)
+            
+            Button {
+                controller.startOrStopRecord()
+            } label: {
+                Text("Start")
+                    .font(.title)
+                    .fontWeight(.semibold)
+                
+            }
+
+            
+            
             HStack {
+                
                 Text("Minutes / Sample: ")
                 TextField("Minutes / Sample", text: $controller.minutesPerSample)
+                
             }
+            
         }
     }
 }

@@ -23,7 +23,7 @@ struct ContentView: View {
                     Spacer()
                     
                     StopWatchView(controller: controller)                                   // stopwatch
-                        .padding(50)
+                        .padding([.bottom, .top], 50)
                     
                     /*
                     Button("update graph") {
@@ -31,7 +31,7 @@ struct ContentView: View {
                      */
                     
                 }
-                .frame(minWidth: geometry.size.width * 0.2, maxWidth: geometry.size.width * 0.8, minHeight: geometry.size.height, maxHeight: geometry.size.height)
+                .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
                     
                 
                 VStack{
@@ -50,7 +50,7 @@ struct ContentView: View {
                         .padding()
                     
                 }
-                .frame(minWidth: geometry.size.width * 0.2, maxWidth: geometry.size.width * 0.8, minHeight: geometry.size.height, maxHeight: geometry.size.height)
+                .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
             }
         }
     }
