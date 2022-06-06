@@ -217,7 +217,15 @@ struct StopWatchView: View {
             }, label: {
                 Text(controller.recordButtonLabel)
             })
+            .buttonStyle(PlainButtonStyle())
+            .frame(width: 250, height: 60)
 
+            .foregroundColor(.black)
+            .background(
+            Rectangle()
+                .background(Color.green) // *change the button background color to black*
+                .cornerRadius(10)
+        )
 
             
             
