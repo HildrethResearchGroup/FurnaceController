@@ -18,7 +18,7 @@ class AppController: ObservableObject {
     var startDate: Date?
     
     // timer functions
-    @Published var recordButtonLabel: String = "Start Recording"
+    @Published var recording: Bool = false
     @Published var recordButtonColor: Color = Color.green
     @Published var progressTime: Int = 0
     @Published var minutesPerSample = "1"
@@ -47,12 +47,12 @@ class AppController: ObservableObject {
     
     // starts and stops logic recording
     func startOrStopRecord(){
-        if(self.recordButtonLabel == "Start Recording"){
+        if(self.recording == false){
             // TODO: should this also handle RESETTING data? 
             
             // on timer started
             let minsPerSamp = Double(self.minutesPerSample)
-            self.recordButtonLabel = "Stop Recording"
+            self.recording = true
             self.recordButtonColor = Color.red
             
             self.progressTime = 0 // reset progress timer
@@ -72,7 +72,7 @@ class AppController: ObservableObject {
             self.pollForData()
         }
         else{
-            self.recordButtonLabel = "Start Recording"
+            self.recording = false
             stopwatchTimer?.invalidate()
             pollingTimer?.invalidate()
             
