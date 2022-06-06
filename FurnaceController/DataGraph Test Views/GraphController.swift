@@ -9,37 +9,24 @@ import Foundation
 import SwiftUI
 
 class GraphController: ObservableObject {
-    @Published var dgController: DGController?
-    private let valueString = "value"
+    @Published var tempGraph: DGController?
+    @Published var flowGraph: DGController?
     private var data = DataModel()
     
-    @Published var adjustableValue = 1.0 {
-        didSet {
-            let parameter = dgController?.parameter(withName: valueString)
-            parameter?.setValue(String(adjustableValue))
-            //print("newParameter = \(parameter)")
-        }
-    }
-    
-    var computedValue: Double {
-        get {return adjustableValue*2}
-    }
-    
-    
     init() {
-        if dgController == nil {
-            dgController = DGController(fileInBundle: "Basic Script")
+        if tempGraph == nil {
+            tempGraph = DGController(fileInBundle: "Basic Script")
+        }
+        if flowGraph == nil {
+            flowGraph = DGController(fileInBundle: "Basic Script")
         }
     }
     
-    func updateData() {
-        data.update()
-        dgController?.dataColumn(at: 1).setDataWith(data.xData)
-        dgController?.dataColumn(at: 2).setDataWith(data.yData)
+    func updateData(time: Double, temp: Double, flowAr: Double, flowN2: Double) {
+        data.update(time: time, temp: temp, flowAr: flowAr, flowN2: flowN2)
+        tempGraph?.dataColumn(at: 1).setDataWith(data.time)
+        tempGraph?.dataColumn(at: 2).setDataWith(data.temp)
     }
-    
-    
-    
 }
 
 extension DGDataColumn {

@@ -32,8 +32,8 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
     
-    // dataController is used to read and write data from the savefile
-    var dataController = DataController()
+    // a reference to the app controller is needed to get the data back to the savefile and the graph
+    weak var appController: AppController?
     
     // All of these published variables are used to keep the app display updated.
     // The @Published modifier makes the view watch the variable to see if it
@@ -47,6 +47,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     @Published var lastTemp = 0.0
     @Published var lastFlowAr = 0.0
     @Published var lastFlowN2 = 0.0
+    @Published var lastTime: Date = Date.distantPast
     @Published var tempUnit = "C"
     @Published var flowUnit = "L/min"
     
@@ -120,7 +121,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 command.response = dataAsList.joined(separator: " ")
                 
                 if (dataAsList[2] == "ERROR") {
-                    print("Command \"\(command.request)\" timed out.")
+                    print("Command \"\(command.request)\" timedout.")
                     return
                 }
                 
@@ -142,12 +143,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                     print(command.response)
                 }
                 
-                if (self.values[0] != -1 && self.values[1] != -1 && self.values[2] != -1) {
-                    let nextLine = Date.now.formatted(.iso8601) + "," + String(values[0]) + "," + String(values[1]) + "," + String(values[2])
-                    dataController.writeLine(data: nextLine)
-                    
-                    self.values = [-1, -1, -1]
-                }
+                self.lastTime = Date.now
             }
         }
     }
@@ -174,10 +170,5 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         
         print("Port \(serialPort.path) is closed")
         self.nextPortState = "Open"
-    }
-    
-    // pipes data from DataController to app and graph controllers
-    func getData() -> [[Double]] {
-        return try! dataController.getData()
     }
 }
