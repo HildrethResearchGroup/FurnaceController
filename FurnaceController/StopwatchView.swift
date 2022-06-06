@@ -21,18 +21,8 @@ struct StopWatchView: View {
                 .font(.title)
                 .toolbar {
                     ToolbarItem{startStopToolbarButton()}
-                    //ToolbarItem{Button(action: controller.startOrStopRecord, label: Image("play"))}
                 }
-            
-            
-            
-            HStack {
-                
-                Text("Minutes / Sample: ")
-                TextField("Minutes / Sample", text: $controller.minutesPerSample)
-                
-            }
-            
+                    
         }
     }
     
