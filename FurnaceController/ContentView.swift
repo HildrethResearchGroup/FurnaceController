@@ -44,7 +44,7 @@ struct ContentView: View {
                     TemperatureView(controller: controller)                 // temperature data and setting
                         .padding()
                     
-                    ArgonFlowView(controller: controller)                   // argon flowrate data and setting
+                    ArgonFlowView(controller: controller.arduino)           // argon flowrate data and setting
                         .padding()
                     
                     NitrogenFlowView(controller: controller)                // nitrogen flowrate data and setting

@@ -33,9 +33,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
     
-    // a reference to the app controller is needed to get the data back to the savefile and the graph
-    weak var appController: AppController?
-    
     // All of these published variables are used to keep the app display updated.
     // The @Published modifier makes the view watch the variable to see if it
     // needs to be updated on the display
@@ -57,7 +54,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     private let thermocoupleID = "TEMP"
     private let argonFlowID = "A"
-    private let nitrogenFlowID = "B"
+    private let nitrogenFlowID = "A"
     @Published var nextPortState = "Open"
     @Published var connectionStatus: String = "Not Connected"
     @Published var connectionColor: Color = Color.red
@@ -81,7 +78,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
-// sends whatever command is entered into the textbox. Currently triggered by a button. Used for debugging
+    // sends whatever command is entered into the textbox. Currently triggered by a button. Used for debugging
 //    func sendCommand() {
 //        let command = Command(request: self.nextCommand, type: .GENERAL)
 //        self.sendCommand(command: command)
@@ -100,6 +97,18 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     func readNitrogenFlow() {
         let command = Command(request: self.nitrogenFlowID, type: .QUERY_NITROGEN)
+        self.sendCommand(command: command)
+    }
+    
+    func setArgonFlow(flow: Double) {
+        print(flow)
+        let command = Command(request: self.argonFlowID + "s" + String(flow), type: .GENERAL)
+        print(self.argonFlowID + "s" + String(flow))
+        self.sendCommand(command: command)
+    }
+    
+    func setNitrogenFlow(flow: Double) {
+        let command = Command(request: self.nitrogenFlowID + "s" + String(flow), type: .GENERAL)
         self.sendCommand(command: command)
     }
     

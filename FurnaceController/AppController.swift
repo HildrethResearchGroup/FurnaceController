@@ -42,7 +42,7 @@ class AppController: ObservableObject {
         dataController.writeLine(data: nextLine)
         
         // TODO: graph that data
-        graph.updateData(time: Double(self.progressTime), temp: temp, flowAr: flowAr, flowN2: flowN2)
+        graph.updateData(time: Double(self.progressTime) / 60, temp: temp, flowAr: flowAr, flowN2: flowN2)
     }
     
     // starts and stops logic recording

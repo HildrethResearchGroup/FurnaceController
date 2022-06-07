@@ -11,7 +11,7 @@ import ORSSerial
  */
 struct InfoView: View {
     
-    @ ObservedObject var controller: ArduinoController
+    @ObservedObject var controller: ArduinoController
     
     init(controller: ArduinoController) {
         self.controller = controller
@@ -116,9 +116,9 @@ struct ArgonFlowView: View {
     
     @State private var flow: String = ""               // last measured flowrate
     
-    var controller: AppController?
+    @ObservedObject var controller: ArduinoController
     
-    init(controller: AppController) {
+    init(controller: ArduinoController) {
         self.controller = controller
     }
     
@@ -130,7 +130,7 @@ struct ArgonFlowView: View {
                 // MARK: Display Flowrate
                 // Displays the flowrate measured at the last request in ...
                 Text("Argon Flowrate (L/min)")
-                Text(String((controller?.arduino.lastFlowAr)!))
+                Text(String(controller.lastFlowAr))
                 
             }
 
@@ -143,7 +143,16 @@ struct ArgonFlowView: View {
                 
                 Button {
                     
-                    // TODO: Send set setpoint command to Arduino
+                    if let flowNum = Double(flow){
+                        if flowNum >= 0 && flowNum <= 1 {
+                            controller.setArgonFlow(flow: flowNum)
+                        } else {
+                            //TODO: alert user, number must be between 0 and 1
+                        }
+                    } else {
+                        //TODO: Alert user, invalid input (not a number)
+                    }
+                    
                     
                 } label: {
                     
