@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StopWatchView: View {
+    
     @ObservedObject var controller: AppController
     
     init(controller: AppController) {
@@ -28,7 +29,7 @@ struct StopWatchView: View {
     
     @ViewBuilder
     func startStopToolbarButton() -> some View {
-        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.circle"): Image(systemName:  "play.circle") }
+        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.fill"): Image(systemName:  "play.fill") }
     }
 }
 

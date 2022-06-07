@@ -42,6 +42,8 @@ struct ContentView: View {
                     NitrogenFlowView(controller: controller)                // nitrogen flowrate data and setting
                         .padding()
                     
+                    MeasurementRateView(controller: controller)
+                        .padding()
                 }
                 .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
             }

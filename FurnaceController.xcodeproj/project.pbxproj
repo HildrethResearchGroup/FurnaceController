@@ -32,6 +32,7 @@
 		3FBB0424284EAA9300CD7FAC /* ArgonFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB0423284EAA9300CD7FAC /* ArgonFlowView.swift */; };
 		3FBB0426284EAB0400CD7FAC /* NitrogenFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB0425284EAB0400CD7FAC /* NitrogenFlowView.swift */; };
 		3FBB0428284EAB7300CD7FAC /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB0427284EAB7300CD7FAC /* StopwatchView.swift */; };
+		3FBB042A284EACD400CD7FAC /* MeasurementRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB0429284EACD400CD7FAC /* MeasurementRateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		3FBB0423284EAA9300CD7FAC /* ArgonFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonFlowView.swift; sourceTree = "<group>"; };
 		3FBB0425284EAB0400CD7FAC /* NitrogenFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NitrogenFlowView.swift; sourceTree = "<group>"; };
 		3FBB0427284EAB7300CD7FAC /* StopwatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchView.swift; sourceTree = "<group>"; };
+		3FBB0429284EACD400CD7FAC /* MeasurementRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementRateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +166,7 @@
 				3FBB0425284EAB0400CD7FAC /* NitrogenFlowView.swift */,
 				3F12F14A2834493C006B0368 /* ArduinoController.swift */,
 				3FBB0427284EAB7300CD7FAC /* StopwatchView.swift */,
+				3FBB0429284EACD400CD7FAC /* MeasurementRateView.swift */,
 				3F4A689B284917ED00257872 /* DataController.swift */,
 				3FBB03E1284A618900CD7FAC /* Basic Script.dgraph */,
 				3FB1A3D528401C1700782DA4 /* DataGraph Test Views */,
@@ -353,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FB1A3E528401C1700782DA4 /* XZData.swift in Sources */,
+				3FBB042A284EACD400CD7FAC /* MeasurementRateView.swift in Sources */,
 				3F12F122283446CD006B0368 /* ContentView.swift in Sources */,
 				3FBB0426284EAB0400CD7FAC /* NitrogenFlowView.swift in Sources */,
 				3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */,
