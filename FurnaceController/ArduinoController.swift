@@ -56,6 +56,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     private let argonFlowID = "A"
     private let nitrogenFlowID = "A"
     @Published var nextPortState = "Open"
+    @Published var statusOK = false
     @Published var connectionStatus: String = "Not Connected"
     @Published var connectionColor: Color = Color.red
     
@@ -101,9 +102,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     }
     
     func setArgonFlow(flow: Double) {
-        print(flow)
         let command = Command(request: self.argonFlowID + "s" + String(flow), type: .GENERAL)
-        print(self.argonFlowID + "s" + String(flow))
         self.sendCommand(command: command)
     }
     
@@ -152,7 +151,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 }
                 else if command.type == .GENERAL {
                     self.lastResponse = command.response
-                    print(command.response)
+                    //print(command.response)
                 }
                 
                 if values[0] != -1 && values[1] != -1 && values[2] != -1 {

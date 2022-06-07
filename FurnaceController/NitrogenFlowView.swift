@@ -11,9 +11,9 @@ struct NitrogenFlowView: View {
     
     @State private var flow: String = ""         // last measured flowrate
     
-    var controller: AppController?
+    @ObservedObject var controller: ArduinoController
     
-    init(controller: AppController) {
+    init(controller: ArduinoController) {
         self.controller = controller
     }
     
@@ -25,7 +25,7 @@ struct NitrogenFlowView: View {
                 // MARK: Display Flowrate
                 // Displays the flowrate measured at the last request in ...
                 Text("Nitrogen Flowrate (L/min)")
-                Text(String((controller?.arduino.lastFlowAr)!))
+                Text(String(controller.lastFlowAr))
                 
             }
 
@@ -36,8 +36,16 @@ struct NitrogenFlowView: View {
                 TextField("", text: $flow)
                 Button ("Set Flowrate"){
                     
-                    // TODO: Send set setpoint command to Arduino
-                    
+                    // TODO: alert user for invalid inputs
+                    if var flowNum = Double(flow) {
+                        if flowNum > 0 {
+                            flowNum = 0
+                        }
+                        if flowNum > 1 {
+                            flowNum = 1
+                        }
+                        controller.setArgonFlow(flow: flowNum)
+                    }
                 }
             }
         }

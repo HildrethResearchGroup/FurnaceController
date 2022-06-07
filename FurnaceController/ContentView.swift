@@ -29,17 +29,17 @@ struct ContentView: View {
                 
                 VStack{
                     
-                    InfoView(controller: controller)                // title and port status
+                    InfoView(controller: controller.arduino)                // title and port status
                         .padding()
                         .frame(alignment: .top)
                     
-                    TemperatureView(controller: controller)                 // temperature data and setting
+                    TemperatureView(controller: controller.arduino)                 // temperature data and setting
                         .padding()
                     
                     ArgonFlowView(controller: controller.arduino)           // argon flowrate data and setting
                         .padding()
                     
-                    NitrogenFlowView(controller: controller)                // nitrogen flowrate data and setting
+                    NitrogenFlowView(controller: controller.arduino)                // nitrogen flowrate data and setting
                         .padding()
                     
                     MeasurementRateView(controller: controller)

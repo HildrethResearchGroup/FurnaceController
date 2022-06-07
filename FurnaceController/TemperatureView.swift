@@ -14,9 +14,9 @@ struct TemperatureView: View {
     
     @State private var temp: String = ""
     
-    var controller: AppController?
+    var controller: ArduinoController
     
-    init(controller: AppController) {
+    init(controller: ArduinoController) {
         self.controller = controller
     }
     
@@ -27,7 +27,7 @@ struct TemperatureView: View {
                 // MARK: Temperature Display
                 // Displays the temperature measured at the last request in degrees Celcius
                 Text("Temperature (ºC):")
-                Text(String((controller?.arduino.lastTemp)!))
+                Text(String(controller.lastTemp))
             }.frame(alignment: .leading)
 
             
@@ -36,6 +36,7 @@ struct TemperatureView: View {
                 // Both the textfield and update button for setting a new temperature
                 // This is NONFUNCTIONAL at the moment
                 TextField("", text: $temp)
+                    .disabled(true)
                 
                 Button("Set Temperature") {
                     
