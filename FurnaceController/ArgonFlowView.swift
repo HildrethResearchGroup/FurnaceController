@@ -41,6 +41,7 @@ struct ArgonFlowView: View {
                 TextField("", text: $flow)
                 
                 Button ("Set Flowrate") {
+                    
                     //TODO: Add alerts for invalid inputs
                     if let flowNum = Double(flow) {
                         if flowNum >= 0 && flowNum <= 1 {
@@ -48,7 +49,7 @@ struct ArgonFlowView: View {
                         }
                     }
                     
-                }
+                }.disabled(false)
             }
         }
     }
