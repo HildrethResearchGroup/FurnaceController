@@ -1,42 +1,64 @@
+// Written by Colton Meyers 2022 Computer Science Field Session
 #include <SoftwareSerial.h>
+#include <Adafruit_MAX31855.h>
+#include <SPI.h>
 
 // variable pre-processor declarations
-#define rxPin 10
-#define txPin 11
+// TTL Serial pins
+#define rxPin 10 // recieve pin
+#define txPin 11 // transmit pin
+
+//https://www.adafruit.com/products/269
+// MAX31855K
+// Adafruit Thermocouple Sensor SPI pins 
+#define DO 3  // output data from the thermocouple amplifier
+#define CS 4  // chip select
+#define CLK 5 // clock signal
+
 #define BUFFER_SIZE 256
 #define TIMEOUT_DURATION 3000 // 3 seconds in miliseconds
-#define EOT ';' // End of transmission
-#define BOT '$' // Beginning of transmission
+#define EOT ';' // End of transmission symbol
+#define BOT '$' // Beginning of transmission symbol
+// #define SPACE_DELIM
+
 // function pre-processor declarations
 // Number of elements in a statically allocated array
 // Only use on an array d-type a[] not an a* which points to the first elm of the array
-#define NELEMS(x) (sizeof(x) / sizeof((x)[0])) 
+#define LEN(x) (sizeof(x) / sizeof((x)[0]))
 
 enum STATE {READ_CMD = 0, WRITE_CMD = 1, WAIT_FOR_DATA = 2, WAITING = 3};
 enum STATE current_state;
 
-struct time_delta {
-  long int start_t;
-  long int end_t;
-} time_d;
-
-
-bool time_waiting = false;
-
-// Set up a new SoftwareSerial object
+// Apex flow sensors are talked to over Software emulated TTL Serial
 SoftwareSerial flowSerial =  SoftwareSerial(rxPin, txPin, false);
 
-// input str from mac application
-char input_data[BUFFER_SIZE];
-int input_pos;
+Adafruit_MAX31855 thermocouple(CLK, CS, DO);
 
-// parsed tokens from input_data
-char* input_tokens[BUFFER_SIZE];
-int tokens_length;
 
-int UID;
+// Serial commands need to be able to record when they first sent out a command
+// Or first recived some data
+// This is used to timeout from waiting from a cmd response
+struct time_delta {
+  long int flow_sensor_start_t; // start time of command sent to flow sensor
+  long int swift_start_t;       // start time of data recived from swift application
+} time_d;
 
+// buffers for serial data in from the Swift application
+struct recived_cmd {
+  // A buffer to hold input data from a Swift Application
+  // Data is in the form:  BOT <UID> <COMMAND> EOT
+  char input_data[BUFFER_SIZE];
+  // A buffer to hold data that has been split() on the space delimiter
+  // Data is in the form: [BOT, <UID>, <COMMAND>, EOT]
+  char* input_tokens[BUFFER_SIZE];
+  int tokens_length; // length of input_tokens array (atleast the parts length of parts with data)
+  int input_pos;     // current_pos in input_data buffer
+  int UID;           // Unique ID of data transmission
+} cmd;
+
+bool time_waiting;
 bool writing_flow_data;
+bool transmission_ongoing;
 
 const char space_delim[2] = " ";
 
@@ -68,15 +90,15 @@ void write_message(int uid, const char* msg) {
 void parse_cmd() {
   char input_data_cpy[BUFFER_SIZE];
   // strtok changes the passed in array and place '\0' where the delim chars are
-  memcpy(input_data_cpy, input_data, BUFFER_SIZE);
+  memcpy(input_data_cpy, cmd.input_data, BUFFER_SIZE);
 
   int i = 0;
   char *token = strtok(input_data_cpy, space_delim);
   while (token != NULL) {
-    input_tokens[i++] = token;
+    cmd.input_tokens[i++] = token;
     token = strtok(NULL, space_delim);
   }
-  tokens_length = i + 1;
+  cmd.tokens_length = i + 1;
 }
 
 // returns true on End of Transmission Signal encountered
@@ -84,20 +106,32 @@ void parse_cmd() {
 bool read_serial_in() {
   if (Serial.available() > 0) {
     char c;
-    while ((c = Serial.read()) != -1 && input_pos < BUFFER_SIZE - 1) {
-      if (c == EOT) {
-        input_data[input_pos] = '\0';
-        input_pos = 0;
+    while ((c = Serial.read()) != -1 && cmd.input_pos < BUFFER_SIZE - 1) {
+      if (c == BOT) {
+        time_d.swift_start_t = millis();
+        // transmission_ongoing = true;
+      }
+      else if (c == EOT) {
+        cmd.input_data[cmd.input_pos] = '\0';
+        cmd.input_pos = 0;
+        // transmission_ongoing = false;
         return true;
       }
-      input_data[input_pos++] = c;
+      cmd.input_data[cmd.input_pos++] = c;
     }
-    if (input_pos == BUFFER_SIZE - 1) {
+    if (cmd.input_pos == BUFFER_SIZE - 1) {
       write_message(-1, "ERROR input buffer stream overflow");
       // clear the stream so the next message can procceed from a defined input_data state
-      input_pos = 0;
-      memset(input_data, '\0', BUFFER_SIZE);
+      cmd.input_pos = 0;
+      memset(cmd.input_data, '\0', BUFFER_SIZE);
+      current_state = WAITING;
     }
+    // if (transmission_ongoing == true && (millis() - time_d.swift_start_t > TIMEOUT_DURATION)){
+    //   write_message(-1, "ERROR Serial data in timeout. EOT not encountered in 3 seconds");
+    //   cmd.input_pos = 0;
+    //   memset(cmd.input_data, '\0', BUFFER_SIZE);
+    //   current_state = WAITING;
+    // }
   }
   return false;
 }
@@ -115,16 +149,24 @@ void setup()  {
   Serial.begin(9600);
   while (!Serial);
 
+  // Initalize Thermocouple
+  while(!thermocouple.begin()){
+    write_message(-1, "Thermocouple initialization error");
+    delay(1);
+  }
+
   // initalize state
   // initally we're just waiting for some sort of command to come in over serial
   current_state = WAITING;
-  input_pos = 0;
-  UID = -1;
+  cmd.input_pos = 0;
+  cmd.UID = -1;
 
-  time_d.start_t = 0;
-  time_d.end_t = 0;
+  time_d.flow_sensor_start_t = 0;
+  time_d.swift_start_t = 0;
 
   writing_flow_data = false;
+  time_waiting = false;
+  transmission_ongoing = false;
 }
 
 
@@ -143,27 +185,45 @@ void loop() {
         // Parse command in input_data and put into input_tokens
         parse_cmd();
 
-        if (tokens_length < 2) {
+        if (cmd.tokens_length < 2) {
           write_message(-1, "ERROR malformed input");
           current_state = WAITING;
         } else {
-          UID = atoi(input_tokens[0]);
+          cmd.UID = atoi(cmd.input_tokens[0]);
         }
         // $ <UID> <COMMAND> ;
         // input_tokens[1] is the actual command
         // COMMAND has no delimiters
         // Send the flow sensor the command
-        char* COMMAND = input_tokens[1];
-        if (strncmp(COMMAND, "TEMP", 4) == 0){
-          // can just read it and send it over
-          write_message(UID, "5");
+        char* COMMAND = cmd.input_tokens[1];
+        if (strncmp(COMMAND, "TEMP", 4) == 0) {
+          // read sensor and send value over
+          double temp_reading = thermocouple.readCelsius();
+          // 0.0001 is below the accuracy of the device so only a zero value should set this off
+          // typically a device / wiring error will set this error off
+          if (isnan(temp_reading) || (temp_reading < 0.0001 && temp_reading >= 0.0000000000)){
+            write_message(cmd.UID, "ERROR the thermocouple chip returned a value which is not a number");
+          }else{
+            Serial.write(BOT);
+            Serial.write(" ");
+            Serial.print(cmd.UID, DEC);
+            Serial.write(" ");
+            Serial.print(temp_reading, DEC); 
+            Serial.write(" ");
+            Serial.write(EOT);
+          }
           current_state = WAITING;
-        }else{
-        flowSerial.write(COMMAND);
-        flowSerial.write("\r");
-        // start the timeout timer
-        time_d.start_t = millis();
-        current_state = WAIT_FOR_DATA;
+        }
+        else if (strncmp(COMMAND, "STATUS", 5) == 0) {
+          write_message(cmd.UID, "OK");
+          current_state = WAITING;
+        } else {
+          // every command sent to a flow sensor device needs to be followed by a carriage return
+          flowSerial.write(COMMAND);
+          flowSerial.write("\r");
+          // start the timeout timer
+          time_d.flow_sensor_start_t = millis();
+          current_state = WAIT_FOR_DATA;
         }
       }
       break;
@@ -177,14 +237,14 @@ void loop() {
             writing_flow_data = true;
             Serial.write(BOT);
             Serial.write(" ");
-            Serial.print(UID, DEC);
+            Serial.print(cmd.UID, DEC);
             Serial.write(" ");
           }
           char c;
           while ((c = flowSerial.read()) != -1) {
-            if (c != '\r'){
+            if (c != '\r') {
               Serial.write(c);
-            }else{
+            } else {
               Serial.write(" ");
               Serial.write(EOT);
               current_state = WAITING;
@@ -194,8 +254,8 @@ void loop() {
           }
         }
         // If no data is recived go back to waiiting
-        if (writing_flow_data == false && (millis() - time_d.start_t > TIMEOUT_DURATION)) {
-          write_message(UID, "ERROR serial communication with flow sensor timeout");
+        if (writing_flow_data == false && (millis() - time_d.flow_sensor_start_t > TIMEOUT_DURATION)) {
+          write_message(cmd.UID, "ERROR serial communication with flow sensor timeout");
           current_state = WAITING;
         }
       }
