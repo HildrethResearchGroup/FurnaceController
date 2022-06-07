@@ -18,18 +18,10 @@ struct ContentView: View {
                 
                 VStack {
                     
-                    
-                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
-                    
-                    Spacer()
-                    
                     StopWatchView(controller: controller)                                   // stopwatch
                         .padding([.bottom, .top], 50)
                     
-                    /*
-                    Button("update graph") {
-                        controller.graph.updateData()
-                     */
+                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
                     
                 }
                 .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
@@ -37,7 +29,7 @@ struct ContentView: View {
                 
                 VStack{
                     
-                    InfoView(controller: controller.arduino)                // title and port status
+                    InfoView(controller: controller)                // title and port status
                         .padding()
                         .frame(alignment: .top)
                     
@@ -50,6 +42,8 @@ struct ContentView: View {
                     NitrogenFlowView(controller: controller)                // nitrogen flowrate data and setting
                         .padding()
                     
+                    MeasurementRateView(controller: controller)
+                        .padding()
                 }
                 .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
             }
