@@ -29,7 +29,7 @@ struct StopWatchView: View {
     
     @ViewBuilder
     func startStopToolbarButton() -> some View {
-        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.fill"): Image(systemName:  "play.fill") }
+        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.fill"): Image(systemName:  "play.fill") }.disabled(false)
     }
 }
 

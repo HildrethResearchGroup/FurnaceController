@@ -42,7 +42,7 @@ struct TemperatureView: View {
                     
                     // MARK: NONFUNCTIONAL BUTTON
                     
-                }
+                }.disabled(true)
             }
         }
     }
