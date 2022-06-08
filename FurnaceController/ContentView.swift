@@ -13,20 +13,9 @@ struct ContentView: View {
     @ObservedObject var controller = AppController.shared
     
     var body: some View {
-        GeometryReader {geometry in
+        GeometryReader { geometry in
             HSplitView {
-                
-                VStack {
                     
-                    StopWatchView(controller: controller)                                   // stopwatch
-                        .padding([.bottom, .top], 20)
-                    
-                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
-                    
-                }
-                .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
-                    
-                
                 VStack{
                     
                     InfoView(controller: controller.arduino)                // title and port status
@@ -45,7 +34,17 @@ struct ContentView: View {
                     MeasurementRateView(controller: controller)
                         .padding()
                 }
-                .frame(minWidth: geometry.size.width * 0.3, maxWidth: geometry.size.width * 0.7, minHeight: geometry.size.height, maxHeight: geometry.size.height)
+                .frame(minWidth: geometry.size.width * 0.2, maxWidth: geometry.size.width * 0.5, minHeight: geometry.size.height, maxHeight: geometry.size.height)
+                
+                VStack {
+                    
+                    StopWatchView(controller: controller)                                   // stopwatch
+                        .padding()
+                    
+                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
+                    
+                }
+                .frame(minWidth: geometry.size.width * 0.5, maxWidth: geometry.size.width * 0.8, minHeight: geometry.size.height, maxHeight: geometry.size.height)
             }
         }
     }

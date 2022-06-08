@@ -23,14 +23,15 @@ struct StopWatchView: View {
             Text("\(String(format:"%02d", (controller.progressTime/86400) )):\(String(format:"%02d", (controller.progressTime/3600) )):\(String(format:"%02d",  (controller.progressTime % 3600 / 60) )):\(String(format:"%02d", controller.progressTime % 60))")
                 .font(.title)
                 .toolbar {
-                    ToolbarItem{startStopToolbarButton()}
+                    ToolbarItem{ startStopToolbarButton() }
                 }
         }
     }
     
     @ViewBuilder
     func startStopToolbarButton() -> some View {
-        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.fill"): Image(systemName:  "play.fill") }.disabled(!arduino.statusOK)
+        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.fill"): Image(systemName:  "play.fill") }
+            .disabled(!arduino.statusOK)
     }
 }
 

@@ -33,7 +33,10 @@ struct NitrogenFlowView: View {
                 
                 // MARK: Update Flowrate
                 // Both the textfield and update button for setting a new flowrate
+                
                 TextField("", text: $flow)
+                    .disabled(!controller.statusOK)
+                
                 Button ("Set Flowrate"){
                     
                     // TODO: alert user for invalid inputs
