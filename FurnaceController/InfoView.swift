@@ -14,9 +14,11 @@ import ORSSerial
 struct InfoView: View {
     
     @ObservedObject var controller: ArduinoController
+    @ObservedObject var appController: AppController
     
     init(controller: ArduinoController) {
         self.controller = controller
+        self.appController = AppController.shared
     }
     
     var body: some View {
@@ -49,7 +51,7 @@ struct InfoView: View {
                     ForEach(controller.serialPortManager.availablePorts, id:\.self) { port in
                         Text(port.name).tag(port as ORSSerialPort?)
                     }
-                }
+                }.disabled(appController.recording)
                 
                 // MARK: Open Port Button
                 // Button for opening port selected from dropdown menu
@@ -59,7 +61,6 @@ struct InfoView: View {
                     // TODO: insert status checking method
                 }
                 .disabled(controller.serialPort == nil)
-                
             }
             .padding(10)
         }

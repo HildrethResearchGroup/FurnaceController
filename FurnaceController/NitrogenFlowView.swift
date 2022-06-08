@@ -39,7 +39,6 @@ struct NitrogenFlowView: View {
                 
                 Button ("Set Flowrate"){
                     
-                    // TODO: alert user for invalid inputs
                     if var flowNum = Double(flow) {
                         if flowNum > 0 {
                             flowNum = 0
@@ -47,6 +46,7 @@ struct NitrogenFlowView: View {
                         if flowNum > 1 {
                             flowNum = 1
                         }
+                        
                         controller.setArgonFlow(flow: flowNum)
                     }
                 }.disabled(!controller.statusOK)
