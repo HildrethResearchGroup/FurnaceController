@@ -60,7 +60,7 @@ struct InfoView: View {
                     
                     // TODO: insert status checking method
                 }
-                .disabled(controller.serialPort == nil)
+                .disabled(controller.serialPort == nil && appController.recording)
             }
             .padding(10)
         }

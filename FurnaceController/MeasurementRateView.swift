@@ -24,7 +24,7 @@ struct MeasurementRateView: View {
                 // MARK: set sample rate
                 Text("Minutes / Sample:")
                 
-                TextField("", text: $controller.minutesPerSample)
+                TextField("", text: $controller.minutesPerSample).disabled(controller.recording)
             }
         }
     }
