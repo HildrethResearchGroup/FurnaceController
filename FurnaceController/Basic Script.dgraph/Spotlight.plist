@@ -7,9 +7,8 @@
 Time [min]
 Flow Rate [L/min]
 Temperature [˚C]
-temp vs time
-flowAr vs time
-flowN2 vs time
+Argon Flowrate
+Nitrogen Flowrate
 </string>
 	<key>Text</key>
 	<string></string>

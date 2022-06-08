@@ -29,6 +29,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         case QUERY_ARGON
         case QUERY_NITROGEN
         case GENERAL
+        case STATUS
     }
     
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
@@ -54,11 +55,9 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     private let thermocoupleID = "TEMP"
     private let argonFlowID = "A"
-    private let nitrogenFlowID = "A"
+    private let nitrogenFlowID = "B"
     @Published var nextPortState = "Open"
     @Published var statusOK = false
-    @Published var connectionStatus: String = "Not Connected"
-    @Published var connectionColor: Color = Color.red
     
     @Published var serialPort: ORSSerialPort? {
         didSet {
@@ -111,6 +110,11 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         self.sendCommand(command: command)
     }
     
+    func getStatus() {
+        let command = Command(request: "STATUS", type: .STATUS)
+        self.sendCommand(command: command)
+    }
+    
     // opens/closes the serial port. controlled by a button
     func openOrClosePort() {
         if let port = self.serialPort {
@@ -149,6 +153,9 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                     self.lastFlowN2 = Double(dataAsList[6])!
                     self.values[2] = self.lastFlowN2
                 }
+                else if command.type == .STATUS {
+                    self.statusOK = dataAsList[2] == "OK"
+                }
                 else if command.type == .GENERAL {
                     self.lastResponse = command.response
                     //print(command.response)
@@ -179,6 +186,9 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         
         print("Port \(serialPort.path) is open")
         self.nextPortState = "Close"
+        Thread.sleep(forTimeInterval: 2)
+        //TODO: FIX THIS SHIT
+        self.getStatus()
     }
     
     func serialPortWasClosed(_ serialPort: ORSSerialPort) {
@@ -186,5 +196,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         
         print("Port \(serialPort.path) is closed")
         self.nextPortState = "Open"
+        self.statusOK = false
     }
 }

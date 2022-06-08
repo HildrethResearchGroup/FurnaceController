@@ -14,7 +14,7 @@ struct FurnaceControllerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .frame(width: 1000, height: 800, alignment: .center)
+                .frame(width: 1000, height: 600, alignment: .center)
         }
     }
 }

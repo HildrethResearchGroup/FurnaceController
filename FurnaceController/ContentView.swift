@@ -19,7 +19,7 @@ struct ContentView: View {
                 VStack {
                     
                     StopWatchView(controller: controller)                                   // stopwatch
-                        .padding([.bottom, .top], 50)
+                        .padding([.bottom, .top], 20)
                     
                     GraphViewRepresentable(graphController: controller.graph).padding()     // graph
                     

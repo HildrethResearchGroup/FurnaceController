@@ -49,7 +49,7 @@ struct ArgonFlowView: View {
                         }
                     }
                     
-                }.disabled(false)
+                }.disabled(!controller.statusOK)
             }
         }
     }

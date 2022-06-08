@@ -27,13 +27,7 @@ class DataController {
     }
     
     func saveData(url: URL) {
-        do {
-            let data = try? Data(contentsOf: self.fileURL!)
-            try data?.write(to: url)
-        }
-        catch {
-            print("Could not save file")
-        }
+        try? FileManager.default.moveItem(at: self.fileURL!, to: url)
     }
     
     // gets the CSV data as a 2D array of doubles, representing elapsed time, and the three sensor data points

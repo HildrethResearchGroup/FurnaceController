@@ -10,9 +10,11 @@ import SwiftUI
 struct StopWatchView: View {
     
     @ObservedObject var controller: AppController
+    @ObservedObject var arduino: ArduinoController
     
     init(controller: AppController) {
         self.controller = controller
+        self.arduino = controller.arduino
     }
     
     var body: some View {
@@ -23,13 +25,12 @@ struct StopWatchView: View {
                 .toolbar {
                     ToolbarItem{startStopToolbarButton()}
                 }
-                    
         }
     }
     
     @ViewBuilder
     func startStopToolbarButton() -> some View {
-        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.fill"): Image(systemName:  "play.fill") }.disabled(false)
+        Button(action: controller.startOrStopRecord) { controller.recording ? Image(systemName: "stop.fill"): Image(systemName:  "play.fill") }.disabled(!arduino.statusOK)
     }
 }
 

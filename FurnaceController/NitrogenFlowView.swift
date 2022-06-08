@@ -46,7 +46,7 @@ struct NitrogenFlowView: View {
                         }
                         controller.setArgonFlow(flow: flowNum)
                     }
-                }.disabled(false)
+                }.disabled(!controller.statusOK)
             }
         }
     }
