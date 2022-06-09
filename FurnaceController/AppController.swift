@@ -22,6 +22,8 @@ class AppController: ObservableObject {
     @Published var progressTime: Int = 0
     @Published var minutesPerSample = "1"
     
+    @Published var errorMessage: String = ""
+    
     // timers for the stopwatch and data polling
     var stopwatchTimer: Timer?
     var pollingTimer: Timer?
