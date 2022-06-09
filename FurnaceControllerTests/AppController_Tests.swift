@@ -19,7 +19,6 @@ class AppController_Tests: XCTestCase {
 
     func test_AppController_() throws {
         // Given
-        var testController = AppController.shared
         
         // When
         
