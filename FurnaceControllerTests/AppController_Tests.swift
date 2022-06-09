@@ -1,14 +1,13 @@
 //
-//  FurnaceControllerTests.swift
+//  AppController_Tests.swift
 //  FurnaceControllerTests
 //
-//  Created by Mines Student on 5/17/22.
+//  Created by Mines Student on 6/9/22.
 //
 
 import XCTest
-@testable import FurnaceController
 
-class FurnaceControllerTests: XCTestCase {
+class AppController_Tests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -18,8 +17,13 @@ class FurnaceControllerTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_AppController() throws {
+    func test_AppController_() throws {
+        // Given
+        var testController = AppController.shared
         
+        // When
+        
+        // Then
     }
 
     func testPerformanceExample() throws {
