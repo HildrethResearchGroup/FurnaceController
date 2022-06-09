@@ -126,6 +126,8 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
+    // $ UID ERROR help me obiwan kenobi, youre my only hope ;
+    
     // the serialPort functions all respond to incoming packets recieved from the serial port
     // if the ORSSerial{PacketDescriptor sees a command from arduino, it will call the first function
     func serialPort(_ serialPort: ORSSerialPort, didReceivePacket packetData: Data, matching descriptor: ORSSerialPacketDescriptor) {
@@ -136,7 +138,8 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 command.response = dataAsList.joined(separator: " ")
                 
                 if (dataAsList[2] == "ERROR") {
-                    print("Command \"\(command.request)\" timedout.")
+                    let errorResponse = dataAsList[3...dataAsList.count-1].joined(separator: " ")
+                    AppController.shared.errorMessage = errorResponse
                     return
                 }
                 
