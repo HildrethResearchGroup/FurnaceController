@@ -18,7 +18,7 @@ struct ContentView: View {
                     
                 VStack{
                     
-                    InfoView(controller: controller.arduino)                // title and port status
+                    InfoView()                                             // title and port status
                         .padding()
                         .frame(alignment: .top)
                     

@@ -8,18 +8,24 @@
 import SwiftUI
 import ORSSerial
 
-/*
- * InfoView contains the app title, the connection status, the port selection dropdown, and the open port button
- */
+
+/// Subview containing the application's title, the connection status with the Arduino unit, the serial port selection dropdown, and the open port button.
+///
+/// This view contains the title text for the application as well as the text, dropdown menu, and button aspects for selecting an Arduino to interact with.
+///
+/// The connection status text is determined by the statusOK boolean that exists in the ArduinoController class. The different text options are implemented using a ternary conditional operator.
+///
+/// The dropdown menu communicates with the serialPortManager variable (which is a reference to the singleton instance of the ORSSerialPortManager object from the ORSSerial library). Each option in the dropdown menu is retrieved from the availablePorts property of the ORSSerialPortManager.
+///
+///  Upon pressing the open button next to the serial port selection dropdown, the open 
+///
+/// The serial port selection dropdown and the button for opening the
+///
+///
 struct InfoView: View {
     
-    @ObservedObject var controller: ArduinoController
-    @ObservedObject var appController: AppController
-    
-    init(controller: ArduinoController) {
-        self.controller = controller
-        self.appController = AppController.shared
-    }
+    @ObservedObject var appController: AppController = AppController.shared
+    @ObservedObject var controller: ArduinoController = AppController.shared.arduino
     
     var body: some View {
         VStack{
@@ -57,8 +63,6 @@ struct InfoView: View {
                 // Button for opening port selected from dropdown menu
                 Button(controller.nextPortState) {
                     controller.openOrClosePort()
-                    
-                    // TODO: insert status checking method
                 }
                 .disabled(controller.serialPort == nil || appController.recording)
             }
