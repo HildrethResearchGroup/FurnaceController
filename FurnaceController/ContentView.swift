@@ -33,6 +33,9 @@ struct ContentView: View {
                     
                     MeasurementRateView(controller: controller)
                         .padding()
+                    
+                    ErrorView(controller: controller)
+                        .padding()
                 }
                 .frame(minWidth: geometry.size.width * 0.2, maxWidth: geometry.size.width * 0.5, minHeight: geometry.size.height, maxHeight: geometry.size.height)
                 
@@ -41,7 +44,8 @@ struct ContentView: View {
                     StopWatchView(controller: controller)                                   // stopwatch
                         .padding()
                     
-                    GraphViewRepresentable(graphController: controller.graph).padding()     // graph
+                    GraphViewRepresentable(graphController: controller.graph)
+                        .padding()     // graph
                     
                 }
                 .frame(minWidth: geometry.size.width * 0.5, maxWidth: geometry.size.width * 0.8, minHeight: geometry.size.height, maxHeight: geometry.size.height)
