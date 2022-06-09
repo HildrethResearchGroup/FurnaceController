@@ -9,11 +9,17 @@ import SwiftUI
 import ORSSerial
 
 
-/// Subview containing the application's title, the connection status with the Arduino unit, the COMP port selection dropdown, and the open port button.
+/// Subview containing the application's title, the connection status with the Arduino unit, the serial port selection dropdown, and the open port button.
 ///
 /// This view contains the title text for the application as well as the text, dropdown menu, and button aspects for selecting an Arduino to interact with.
 ///
-/// The connection status text is determined by the statusOK boolean that exists in the ArduinoController class. The dropdown menu communicates with the serialPortManager variable (which is a reference to the singleton instance of the ORSSerialPortManager object from the ORSSerial library). Each option in the dropdown menu is retrieved from the availablePorts property of the ORSSerialPortManager.
+/// The connection status text is determined by the statusOK boolean that exists in the ArduinoController class. The different text options are implemented using a ternary conditional operator.
+///
+/// The dropdown menu communicates with the serialPortManager variable (which is a reference to the singleton instance of the ORSSerialPortManager object from the ORSSerial library). Each option in the dropdown menu is retrieved from the availablePorts property of the ORSSerialPortManager.
+///
+///  Upon pressing the open button next to the serial port selection dropdown, the open 
+///
+/// The serial port selection dropdown and the button for opening the
 ///
 ///
 struct InfoView: View {
