@@ -12,7 +12,7 @@ class AppController: ObservableObject {
     
     // sub-controllers, used to manipulate data and graphs
     var arduino = ArduinoController()
-    var graph: GraphController?
+    var graph = GraphController()
     var dataController: DataController?
     
     var startDate: Date?
@@ -41,7 +41,7 @@ class AppController: ObservableObject {
         dataController!.writeLine(data: nextLine)
         
         // TODO: graph that data
-        graph!.updateData(time: Double(self.progressTime) / 60, temp: temp, flowAr: flowAr, flowN2: flowN2)
+        graph.updateData(time: Double(self.progressTime) / 60, temp: temp, flowAr: flowAr, flowN2: flowN2)
     }
     
     // starts and stops logic recording
@@ -55,8 +55,7 @@ class AppController: ObservableObject {
                 self.progressTime = 0 // reset progress timer
                 self.startDate = Date.now // set startTime
                 dataController = DataController() // also reset all file data
-                graph = GraphController() // reset graph data
-                
+                graph.resetData()
                 
                 // initialize the timers
                 stopwatchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
@@ -70,7 +69,6 @@ class AppController: ObservableObject {
                 // poll for data right away to get imediate data (and not have to wait for timer)
                 self.pollForData()
             }
-            
         }
         else{
             self.recording = false

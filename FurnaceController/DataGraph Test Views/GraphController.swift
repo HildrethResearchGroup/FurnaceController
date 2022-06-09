@@ -28,6 +28,10 @@ class GraphController: ObservableObject {
         
         
     }
+    
+    func resetData() {
+        data = DataModel()
+    }
 }
 
 extension DGDataColumn {
