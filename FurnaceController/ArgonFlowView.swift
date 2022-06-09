@@ -43,11 +43,15 @@ struct ArgonFlowView: View {
                 
                 Button ("Set Flowrate") {
                     
-                    //TODO: Add alerts for invalid inputs
-                    if let flowNum = Double(flow) {
-                        if flowNum >= 0 && flowNum <= 1 {
-                            controller.setArgonFlow(flow: flowNum)
+                    if var flowNum = Double(flow) {
+                        if flowNum > 0 {
+                            flowNum = 0
                         }
+                        if flowNum > 1 {
+                            flowNum = 1
+                        }
+                        
+                        controller.setArgonFlow(flow: flowNum)
                     }
                     
                 }.disabled(!controller.statusOK)
