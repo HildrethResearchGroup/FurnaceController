@@ -36,18 +36,30 @@ struct NitrogenFlowView: View {
                 
                 TextField("", text: $flow)
                     .disabled(!controller.statusOK)
+                    .onSubmit {
+                        if var flowNum = Double(flow) {
+                            if flowNum < 0 {
+                                flowNum = 0
+                            }
+                            if flowNum > 1 {
+                                flowNum = 1
+                            }
+                            
+                            controller.setNitrogenFlow(flow: flowNum)
+                        }
+                    }
                 
                 Button ("Set Flowrate"){
                     
                     if var flowNum = Double(flow) {
-                        if flowNum > 0 {
+                        if flowNum < 0 {
                             flowNum = 0
                         }
                         if flowNum > 1 {
                             flowNum = 1
                         }
                         
-                        controller.setArgonFlow(flow: flowNum)
+                        controller.setNitrogenFlow(flow: flowNum)
                     }
                 }.disabled(!controller.statusOK)
             }
