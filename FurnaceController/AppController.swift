@@ -6,6 +6,12 @@
 import Foundation
 import SwiftUI
 
+/**
+#AppController
+ 
+ AppController is the brains behind the furnace controller app. It handles both timers used, tells the arduino when to poll for data, handles graphing and saving the sensor data, and has the main logic for starting and stopping recording. It is a singleton class because we were having some issues getting sensor data from the ArduinoController back to the AppController after polling. 
+ */
+
 class AppController: ObservableObject {
     
     static let shared = AppController()
@@ -24,11 +30,11 @@ class AppController: ObservableObject {
     
     @Published var errorMessage: String = ""
     
-    // timers for the stopwatch and data polling
+    /// timers for the stopwatch and data polling
     var stopwatchTimer: Timer?
     var pollingTimer: Timer?
     
-    // handles all new data functionality (polling from ardiuino, saving to file, graphing, etc)
+    /// handles all new data functionality (polling from ardiuino, saving to file, graphing, etc)
     func pollForData() {
         // poll for data from arduino
         arduino.readTemperature()
@@ -46,11 +52,11 @@ class AppController: ObservableObject {
         graph.updateData(time: Double(self.progressTime) / 60, temp: temp, flowAr: flowAr, flowN2: flowN2)
     }
     
-    // starts and stops logic recording
+    /// starts and stops recording logic
     func startOrStopRecord(){
         if(self.recording == false){
             // TODO: should this also handle RESETTING data?
-            if let minsPerSamp = Double(self.minutesPerSample) {
+            if var minsPerSamp = Double(self.minutesPerSample) {
                 
                 // on timer started
                 self.recording = true
@@ -58,6 +64,11 @@ class AppController: ObservableObject {
                 self.startDate = Date.now // set startTime
                 dataController = DataController() // also reset all file data
                 graph.resetData()
+                
+                if minsPerSamp < 0.1 {
+                    minsPerSamp = 0.1
+                    self.minutesPerSample = "0.1"
+                }
                 
                 // initialize the timers
                 stopwatchTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
@@ -81,7 +92,7 @@ class AppController: ObservableObject {
         }
     }
     
-    // TODO: Implement savepanel function
+    /// displays the savepanel and moves the saved CSV data to the specified filepath
     func showSavePanel(){
         let panel = NSSavePanel()
         panel.nameFieldLabel = "Save data as:"

@@ -9,14 +9,14 @@ import Foundation
 
 class DataController {
     
-    // fileURL to save current running data to
+    /// File URL to save current running data to
     var fileURL: URL?
     
     init() {
         self.fileURL = URL(fileURLWithPath: "/Users/student/Documents/\(Date.now.formatted(.iso8601)).csv")
     }
     
-    // writes a single line of data to the CSV file
+    /// writes a single line of data to the CSV file
     func writeLine (data: String) {
         do {
             try data.appendLineToURL(fileURL: self.fileURL!)
@@ -30,17 +30,15 @@ class DataController {
         try? FileManager.default.moveItem(at: self.fileURL!, to: url)
     }
     
-    // gets the CSV data as a 2D array of doubles, representing elapsed time, and the three sensor data points
-    // this may not be needed, oops
+    /// gets the CSV data as a 2D array of doubles, representing elapsed time, and the three sensor data points
+    /// unused function
     func getData() throws -> [[Double]] {
         let data = try? Data(contentsOf: self.fileURL!)
         let stringFromData = String(data: data!, encoding: .ascii)
         
         return strToCSV(string: stringFromData!)
     }
-    
-    //TODO: add in error handling for malformed CSV files
-    // converts CSV string into nice array of doubles
+    /// converts CSV string into nice array of doubles
     func strToCSV(string: String) -> [[Double]] {
         let arr1 = string.components(separatedBy: "\n")
         var arr2: [[Double]] = [[]]
@@ -65,7 +63,7 @@ class DataController {
     }
 }
 
-// code stollen, TODO: CREDIT CODE, found here: https://stackoverflow.com/questions/27327067/append-text-or-data-to-text-file-in-swift
+// code stolen, CREDIT: https://stackoverflow.com/questions/27327067/append-text-or-data-to-text-file-in-swift
 extension String {
     func appendLineToURL(fileURL: URL) throws {
          try (self + "\n").appendToURL(fileURL: fileURL)
