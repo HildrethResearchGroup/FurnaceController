@@ -33,7 +33,7 @@
 		3FBB0428284EAB7300CD7FAC /* StopwatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB0427284EAB7300CD7FAC /* StopwatchView.swift */; };
 		3FBB042A284EACD400CD7FAC /* MeasurementRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB0429284EACD400CD7FAC /* MeasurementRateView.swift */; };
 		3FBB042D2852566F00CD7FAC /* AppController_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB042C2852566F00CD7FAC /* AppController_Tests.swift */; };
-		3FBB042F2852589E00CD7FAC /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB042E2852589E00CD7FAC /* SwiftUIView.swift */; };
+		3FBB042F2852589E00CD7FAC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB042E2852589E00CD7FAC /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,7 +97,7 @@
 		3FBB0429284EACD400CD7FAC /* MeasurementRateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementRateView.swift; sourceTree = "<group>"; };
 		3FBB042B2852566F00CD7FAC /* FurnaceControllerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FurnaceControllerTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		3FBB042C2852566F00CD7FAC /* AppController_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController_Tests.swift; sourceTree = "<group>"; };
-		3FBB042E2852589E00CD7FAC /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		3FBB042E2852589E00CD7FAC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,8 +171,8 @@
 				3FBB0427284EAB7300CD7FAC /* StopwatchView.swift */,
 				3FBB0429284EACD400CD7FAC /* MeasurementRateView.swift */,
 				3F4A689B284917ED00257872 /* DataController.swift */,
+				3FBB042E2852589E00CD7FAC /* ErrorView.swift */,
 				3FBB03E1284A618900CD7FAC /* Basic Script.dgraph */,
-				3FBB042E2852589E00CD7FAC /* SwiftUIView.swift */,
 				3FB1A3D528401C1700782DA4 /* DataGraph Test Views */,
 				3F12F123283446CD006B0368 /* Assets.xcassets */,
 				3F12F128283446CD006B0368 /* FurnaceController.entitlements */,
@@ -363,7 +363,7 @@
 			files = (
 				3FB1A3E528401C1700782DA4 /* XZData.swift in Sources */,
 				3FBB042A284EACD400CD7FAC /* MeasurementRateView.swift in Sources */,
-				3FBB042F2852589E00CD7FAC /* SwiftUIView.swift in Sources */,
+				3FBB042F2852589E00CD7FAC /* ErrorView.swift in Sources */,
 				3F12F122283446CD006B0368 /* ContentView.swift in Sources */,
 				3FBB0426284EAB0400CD7FAC /* NitrogenFlowView.swift in Sources */,
 				3F12F14B2834493C006B0368 /* ArduinoController.swift in Sources */,
