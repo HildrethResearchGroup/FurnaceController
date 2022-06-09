@@ -138,8 +138,13 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 command.response = dataAsList.joined(separator: " ")
                 
                 if (dataAsList[2] == "ERROR") {
-                    let errorResponse = dataAsList[3...dataAsList.count-1].joined(separator: " ")
-                    AppController.shared.errorMessage = errorResponse
+                    let errorResponse = dataAsList[3...dataAsList.count-2].joined(separator: " ")
+                    AppController.shared.errorMessage = "ERROR: " + errorResponse
+                    return
+                }
+                else if (dataAsList[2] == "?") {
+                    let errorResponse = "unknown command sent to flow sensor"
+                    AppController.shared.errorMessage = "ERROR: " + errorResponse
                     return
                 }
                 
@@ -158,6 +163,12 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                 }
                 else if command.type == .STATUS {
                     self.statusOK = dataAsList[2] == "OK"
+                    
+                    if !self.statusOK {
+                        let errorResponse = dataAsList[3...dataAsList.count-2].joined(separator: " ")
+                        AppController.shared.errorMessage = "BAD status response: " + errorResponse
+                        return
+                    }
                 }
                 else if command.type == .GENERAL {
                     self.lastResponse = command.response

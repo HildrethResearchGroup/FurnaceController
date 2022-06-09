@@ -9,11 +9,8 @@ import SwiftUI
 
 struct ErrorView: View {
     
-    @ObservedObject var controller: AppController
+    @ObservedObject var controller = AppController.shared
     
-    init(controller: AppController) {
-        self.controller = controller
-    }
     
     var body: some View {
         Text(controller.errorMessage)
@@ -25,6 +22,6 @@ struct ErrorView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView()
+        ErrorView(controller: AppController.shared)
     }
 }
