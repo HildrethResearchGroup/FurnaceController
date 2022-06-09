@@ -17,15 +17,13 @@ import ORSSerial
 ///
 /// The dropdown menu communicates with the serialPortManager variable (which is a reference to the singleton instance of the ORSSerialPortManager object from the ORSSerial library). Each option in the dropdown menu is retrieved from the availablePorts property of the ORSSerialPortManager.
 ///
-///  Upon pressing the open button next to the serial port selection dropdown, the open 
+///  Upon pressing the "Open" button next to the serial port selection dropdown, the nextPortState variable in ArduinoController is updated to "Close" which changes the text in the button. Additionally, when the port is opened, the serialPortWasOpened function is called which sends a status checking command to the Arduino and updates StatusOK based on the response it receives. When the "Close" button is pressed, the nextPortState is updated to "Open" and the serialPortWasClosed function is called.
 ///
-/// The serial port selection dropdown and the button for opening the
-///
-///
+/// The serial port selection dropdown and the button for opening/closing the port are disabled when the timer is running, which is indicated by the "recording" boolean in AppController. Additionally, the dropdown menu is disabled if no ports are detected.
 struct InfoView: View {
     
     @ObservedObject var appController: AppController = AppController.shared
-    @ObservedObject var controller: ArduinoController = AppController.shared.arduino
+    @ObservedObject var arduinoController: ArduinoController = AppController.shared.arduino
     
     var body: some View {
         VStack{
@@ -42,9 +40,9 @@ struct InfoView: View {
                 Text("Status:")
                     .font(.body)
                     .fontWeight(.semibold)
-                Text(controller.statusOK ? "Connected" : "Not Connected")
+                Text(arduinoController.statusOK ? "Connected" : "Not Connected")
                     .font(.body)
-                    .foregroundColor(controller.statusOK ? Color.green : Color.red)
+                    .foregroundColor(arduinoController.statusOK ? Color.green : Color.red)
             }
             
             
@@ -53,18 +51,18 @@ struct InfoView: View {
                 
                 // MARK: Port Selection Dropdown
                 // Dropdown menu showing all available ports that can be connected to
-                Picker("Select Port", selection: $controller.serialPort) {
-                    ForEach(controller.serialPortManager.availablePorts, id:\.self) { port in
+                Picker("Select Port", selection: $arduinoController.serialPort) {
+                    ForEach(arduinoController.serialPortManager.availablePorts, id:\.self) { port in
                         Text(port.name).tag(port as ORSSerialPort?)
                     }
                 }.disabled(appController.recording)
                 
                 // MARK: Open Port Button
                 // Button for opening port selected from dropdown menu
-                Button(controller.nextPortState) {
-                    controller.openOrClosePort()
+                Button(arduinoController.nextPortState) {
+                    arduinoController.openOrClosePort()
                 }
-                .disabled(controller.serialPort == nil || appController.recording)
+                .disabled(arduinoController.serialPort == nil || appController.recording)
             }
             .padding(10)
         }
