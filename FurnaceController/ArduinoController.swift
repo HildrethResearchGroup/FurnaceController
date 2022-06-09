@@ -8,7 +8,10 @@
 import Foundation
 import ORSSerial
 import SwiftUI
-
+/**
+The ArduinoController is what sends commands to and receives data from the arduino, and handles all usbport 
+ 
+ */
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     struct Command {
@@ -208,11 +211,8 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         
         print("Port \(serialPort.path) is open")
         self.nextPortState = "Close"
-        Thread.sleep(forTimeInterval: 2)
-        //TODO: FIX THIS SHIT
+        Timer.scheduledTimer(timeInterval: 2, target: <#T##Any#>, selector: <#T##Selector#>, userInfo: <#T##Any?#>, repeats: <#T##Bool#>)
         self.getStatus()
-        self.readArgonFlow()
-        self.readNitrogenFlow()
     }
     
     func serialPortWasClosed(_ serialPort: ORSSerialPort) {

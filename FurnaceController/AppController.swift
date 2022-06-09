@@ -7,8 +7,6 @@ import Foundation
 import SwiftUI
 
 /**
-#AppController
- 
  AppController is the brains behind the furnace controller app. It handles both timers used, tells the arduino when to poll for data, handles graphing and saving the sensor data, and has the main logic for starting and stopping recording. It is a singleton class because we were having some issues getting sensor data from the ArduinoController back to the AppController after polling. 
  */
 
@@ -16,22 +14,24 @@ class AppController: ObservableObject {
     
     static let shared = AppController()
     
-    // sub-controllers, used to manipulate data and graphs
+    /// instance of the arduino controller
     var arduino = ArduinoController()
+    /// instance of the graph controller
     var graph = GraphController()
+    /// instance of the data controller
     var dataController: DataController?
     
-    var startDate: Date?
-    
-    // timer functions
+    /// determines whether the application is currently recording data
     @Published var recording: Bool = false
     @Published var progressTime: Int = 0
     @Published var minutesPerSample = "1"
     
+    /// if the arduino sends an error, the error is put into this string and displayed on the UI
     @Published var errorMessage: String = ""
     
-    /// timers for the stopwatch and data polling
+    /// timer to increment `progressTime`, used to keep track of how much time has passed in the experiment
     var stopwatchTimer: Timer?
+    /// timer to poll every N minutes, input by the user in `minutesPerSample`
     var pollingTimer: Timer?
     
     /// handles all new data functionality (polling from ardiuino, saving to file, graphing, etc)
@@ -61,7 +61,6 @@ class AppController: ObservableObject {
                 // on timer started
                 self.recording = true
                 self.progressTime = 0 // reset progress timer
-                self.startDate = Date.now // set startTime
                 dataController = DataController() // also reset all file data
                 graph.resetData()
                 
