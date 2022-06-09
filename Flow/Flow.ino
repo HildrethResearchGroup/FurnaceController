@@ -1,4 +1,5 @@
 // Written by Colton Meyers 2022 Computer Science Field Session
+// Contact 303-551-5603 if you'd like some help.
 #include <SoftwareSerial.h>
 #include <Adafruit_MAX31855.h>
 #include <SPI.h>
@@ -16,10 +17,14 @@
 #define CLK 5 // clock signal
 
 #define BUFFER_SIZE 256
+#define S_BUFFER_SIZE 128
 #define TIMEOUT_DURATION 3000 // 3 seconds in miliseconds
 #define EOT ';' // End of transmission symbol
 #define BOT '$' // Beginning of transmission symbol
-// #define SPACE_DELIM
+// The MAX31855K has very limited with error checking readError / NAN check doesn't really work so reciving a value of 0.00000  
+// which is likely improbable for the lab env. is the best error checking
+#define THERMOCOUPLE_UNINIT 0.0000000000
+#define FLOW_SENSOR_UNKNOWN_CMD '?'
 
 // function pre-processor declarations
 // Number of elements in a statically allocated array
@@ -33,7 +38,6 @@ enum STATE current_state;
 SoftwareSerial flowSerial =  SoftwareSerial(rxPin, txPin, false);
 
 Adafruit_MAX31855 thermocouple(CLK, CS, DO);
-
 
 // Serial commands need to be able to record when they first sent out a command
 // Or first recived some data
@@ -62,19 +66,6 @@ bool transmission_ongoing;
 
 const char space_delim[2] = " ";
 
-// Fills passed in buf with buf_size - 2 data. Last character of sequence is always null terminating char
-// Returns number of characters written
-int fill_buffer_from_stream(Stream &data, char buf[], int buf_size) {
-  memset(buf, '\0', sizeof(char)*buf_size);
-  int i = 0;
-  if (data.available() > 0) {
-    char c;
-    while ( (c = data.read()) != -1 && i < buf_size - 1) {
-      buf[i++] = c;
-    }
-  }
-  return i;
-}
 // Writes a message to the serial Stream
 void write_message(int uid, const char* msg) {
   Serial.write(BOT);
@@ -126,14 +117,52 @@ bool read_serial_in() {
       memset(cmd.input_data, '\0', BUFFER_SIZE);
       current_state = WAITING;
     }
-    // if (transmission_ongoing == true && (millis() - time_d.swift_start_t > TIMEOUT_DURATION)){
-    //   write_message(-1, "ERROR Serial data in timeout. EOT not encountered in 3 seconds");
-    //   cmd.input_pos = 0;
-    //   memset(cmd.input_data, '\0', BUFFER_SIZE);
-    //   current_state = WAITING;
-    // }
   }
   return false;
+}
+
+// reaches out to each connected sensor and waits for data to see if any issues exist
+void check_all_sensors(){
+  char error_msg[S_BUFFER_SIZE];
+  memset(error_msg, '\0', S_BUFFER_SIZE);
+  
+  flowSerial.write("a\r");
+  delay(100);
+  // Something like this should be returned
+  // A +011.96 +033.75 +0.0000 +0.0000 +0.3000
+  if (flowSerial.read() != 'A'){
+    strcat(error_msg, "Apex Flow sensor A did not respond when polled");
+  }
+
+  // clear softewareSerial buffer
+  while (flowSerial.read() != -1);
+
+  flowSerial.write("b\r");
+  delay(100);
+  // Something like this should be returned
+  // B +011.96 +033.75 +0.0000 +0.0000 +0.3000
+  if (flowSerial.read() != 'B'){
+    if (strlen(error_msg) != 0){
+      strcat(error_msg, " ");
+    }
+    strcat(error_msg, "Apex Flow sensor B did not respond when polled");
+  }
+
+  // clear softewareSerial buffer
+  while (flowSerial.read() != -1);
+
+  // some error has occured
+  if (strlen(error_msg) > 0){
+    Serial.write(BOT);
+    Serial.write(" BAD ");
+    Serial.write(error_msg);
+    Serial.write(" ");
+    Serial.write(EOT);
+  }else{
+    Serial.write(BOT);
+    Serial.write(" OK ");
+    Serial.write(EOT);
+  }
 }
 
 
@@ -151,7 +180,7 @@ void setup()  {
 
   // Initalize Thermocouple
   while(!thermocouple.begin()){
-    write_message(-1, "Thermocouple initialization error");
+    write_message(-1, "ERROR thermocouple initialization error");
     delay(1);
   }
 
@@ -198,11 +227,10 @@ void loop() {
         char* COMMAND = cmd.input_tokens[1];
         if (strncmp(COMMAND, "TEMP", 4) == 0) {
           // read sensor and send value over
-          double temp_reading = thermocouple.readCelsius();
-          // 0.0001 is below the accuracy of the device so only a zero value should set this off
-          // typically a device / wiring error will set this error off
-          if (isnan(temp_reading) || (temp_reading < 0.0001 && temp_reading >= 0.0000000000)){
-            write_message(cmd.UID, "ERROR the thermocouple chip returned a value which is not a number");
+          double temp_reading = THERMOCOUPLE_UNINIT;
+          temp_reading = thermocouple.readCelsius();
+          if (isnan(temp_reading) || thermocouple.readError() > 0 || temp_reading == THERMOCOUPLE_UNINIT){
+            write_message(cmd.UID, "ERROR critical thermocouple readError the chip may not be connected.");
           }else{
             Serial.write(BOT);
             Serial.write(" ");
@@ -215,7 +243,7 @@ void loop() {
           current_state = WAITING;
         }
         else if (strncmp(COMMAND, "STATUS", 5) == 0) {
-          write_message(cmd.UID, "OK");
+          check_all_sensors();
           current_state = WAITING;
         } else {
           // every command sent to a flow sensor device needs to be followed by a carriage return
