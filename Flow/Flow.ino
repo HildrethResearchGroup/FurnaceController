@@ -18,6 +18,7 @@
 
 #define BUFFER_SIZE 256
 #define S_BUFFER_SIZE 128
+
 #define TIMEOUT_DURATION 3000 // 3 seconds in miliseconds
 #define EOT ';' // End of transmission symbol
 #define BOT '$' // Beginning of transmission symbol
@@ -122,7 +123,12 @@ bool read_serial_in() {
 }
 
 // reaches out to each connected sensor and waits for data to see if any issues exist
+// Sometimes this will incorrectly say BAD, but sending the command multiple times will yield the actual status of the sensors
 void check_all_sensors(){
+  // flowSerial maintains an internal buffer of 16bytes
+  // the only way to clear this buffer is to read all chars from it
+  while(flowSerial.read() != -1); 
+  
   char error_msg[S_BUFFER_SIZE];
   memset(error_msg, '\0', S_BUFFER_SIZE);
   
@@ -131,7 +137,7 @@ void check_all_sensors(){
   // Something like this should be returned
   // A +011.96 +033.75 +0.0000 +0.0000 +0.3000
   if (flowSerial.read() != 'A'){
-    strcat(error_msg, "Apex Flow sensor A did not respond when polled");
+    strcat(error_msg, " Apex Flow sensor A did not respond when polled ");
   }
 
   // clear softewareSerial buffer
@@ -142,27 +148,30 @@ void check_all_sensors(){
   // Something like this should be returned
   // B +011.96 +033.75 +0.0000 +0.0000 +0.3000
   if (flowSerial.read() != 'B'){
-    if (strlen(error_msg) != 0){
-      strcat(error_msg, " ");
-    }
-    strcat(error_msg, "Apex Flow sensor B did not respond when polled");
+    strcat(error_msg, " Apex Flow sensor B did not respond when polled ");
   }
 
   // clear softewareSerial buffer
   while (flowSerial.read() != -1);
 
-  // some error has occured
+
+  double temp_reading = THERMOCOUPLE_UNINIT;
+  temp_reading = thermocouple.readCelsius();
+  if (isnan(temp_reading) || thermocouple.readError() > 0 || temp_reading == THERMOCOUPLE_UNINIT){
+    strcat(error_msg, " Thermocouple amplifier or wire may not be connected ");
+  }
+  
+  Serial.write(BOT);
+  Serial.write(" ");
+  Serial.print(cmd.UID, DEC);
+  // some error has occured 
   if (strlen(error_msg) > 0){
-    Serial.write(BOT);
     Serial.write(" BAD ");
     Serial.write(error_msg);
-    Serial.write(" ");
-    Serial.write(EOT);
   }else{
-    Serial.write(BOT);
     Serial.write(" OK ");
-    Serial.write(EOT);
   }
+  Serial.write(EOT);
 }
 
 
