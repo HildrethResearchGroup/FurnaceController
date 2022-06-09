@@ -39,11 +39,16 @@ struct ArgonFlowView: View {
                 // Both the textfield and update button for setting a new flowrate
                 
                 TextField("", text: $flow)
-                    .disabled(!controller.statusOK)
+                    .disabled(!controller.statusOK).onSubmit {
+                        if let flowNum = Double(flow) {
+                            if flowNum >= 0 && flowNum <= 1 {
+                                controller.setArgonFlow(flow: flowNum)
+                            }
+                        }
+                    }
                 
                 Button ("Set Flowrate") {
                     
-                    //TODO: Add alerts for invalid inputs
                     if let flowNum = Double(flow) {
                         if flowNum >= 0 && flowNum <= 1 {
                             controller.setArgonFlow(flow: flowNum)
