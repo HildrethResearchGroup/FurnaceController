@@ -1,10 +1,57 @@
 # FurnaceController
 
-Review our final report to learn more about our design and development
+A macOS application written in Swift that can interface with an Arduino UNO to:
+- Set Flow rate data on Apex Flow Sensors
+- Read Flow rate data on Apex Flow Sensors
+- Read the temperature from the Furnace
 
-We have developed a macOS application that can control and display temperature and gas flow information from a furnace to the user through SwiftUI. Dr. Owen Hildreth, Associate Professor in the Mechanical Engineering Department at Colorado School of Mines, researches nanometer to centimeter-scale additive manufacturing technologies and we created this program for use in his materials science laboratory.
+Using this information the application can log the data recieved and provide an interface for setting the flow rates and reading the temperature values. 
+
+# Table of Contents
+1. Building the Swift application
+2. Brief overview of Swift code
+3. Hardware specification and diagrams
+4. Important docs and explanations
+
+# 1. Building the Swift application
+
+# 2. Brief overview of Swift code
+
+# 3. Arduino and Hardware
+**Language Specification**
+The Arduino has a simple language API which was developed to allow for both manual testing and communication with the Swift Application.
+
+To directly send the Arduino commands connect to the Arduino with a serial monitor set to 9600 BAUD (assuming the Arduino has been flashed with the project code & is wired correctly)
+
+**Command Format:**
+```
+$ <UID> <DATA> ;
+```
+- **UID** is a positive 32-bit integer value 
+- **DATA** is a variable length string 
+    It can either be an **Immediate command** or an **Apex Flow Sensor command**
+- **$** is the beginning of transmission signal (BOT)
+- **;** is the end of transmission signal (EOT)
+
+**List of Immediate commands:**
+| CMD | Description |
+| --- | ----------- |
+| TEMP | Polls the thermocouple for the temperatuure in Celsius |
+| STATUS | Prints debug information about sensors. See Status response section for more info. |
+
+**List of Apex Flow Sensor commands**
+The following commands assume a device id of A. See the Apex Flow Sensor manual on how to set the device id. 
+| CMD | Description | 
+| --- | ----------- |
+| a | Polls the Apex Flow Device for a data frame. Typically in the form of: ```$ [Command ID]   [Unit ID]  [Absolute Pressure] [Temperature]  [Volumetric Flow]  [Mass Flow]  [Setpoint] [Gas] ;``` |
+| as[floating point number] | Sets the setpoint (target for gas flow) of the device to the described value. Many Apex flow devices have hardset limits (ex: 0-10 L/min). Example Command: as0.25 : Sets the setpoint to 0.25 L/min
+
+**Arduino State Machine**
+**UART**
+**TTL and UART**
 
 
+# 4. Important docs and explanations
 
 **Files included:**
 ContentView.swift
