@@ -48,7 +48,7 @@ struct ArgonFlowView: View {
                             if flowNum > 1 {
                                 flowNum = 1
                             }
-                            
+                            flow = String(flowNum)
                             controller.setArgonFlow(flow: flowNum)
                         }
                     }
@@ -62,7 +62,7 @@ struct ArgonFlowView: View {
                         if flowNum > 1 {
                             flowNum = 1
                         }
-                        
+                        flow = String(flowNum)
                         controller.setArgonFlow(flow: flowNum)
                     }
                     

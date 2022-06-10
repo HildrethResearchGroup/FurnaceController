@@ -117,8 +117,29 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     }
     
     func getStatus() {
+        if let port = self.serialPort {
+            port.send("$ -1 STATUS ;".data(using: String.Encoding.utf8)!)
+        }
+        
         let command = Command(request: "STATUS", type: .STATUS)
         self.sendCommand(command: command)
+    }
+    
+    func commandBomb() {
+        self.getStatus()
+        self.readTemperature()
+        self.readArgonFlow()
+        self.readNitrogenFlow()
+        self.setArgonFlow(flow: 1)
+        self.setNitrogenFlow(flow: 0)
+        self.setArgonFlow(flow: 0.5)
+        self.setNitrogenFlow(flow: 0.5)
+        self.setArgonFlow(flow: 0)
+        self.setNitrogenFlow(flow: 1)
+        self.readTemperature()
+        self.readArgonFlow()
+        self.readNitrogenFlow()
+        self.getStatus()
     }
     
     /// opens/closes the serial port. controlled by a button
@@ -160,7 +181,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                         self.lastTemp = Double(dataAsList[2])!
                         self.values[0] = self.lastTemp
                     }
-                    // maybe add a confirmation that we are, in fact, reading Nitrogen data (response includes Gas Type)
+                    // TODO: maybe add a confirmation that we are, in fact, reading Nitrogen data (response includes Gas Type)
                     else if command.type == .QUERY_ARGON {
                         self.lastFlowAr = Double(dataAsList[6])!
                         self.values[1] = self.lastFlowAr
@@ -211,8 +232,10 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         
         print("Port \(serialPort.path) is open")
         self.nextPortState = "Close"
-        Timer.scheduledTimer(timeInterval: 2, target: <#T##Any#>, selector: <#T##Selector#>, userInfo: <#T##Any?#>, repeats: <#T##Bool#>)
-        self.getStatus()
+        
+        Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { timer in
+            self.getStatus()
+        }
     }
     
     func serialPortWasClosed(_ serialPort: ORSSerialPort) {

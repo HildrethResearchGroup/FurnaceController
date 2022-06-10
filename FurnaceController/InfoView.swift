@@ -11,11 +11,11 @@ import ORSSerial
 
 /// Subview containing the application's title, the connection status with the Arduino unit, the serial port selection dropdown, and the open port button.
 ///
-/// This view contains the title text for the application as well as the text, dropdown menu, and button aspects for selecting an Arduino to interact with.
+/// This view contains the title text for the application as well as the text, dropdown menu, and button aspects for selecting a serial port to use.
 ///
-/// The connection status text is determined by the statusOK boolean that exists in the ArduinoController class. The different text options are implemented using a ternary conditional operator.
+/// The connection status text is determined by the`statusOK` boolean that exists in the `ArduinoController` class. The different text options are implemented using a ternary conditional operator.
 ///
-/// The dropdown menu communicates with the serialPortManager variable (which is a reference to the singleton instance of the ORSSerialPortManager object from the ORSSerial library). Each option in the dropdown menu is retrieved from the availablePorts property of the ORSSerialPortManager.
+/// The dropdown menu communicates with the `serialPortManager` variable (which is a reference to the singleton instance of the `ORSSerialPortManager` object from the ORSSerial library). Each option in the dropdown menu is retrieved from the availablePorts property of the ORSSerialPortManager.
 ///
 ///  Upon pressing the "Open" button next to the serial port selection dropdown, the nextPortState variable in ArduinoController is updated to "Close" which changes the text in the button. Additionally, when the port is opened, the serialPortWasOpened function is called which sends a status checking command to the Arduino and updates StatusOK based on the response it receives. When the "Close" button is pressed, the nextPortState is updated to "Open" and the serialPortWasClosed function is called.
 ///

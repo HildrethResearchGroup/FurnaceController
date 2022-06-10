@@ -44,7 +44,7 @@ struct NitrogenFlowView: View {
                             if flowNum > 1 {
                                 flowNum = 1
                             }
-                            
+                            flow = String(flowNum)
                             controller.setNitrogenFlow(flow: flowNum)
                         }
                     }
@@ -58,7 +58,7 @@ struct NitrogenFlowView: View {
                         if flowNum > 1 {
                             flowNum = 1
                         }
-                        
+                        flow = String(flowNum)
                         controller.setNitrogenFlow(flow: flowNum)
                     }
                 }.disabled(!controller.statusOK)
