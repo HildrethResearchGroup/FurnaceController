@@ -65,6 +65,10 @@ struct InfoView: View {
                 .disabled(arduinoController.serialPort == nil || appController.recording)
             }
             .padding(10)
+            
+//            Button("Test Command Dump") {
+//                arduinoController.commandBomb()
+//            }
         }
     }
 }

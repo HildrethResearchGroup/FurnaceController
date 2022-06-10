@@ -25,7 +25,7 @@ struct NitrogenFlowView: View {
                 // MARK: Display Flowrate
                 // Displays the flowrate measured at the last request in ...
                 Text("Nitrogen Flowrate (L/min)")
-                Text(String(controller.lastFlowAr))
+                Text(String(controller.lastFlowN2))
                 
             }
 
@@ -41,8 +41,8 @@ struct NitrogenFlowView: View {
                             if flowNum < 0 {
                                 flowNum = 0
                             }
-                            if flowNum > 1 {
-                                flowNum = 1
+                            if flowNum > controller.MAX_FLOWRATE {
+                                flowNum = controller.MAX_FLOWRATE
                             }
                             flow = String(flowNum)
                             controller.setNitrogenFlow(flow: flowNum)
@@ -55,8 +55,8 @@ struct NitrogenFlowView: View {
                         if flowNum < 0 {
                             flowNum = 0
                         }
-                        if flowNum > 1 {
-                            flowNum = 1
+                        if flowNum > controller.MAX_FLOWRATE {
+                            flowNum = controller.MAX_FLOWRATE
                         }
                         flow = String(flowNum)
                         controller.setNitrogenFlow(flow: flowNum)

@@ -52,7 +52,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     @Published var lastTemp = 0.0
     @Published var lastFlowAr = 0.0
     @Published var lastFlowN2 = 0.0
-    @Published var lastTime: Date = Date.distantPast
     @Published var tempUnit = "C"
     @Published var flowUnit = "L/min"
     
@@ -60,10 +59,12 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     var values: [Double] = [-1, -1, -1]
     
     private let thermocoupleID = "TEMP"
-    private let argonFlowID = "A"
-    private let nitrogenFlowID = "B"
+    private let nitrogenFlowID = "A"
+    private let argonFlowID = "B"
     @Published var nextPortState = "Open"
     @Published var statusOK = false
+    
+    let MAX_FLOWRATE = 10.0
     
     @Published var serialPort: ORSSerialPort? {
         didSet {
@@ -208,8 +209,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                         AppController.shared.recordData(temp: values[0], flowAr: values[1], flowN2: values[2])
                         values = [-1, -1, -1]
                     }
-                    
-                    self.lastTime = Date.now
                 }
             }
         }

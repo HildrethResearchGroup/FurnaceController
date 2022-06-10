@@ -17,6 +17,10 @@ struct ErrorView: View {
             .foregroundColor(.red)
             .fontWeight(.semibold)
             .font(.headline)
+//        Button("Clear Error Message") {
+//            controller.errorMessage = ""
+//        }
+//        .disabled(controller.errorMessage == "")
     }
 }
 

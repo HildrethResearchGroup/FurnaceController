@@ -45,8 +45,8 @@ struct ArgonFlowView: View {
                             if flowNum < 0 {
                                 flowNum = 0
                             }
-                            if flowNum > 1 {
-                                flowNum = 1
+                            if flowNum > controller.MAX_FLOWRATE {
+                                flowNum = controller.MAX_FLOWRATE
                             }
                             flow = String(flowNum)
                             controller.setArgonFlow(flow: flowNum)
@@ -59,8 +59,8 @@ struct ArgonFlowView: View {
                         if flowNum < 0 {
                             flowNum = 0
                         }
-                        if flowNum > 1 {
-                            flowNum = 1
+                        if flowNum > controller.MAX_FLOWRATE {
+                            flowNum = controller.MAX_FLOWRATE
                         }
                         flow = String(flowNum)
                         controller.setArgonFlow(flow: flowNum)
