@@ -8,48 +8,51 @@
 import SwiftUI
 import ORSSerial
 
-
-
-
-
-
 struct ContentView: View {
-    @StateObject var controller = ArduinoController()
-    @StateObject var graphController = GraphController()
-    @StateObject var watch = StopWatch()
-
-    @State private var start: String = ""
     
-    private func Start() -> Void {
-        print(start)
-    }
+    @ObservedObject var controller = AppController.shared
     
-
     var body: some View {
-        
-        HSplitView{
-            
-            VStack {
+        GeometryReader { geometry in
+            HSplitView {
+                    
+                VStack{
+                    
+                    InfoView()                                             // title and port status
+                        .padding()
+                        .frame(alignment: .top)
+                    
+                    TemperatureView(controller: controller.arduino)                 // temperature data and setting
+                        .padding()
+                    
+                    NitrogenFlowView(controller: controller.arduino)                // nitrogen flowrate data and setting
+                        .padding()
+                    
+                    ArgonFlowView(controller: controller.arduino)           // argon flowrate data and setting
+                        .padding()
+                    
+                    MeasurementRateView(controller: controller)
+                        .padding()
+                    
+                    ErrorView(controller: controller)
+                        .padding()
+                }
+                .frame(minWidth: geometry.size.width * 0.2, maxWidth: geometry.size.width * 0.5, minHeight: geometry.size.height, maxHeight: geometry.size.height)
                 
-                GraphViewRepresentable(graphController: graphController)
-                    .frame(minWidth: 800, maxWidth: .infinity, minHeight: 400, maxHeight: .infinity)
-            
-//                let time: StopwatchView = StopwatchView()
-                
-                Button(watch.status, action: watch.startOrStopRecord)
-
-                //Label("Lightning", systemImage: "bolt.fill")
-                //StopwatchView()
-//                StopWatch.StopwatchView(stopWatch: watch)
-                Text("\(String(format:"%02d", (watch.progressTime/3600) )):\(String(format:"%02d",  (watch.progressTime % 3600 / 60) )):\(String(format:"%02d", watch.progressTime % 60))").font(.system(size: 25, design: .serif))
+                VStack {
+                    
+                    StopWatchView(controller: controller)                                   // stopwatch
+                        .padding()
+                    
+                    GraphViewRepresentable(graphController: controller.graph)
+                        .padding()     // graph
+                    
+                }
+                .frame(minWidth: geometry.size.width * 0.5, maxWidth: geometry.size.width * 0.8, minHeight: geometry.size.height, maxHeight: geometry.size.height)
             }
-            ControlView()
-            
         }
     }
 }
-
-
 
 
 struct ContentView_Previews: PreviewProvider {
