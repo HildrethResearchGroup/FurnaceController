@@ -1,10 +1,3 @@
-//
-//  XZData.swift
-//  QuadraticFitting
-//
-//  Created by Owen Hildreth on 12/2/21.
-//
-
 import Foundation
 
 class XZData {

@@ -9,12 +9,7 @@ import SwiftUI
 
 struct MeasurementRateView: View {
     
-    @ObservedObject var controller: AppController
-    init(controller: AppController) {
-        self.controller = controller
-    }
-    
-    
+    @ObservedObject var controller: AppController = AppController.shared
     
     var body: some View {
         VStack {

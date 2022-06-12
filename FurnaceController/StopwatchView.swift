@@ -9,13 +9,8 @@ import SwiftUI
 
 struct StopWatchView: View {
     
-    @ObservedObject var controller: AppController
-    @ObservedObject var arduino: ArduinoController
-    
-    init(controller: AppController) {
-        self.controller = controller
-        self.arduino = controller.arduino
-    }
+    @ObservedObject var controller: AppController = AppController.shared
+    @ObservedObject var arduino: ArduinoController = AppController.shared.arduino
     
     var body: some View {
         VStack {

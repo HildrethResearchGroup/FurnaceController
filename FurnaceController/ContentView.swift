@@ -10,6 +10,8 @@ import ORSSerial
 
 struct ContentView: View {
     
+    /// Reference to the singleton instance of AppController.
+    ///
     /// 
     @ObservedObject var controller = AppController.shared
     
@@ -19,34 +21,34 @@ struct ContentView: View {
                     
                 VStack{
                     
-                    InfoView()                                             // title and port status
+                    InfoView()
                         .padding()
                         .frame(alignment: .top)
                     
-                    TemperatureView(controller: controller.arduino)                 // temperature data and setting
+                    TemperatureView()
                         .padding()
                     
-                    NitrogenFlowView(controller: controller.arduino)                // nitrogen flowrate data and setting
+                    NitrogenFlowView()
                         .padding()
                     
-                    ArgonFlowView(controller: controller.arduino)           // argon flowrate data and setting
+                    ArgonFlowView()
                         .padding()
                     
-                    MeasurementRateView(controller: controller)
+                    MeasurementRateView()
                         .padding()
                     
-                    ErrorView(controller: controller)
+                    ErrorView()
                         .padding()
                 }
                 .frame(minWidth: geometry.size.width * 0.2, maxWidth: geometry.size.width * 0.5, minHeight: geometry.size.height, maxHeight: geometry.size.height)
                 
                 VStack {
                     
-                    StopWatchView(controller: controller)                                   // stopwatch
+                    StopWatchView()
                         .padding()
                     
                     GraphViewRepresentable(graphController: controller.graph)
-                        .padding()     // graph
+                        .padding()
                     
                 }
                 .frame(minWidth: geometry.size.width * 0.5, maxWidth: geometry.size.width * 0.8, minHeight: geometry.size.height, maxHeight: geometry.size.height)

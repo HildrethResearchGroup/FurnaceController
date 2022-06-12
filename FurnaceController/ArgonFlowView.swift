@@ -15,11 +15,7 @@ struct ArgonFlowView: View {
     
     @State private var flow: String = ""               // last measured flowrate
     
-    @ObservedObject var controller: ArduinoController
-    
-    init(controller: ArduinoController) {
-        self.controller = controller
-    }
+    @ObservedObject var controller: ArduinoController = AppController.shared.arduino
     
     var body: some View {
         VStack {

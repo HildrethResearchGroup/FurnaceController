@@ -14,11 +14,7 @@ struct TemperatureView: View {
     
     @State private var temp: String = ""
     
-    @ObservedObject var controller: ArduinoController
-    
-    init(controller: ArduinoController) {
-        self.controller = controller
-    }
+    @ObservedObject var controller: ArduinoController = AppController.shared.arduino
     
     var body: some View {
         VStack {
