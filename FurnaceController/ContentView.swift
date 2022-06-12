@@ -10,6 +10,7 @@ import ORSSerial
 
 struct ContentView: View {
     
+    /// 
     @ObservedObject var controller = AppController.shared
     
     var body: some View {

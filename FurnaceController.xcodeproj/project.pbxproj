@@ -185,16 +185,13 @@
 		3FB498EF2853E52D00C3B565 /* FurnaceController */ = {
 			isa = PBXGroup;
 			children = (
-				3FB498F02853E52D00C3B565 /* DataController.swift */,
+				3FB498F92853E52D00C3B565 /* FurnaceControllerApp.swift */,
+				3FB499092853E52D00C3B565 /* ContentView.swift */,
 				3FB498F12853E52D00C3B565 /* InfoView.swift */,
 				3FB498F22853E52D00C3B565 /* ArduinoController.swift */,
-				3FB498F32853E52D00C3B565 /* DataGraph.framework */,
-				3FB498F42853E52D00C3B565 /* Assets.xcassets */,
-				3FB498F52853E52D00C3B565 /* FurnaceController-Bridging-Header.h */,
 				3FB498F62853E52D00C3B565 /* FurnaceController.entitlements */,
-				3FB498F72853E52D00C3B565 /* Preview Content */,
-				3FB498F92853E52D00C3B565 /* FurnaceControllerApp.swift */,
 				3FB498FA2853E52D00C3B565 /* StopwatchView.swift */,
+				3FB498F02853E52D00C3B565 /* DataController.swift */,
 				3FB498FB2853E52D00C3B565 /* TemperatureView.swift */,
 				3FB498FC2853E52D00C3B565 /* CurrentReadingView.swift */,
 				3FB498FD2853E52D00C3B565 /* Basic Script.dgraph */,
@@ -202,11 +199,14 @@
 				3FB498FF2853E52D00C3B565 /* NitrogenFlowView.swift */,
 				3FB499002853E52D00C3B565 /* AppController.swift */,
 				3FB499012853E52D00C3B565 /* Tests.swift */,
-				3FB499022853E52D00C3B565 /* DataGraph Test Views */,
-				3FB499082853E52D00C3B565 /* DataGraphFramework.dmg */,
-				3FB499092853E52D00C3B565 /* ContentView.swift */,
 				3FB4990A2853E52D00C3B565 /* MeasurementRateView.swift */,
 				3FB4990B2853E52D00C3B565 /* ErrorView.swift */,
+				3FB498F52853E52D00C3B565 /* FurnaceController-Bridging-Header.h */,
+				3FB498F42853E52D00C3B565 /* Assets.xcassets */,
+				3FB498F32853E52D00C3B565 /* DataGraph.framework */,
+				3FB498F72853E52D00C3B565 /* Preview Content */,
+				3FB499022853E52D00C3B565 /* DataGraph Test Views */,
+				3FB499082853E52D00C3B565 /* DataGraphFramework.dmg */,
 			);
 			path = FurnaceController;
 			sourceTree = "<group>";
