@@ -107,9 +107,6 @@ Here are some useful docs for learning about UART, RS-232, and TTL
 
 # 3. Important docs and explanations
 
-**Files included:**
-ContentView.swift
-
 ### System Architecture
 
 Here is a high-level overview of all of the components of our project and how they interact. 
