@@ -16,12 +16,26 @@ Using this information the application can log the data recieved and provide an 
 [3. Hardware specification and diagrams](#hardware-specification-and-diagrams)
 [4. Important docs and explanations](#important-docs-and-explanations)
 
-# 1. Cloning the Swift application into Xcode
+# 1. Swift Application
+
+**Project Dependencies**
+
+There are a couple of dependencies for this project, which *should* all be in this repository already. If you find yourself missing anything, here is what you need:
+
+* ORSSerialPort - https://github.com/armadsen/ORSSerialPort
+* DataGraph - https://www.visualdatatools.com/DataGraph/
+  * To view the graph in the application, you *must* have the DataGraph application downloaded and have a license for DataGraph. Professor Hildreth has a license. 
+
+**Cloning the application into Xcode**
 
 1. Download Xcode 13.4.1 (*might* also work in future versions)
 2. Copy the repository URL
 3. Open Xcode, click "Clone an existing project"
 4. Paste repository URL into top search bar and click "clone" 3 times
+
+**Swift Documentation**
+
+The DocC documentation compiler converts Markdown-based text into rich documentation for Swift and Objective-C projects, and displays it right in the Xcode documentation window. To build and view the application's documentation in Xcode, click Product->Build Documentation.
 
 # 2. Arduino and Hardware
 **Language Specification**
@@ -62,10 +76,10 @@ The following commands assume a device id of A. See the Apex Flow Sensor manual 
 
 **Flashing the Arduino & Getting communication up and running** 
 1. Download the Aruino IDE from https://www.arduino.cc/en/software
-2. Using the Arduino package manager install https://github.com/adafruit/Adafruit-MAX31855-library
-3. Wire up the Arduino as depected by the Arduino Circuit Diagram
+2. Using the Arduino package manager, install https://github.com/adafruit/Adafruit-MAX31855-library
+3. Wire up the Arduino as depicted by the Arduino Circuit Diagram
 4. Configure the flow sensor devices (See Configuring the Apex Flow Sensor devices)
-5. Flash the Arduino with the project code
+5. Flash the Arduino with the project code in the Controller folder
 6. Open the included Serial montior with the IDE and set the BAUD to 9600
 7. Send some sample commands (See Command Examples)
 
@@ -73,6 +87,7 @@ The following commands assume a device id of A. See the Apex Flow Sensor manual 
 ![Arduino Circuit Diagram*](https://user-images.githubusercontent.com/63746522/173146773-a187073d-67cc-4125-81f6-e75cf9873cc7.jpg)
 
 **Arduino State Machine**
+
 TTL Serial is how communication between the connected MacOS application and the Arduino is conducted. This protocol is asynchronous meaning that a string sent will not all arrive at the same time. Because of this a state machine was built in order to handle staying in specific states untill all information is recived. 
 Beginning of transmission signal **$** (BOT)
 End of transmission signal **;** (EOT)
@@ -96,6 +111,8 @@ Here are some useful docs for learning about UART, RS-232, and TTL
 ContentView.swift
 
 ### System Architecture
+
+Here is a high-level overview of all of the components of our project and how they interact. 
 ![Architecture Diagram](https://user-images.githubusercontent.com/63746522/173135280-58aab64d-c667-485b-831b-c4a724d6ab8b.jpg)
 
 ### Configuring the Apex Flow Sensor devices
