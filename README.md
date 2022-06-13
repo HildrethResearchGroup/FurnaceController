@@ -100,13 +100,6 @@ Interaction with datagraph:
 - GraphView takes instance of GraphController then represent a GraphView as a GraphViewRepresentable
 
 
-
-
-
-
-
-
-
 # 3. Arduino and Hardware
 **Language Specification**
 The Arduino has a simple language API which was developed to allow for both manual testing and communication with the Swift Application.
@@ -137,9 +130,19 @@ The following commands assume a device id of A. See the Apex Flow Sensor manual 
 | as[floating point number] | Sets the setpoint (target for gas flow) of the device to the described value. Many Apex flow devices have hardset limits (ex: 0-10 L/min). Example Command: as0.25 : Sets the setpoint to 0.25 L/min
 
 **Arduino State Machine**
-**UART**
-**TTL and UART**
+TTL Serial is how communication between the connected MacOS application and the Arduino is conducted. This protocol is asynchronous meaning that a string sent will not all arrive at the same time. Because of this a state machine was built in order to handle staying in specific states untill all information is recived. 
+Beginning of transmission signal **$** (BOT)
+End of transmission signal **;** (EOT)
+The arduino begins filling the input buffer when the BOT signal is recived and parses the command when the EOT signal is recived. See the arduino code for more detail. 
+**IMPORTANT:** Commands must have BOT and EOT otherwise they will not be processed correctly. 
+![Arduino State Diagram](https://user-images.githubusercontent.com/63746522/173144378-d2219624-6fb2-4935-a0c3-cf62166a2447.jpg)
 
+**TTL and RS-232 as flavors of UART**
+Both TTL and RS-232 are flavors of UART which stands for universal asynchronous reciver transmiter. Both TTL and RS-232 need either software emulation or a hardware chip (most common) to achieve communication. The only difference between TTL and RS-232 is the voltage levels which are designated. 
+
+Here are some useful docs for learning about UART, RS-232, and TTL 
+- https://www.circuitbasics.com/basics-uart-communication/#:~:text=UART%20stands%20for%20Universal%20Asynchronous,transmit%20and%20receive%20serial%20data.
+- https://support.unitronics.com/index.php?/selfhelp/view-article/connect-devices-with-ttl-interface-levels-to-rs232-interface
 
 # 4. Important docs and explanations
 
@@ -151,10 +154,6 @@ ContentView.swift
 ![Architecture Diagram](https://user-images.githubusercontent.com/63746522/173135280-58aab64d-c667-485b-831b-c4a724d6ab8b.jpg)
 
 
-
-### Hardware Architecture
-Below is the **Arduino State Diagram** ...
-![Arduino State Diagram](https://user-images.githubusercontent.com/63746522/173144378-d2219624-6fb2-4935-a0c3-cf62166a2447.jpg)
 
 # Circuit Diagrams and Hardware Setup
 ### Sensor settings
