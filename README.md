@@ -16,91 +16,14 @@ Using this information the application can log the data recieved and provide an 
 [3. Hardware specification and diagrams](#hardware-specification-and-diagrams)
 [4. Important docs and explanations](#important-docs-and-explanations)
 
-# 1. Building the Swift application
+# 1. Cloning the Swift application into Xcode
 
-### Setup DataGraph Application
-Import DataGraph.framework
+1. Download Xcode 13.4.1 (*might* also work in future versions)
+2. Copy the repository URL
+3. Open Xcode, click "Clone an existing project"
+4. Paste repository URL into top search bar and click "clone" 3 times
 
-- Make sure the Framework is installed/placed in the Folder after the .proj file
-
-- Add the DataGraph.framework to your Target:
-	- Targets → General → Frameworks, Libraries, and Embedded Content
-	- Select: + button
-	- Select: "Add Other" → Add Files
-	- Select: the DataGraph.Framework Folder
-
-
-
-- Create a .h file named: YourApplicationName-Bridging-Header.h
-	- Select the top-level folder in your project (just under the blue project icon
-	- Select: Menubar → File → New File
-	- Select: Under Source → Header File
-	- Name your file:  yourApplicaitonName-Bridging_Header.h
-	- Make sure Targets is checked "Yes"
-
-
-- Copy-Paste the supplied Bridging-Header information into your .h bridging-header file
-
-
-
-- Make sure the path to the Bridging Header is correct
-    	- Project → Build Settings → All
-	- Swift Compiler - General → Objective-C Bridging Header:  <Internal Path: e.g. TestApp/TestApp-Bridging-Header.h>
-
-
-- Switch Architecture to x86_64 on both the Project and the Target
-
-- Under Build Settings, in Packaging, make sure the Defines Module setting for the framework target is set to Yes.
-	- Project → Build Settings → All
-	- Packaging → Defines Module:  Yes
-
-- Turn OFF Hardened Runtime
-	- Targets → Signing and Capabilities → Hardened Runtime 
-	- There is a small, grey "x" in the upper left corner of the Hardened Runtime settings (just below the dividing line).  
-	- Click "x" to remove all hardened runtime.
-
-
-- Test the Importing of the Framework:
- 	- Drag and Drop the files from the unzipped DataGraph Test Views.zip folder
-	- Located under Files → DataGraph Framework → DataGraph Text Views.zip
-	- Compile your application
-	- Make sure there are no Compile Errors
-  - Try to make DataGraph View
-```
-struct ContentView: View {
-    @ObservedObject var graphController = GraphController()
-    
-    var body: some View {
-        VStack{
-            HStack {
-                Slider(value: $graphController.adjustableValue, in: 0.0...10.0) {
-                    Text(String(format: "%.2f", graphController.adjustableValue))
-                }
-                Text(String(format: "%.2f", graphController.computedValue))
-            }
-            
-            Button("Increment"){graphController.updateData()}
-            GraphViewRepresentable(graphController: graphController)
-                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 200, maxHeight: .infinity)
-        }
-        .padding()
-    }
-}
-
-```
-
-# 2. Brief overview of Swift code
-
-##### Transfer of data
-ArduinoController ORSSerial
-
-##### Understanding DataGraph
-Interaction with datagraph:
-- Data in DataModel which communicates with GraphController
-- GraphView takes instance of GraphController then represent a GraphView as a GraphViewRepresentable
-
-
-# 3. Arduino and Hardware
+# 2. Arduino and Hardware
 **Language Specification**
 The Arduino has a simple language API which was developed to allow for both manual testing and communication with the Swift Application.
 
@@ -167,7 +90,7 @@ Here are some useful docs for learning about UART, RS-232, and TTL
 - https://www.circuitbasics.com/basics-uart-communication/#:~:text=UART%20stands%20for%20Universal%20Asynchronous,transmit%20and%20receive%20serial%20data.
 - https://support.unitronics.com/index.php?/selfhelp/view-article/connect-devices-with-ttl-interface-levels-to-rs232-interface
 
-# 4. Important docs and explanations
+# 3. Important docs and explanations
 
 **Files included:**
 ContentView.swift
@@ -186,7 +109,7 @@ ContentView.swift
 
 * “RS-232 vs. TTL Serial Communication,” https://www.sparkfun.com/tutorials/215#:~:text=This%20method%20of%20serial%20communication,'0')%20is%200V
 
-* “Operating Manual For Mass Flow Meters Models M · MQ · MS · MW · MB · MBQ · MBS · MWB,” https://apexvacuum.com/wp-content/uploads/2021/09/DOC-MANUAL-M-2021-Apex.pdf  
+* “Operating Manual For Mass Flow Meters Models M · MQ · MS · MW · MB · MBQ · MBS · MWB,” https://apexvacuum.com/wp-content/uploads/2021/09/DOC-MANUAL-M-2021-Apex.pdf
 
 * “Serial communication Basic Knowledge -RS-232C/RS-422/RS-485,” https://www.contec.com/support/basic-knowledge/daq-control/serial-communicatin/ 
 
