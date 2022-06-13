@@ -1,7 +1,3 @@
-//
-//  AppController.swift
-//  FurnaceController
-//
 
 import Foundation
 import SwiftUI
@@ -12,10 +8,14 @@ import SwiftUI
 
 class AppController: ObservableObject {
     
+    /// Singleton instance of AppController
+    ///
+    /// By declaring a static, constant instance of AppController within the AppController class, AppController is made into a singleton. If an init method is created for AppController, it should be set to private
     static let shared = AppController()
     
-    /// instance of the arduino controller
+    ///  The  interface between the Arduino and the rest of the program which contains the 
     var arduino = ArduinoController()
+    
     /// instance of the graph controller
     var graph = GraphController()
     /// instance of the data controller

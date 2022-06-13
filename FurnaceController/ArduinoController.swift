@@ -1,27 +1,42 @@
-//
-//  ArduinoController.swift
-//  FurnaceController
-//
-//  Created by Mines Student on 5/17/22.
-//
 
 import Foundation
 import ORSSerial
 import SwiftUI
-/**
-The ArduinoController is what sends commands to and receives data from the arduino, and handles all usbport 
- 
- */
+
+/// The interface between the Arduino and the rest of the Swift application. Handles initialization of the connection with an Arduino, sending commands to the Arduino, and receiving and parsing data received from the Arduino.
+///
+/// This class relies heavily on the ORSSerial library created by armadsen. For more in-depth documentation, go to [their github repository](https://github.com/armadsen/ORSSerialPort).
+///
+///
+
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
+    // MARK: Command Struct
+    
+    /// Stores information for commands sent to Arduino
+    ///
+    /// Contains command type, the command string, and a response for debugging.
     struct Command {
-        /// this is to handle what to do with a response to the command
+        
+        /// Specifies which sensor or status check the command is meant for.
+        ///
+        /// This is to handle what to do with a response to the command
         var type: CommandType
-        /// this is just the command part of the serial string sent to arduino. does not include the UID
+        
+        /// The command that will be sent to the Arduino (without the ID)
+        ///
+        /// This is just the command part of the serial string sent to the Arduino. does not include the UID
         var request: String
-        /// Full response (used for debugging)
+        
+        /// Full response from Arduino
+        ///
+        /// Used for debugging
         var response: String
         
+        ///  Initializer for a Command object
+        /// - Parameters:
+        ///   - request: The String command sent to the Arduino along with the command ID
+        ///   - type:  Defines which aspect of the hardware the command is communicating with
         init(request: String, type: CommandType){
             self.type = type
             self.request = request
@@ -29,7 +44,16 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
-    /// types of commands that require handling a response
+    // MARK: Enumerated CommandType Object
+    
+    /// Types of commands that require handling a response
+    ///
+    /// Meaning for each command type:
+    /// * QUERY_TEMP =
+    /// * QUERY_ARGON =
+    /// * QUERY_NITROGEN =
+    /// * GENERAL =
+    /// * STATUS =
     enum CommandType {
         case QUERY_TEMP
         case QUERY_ARGON
@@ -38,33 +62,72 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         case STATUS
     }
     
+    // MARK: Variables
+    
+    /// Reference to the singleton instance of ORSSerialPortManager
+    ///
+    /// Provides a list of ports with its availablePorts property.
     var serialPortManager: ORSSerialPortManager = ORSSerialPortManager.shared()
     
     // All of these published variables are used to keep the app display updated.
     // The @Published modifier makes the view watch the variable to see if it
     // needs to be updated on the display
-    @Published var nextCommand = ""
-    @Published var lastResponse = "" // possibly just a debugging variable, possibly not
     
+    // TODO: Complete Documentation
+    @Published var nextCommand = ""
+    
+    @Published var lastResponse = ""
+    
+    /// A dictionary that stores command history by command ID.
     private var commands: [Int: Command] = [:]
+    
+    /// The command ID that the next command sent will use
     private var nextID = 0
     
+    /// The last temperature value that was received from the Arduino
     @Published var lastTemp = 0.0
+    
+    /// The last Argon flowrate value that was received from the Arduino
     @Published var lastFlowAr = 0.0
+    
+    /// The last Nitrogen flowrate value that was received from the Arduino
     @Published var lastFlowN2 = 0.0
+    
+    /// The temperature units being used
     @Published var tempUnit = "C"
+    
+    /// The flowrate units being used
     @Published var flowUnit = "L/min"
     
     // this is used to see if all 3 sensors have collected data, so we can write it to a file
     var values: [Double] = [-1, -1, -1]
     
+    /// Sensor ID that is used to identify that the command should communicate with the Thermocouple.
     private let thermocoupleID = "TEMP"
+    
+    /// Sensor ID that is used to identify that the command should communicate with the Nitrogen Flow Meter.
     private let nitrogenFlowID = "B"
+    
+    /// Sensor ID that is used to identify that the command should communicate with the Argon Flow Meter.
     private let argonFlowID = "A"
+    
+    /// String indicator of current port state.
+    ///
+    /// This indicator is used for determining if the open or close function should be used when the openOrClosePort function is callled. It also acts as the Text for the button next to the port selection dropdown in InfoView
     @Published var nextPortState = "Open"
+    
+    // TODO: Clarify with Josh when getStatus is called
+    
+    /// Current status of the connection between the application and the Arduino
+    ///
+    /// A true value indicates that the Arduino is connected and that all sensors are sending appropriate signals to the Arduino. This value will change when an Arduino unit is connected, when an Arduino unit is closed or disconnected, and when the status command returns a bad value.
     @Published var statusOK = false
     
+    /// Max flowrate that the sensors can handle
+    ///
+    /// This value serves as an upper bound to values which may be input to the sensor. If a value larger than this value is entered, it will automatically be adjusted to this value.
     let MAX_FLOWRATE = 10.0
+    
     
     @Published var serialPort: ORSSerialPort? {
         didSet {
@@ -75,6 +138,9 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
+    // MARK: Functions
+    
+    // TODO: Check specifics with Josh
     /// sends a generic command type, using the request field as the `Data` of the command (see Command language specs)
     func sendCommand(command: Command) {
         if let port = self.serialPort{
@@ -85,7 +151,7 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         }
     }
     
-    // sends whatever command is entered into the textbox. Currently triggered by a button. Used for debugging
+    // Sends whatever command is entered into the textbox. Currently triggered by a button. Used for debugging
 //    func sendCommand() {
 //        let command = Command(request: self.nextCommand, type: .GENERAL)
 //        self.sendCommand(command: command)

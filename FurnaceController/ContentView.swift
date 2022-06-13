@@ -1,9 +1,3 @@
-//  This is a test comment
-//  ContentView.swift
-//  FurnaceController
-//
-//  Created by Mines Student on 5/17/22.
-//
 
 import SwiftUI
 import ORSSerial

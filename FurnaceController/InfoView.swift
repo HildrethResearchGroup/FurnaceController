@@ -1,9 +1,3 @@
-//
-//  InfoView.swift
-//  FurnaceController
-//
-//  Created by Mines Student on 6/6/22.
-//
 
 import SwiftUI
 import ORSSerial
