@@ -129,6 +129,26 @@ The following commands assume a device id of A. See the Apex Flow Sensor manual 
 | a | Polls the Apex Flow Device for a data frame. Typically in the form of: ```$ [Command ID]   [Unit ID]  [Absolute Pressure] [Temperature]  [Volumetric Flow]  [Mass Flow]  [Setpoint] [Gas] ;``` |
 | as[floating point number] | Sets the setpoint (target for gas flow) of the device to the described value. Many Apex flow devices have hardset limits (ex: 0-10 L/min). Example Command: as0.25 : Sets the setpoint to 0.25 L/min
 
+**Command Examples** 
+| Command | Description |
+| - | - |
+| $ 1 STATUS ; | Polls for status of all sensors |
+| $ 1 a ; | Polls flow sensor a for data | 
+| $ 1 A ; | Polls flow sensor a for data (Identical to above) |
+| $ 1 TEMP ; | Polls thermocouple for data |
+
+**Flashing the Arduino & Getting communication up and running** 
+1. Download the Aruino IDE from https://www.arduino.cc/en/software
+2. Using the Arduino package manager install https://github.com/adafruit/Adafruit-MAX31855-library
+3. Wire up the Arduino as depected by the Arduino Circuit Diagram
+4. Configure the flow sensor devices (See Configuring the Apex Flow Sensor devices)
+5. Flash the Arduino with the project code
+6. Open the included Serial montior with the IDE and set the BAUD to 9600
+7. Send some sample commands (See Command Examples)
+
+**Arduino Circuit Diagram**
+![Arduino Circuit Diagram*](https://user-images.githubusercontent.com/63746522/173146773-a187073d-67cc-4125-81f6-e75cf9873cc7.jpg)
+
 **Arduino State Machine**
 TTL Serial is how communication between the connected MacOS application and the Arduino is conducted. This protocol is asynchronous meaning that a string sent will not all arrive at the same time. Because of this a state machine was built in order to handle staying in specific states untill all information is recived. 
 Beginning of transmission signal **$** (BOT)
@@ -149,31 +169,19 @@ Here are some useful docs for learning about UART, RS-232, and TTL
 **Files included:**
 ContentView.swift
 
-
 ### System Architecture
 ![Architecture Diagram](https://user-images.githubusercontent.com/63746522/173135280-58aab64d-c667-485b-831b-c4a724d6ab8b.jpg)
 
-
-
-# Circuit Diagrams and Hardware Setup
-### Sensor settings
+### Configuring the Apex Flow Sensor devices
 - Set Baud rate to 9600
 - Nitrogen has device ID A
 - Argon had device ID B  
-
-### Circuits
-Below is the **Arduino Sensor Circuit Diagram** ...
-![Arduino Sensor Circuit Diagram](https://user-images.githubusercontent.com/63746522/173146773-a187073d-67cc-4125-81f6-e75cf9873cc7.jpg)
-
+- Details on to do this can be found in the device manual : https://apexvacuum.com/wp-content/uploads/2021/09/DOC-MANUAL-M-2021-Apex.pdf  
 
 **Here are some links for hardware and serial communications:**  
-
-
 * [Thermocouple introduction](https://www.britannica.com/technology/thermocouple "InfoLink")
 
 * “RS-232 vs. TTL Serial Communication,” https://www.sparkfun.com/tutorials/215#:~:text=This%20method%20of%20serial%20communication,'0')%20is%200V
-
-* “Operating Manual For Mass Flow Controllers Models MC · MCD · MCE · MCQ · MCR · MCS · MCV · MCW,” https://documents.alicat.com/manuals/DOC-MANUAL-9V-MC.pdf 
 
 * “Operating Manual For Mass Flow Meters Models M · MQ · MS · MW · MB · MBQ · MBS · MWB,” https://apexvacuum.com/wp-content/uploads/2021/09/DOC-MANUAL-M-2021-Apex.pdf  
 
