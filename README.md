@@ -160,6 +160,9 @@ The arduino begins filling the input buffer when the BOT signal is recived and p
 **TTL and RS-232 as flavors of UART**
 Both TTL and RS-232 are flavors of UART which stands for universal asynchronous reciver transmiter. Both TTL and RS-232 need either software emulation or a hardware chip (most common) to achieve communication. The only difference between TTL and RS-232 is the voltage levels which are designated. 
 
+**SPI (Serial Peripheral Interface)**
+The Thermocouple amplifier (Max 31855) uses SPI, but fortunately the MAX 31855 library takes care of the amplifier for you. 
+
 Here are some useful docs for learning about UART, RS-232, and TTL 
 - https://www.circuitbasics.com/basics-uart-communication/#:~:text=UART%20stands%20for%20Universal%20Asynchronous,transmit%20and%20receive%20serial%20data.
 - https://support.unitronics.com/index.php?/selfhelp/view-article/connect-devices-with-ttl-interface-levels-to-rs232-interface
@@ -187,12 +190,8 @@ ContentView.swift
 
 * “Serial communication Basic Knowledge -RS-232C/RS-422/RS-485,” https://www.contec.com/support/basic-knowledge/daq-control/serial-communicatin/ 
 
-* “Swift,” https://developer.apple.com/swift/
-
 * “RS232 Serial Communication Protocol: Basics, Working & Specifications,” https://circuitdigest.com/article/rs232-serial-communication-protocol-basics-specifications
 
 * “VCC and VSS Pins,” https://www.tutorialspoint.com/vcc-and-vss-pins#:~:text=VCC%20(Voltage%20Common%20Collector)%20is,Supply)%20means%20ground%20or%20zero
 
 * “What is Arduino?,” https://www.arduino.cc/en/Guide/Introduction
-
-# Additional Design Documents
