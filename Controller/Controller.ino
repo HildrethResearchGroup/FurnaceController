@@ -94,6 +94,7 @@ void parse_cmd() {
 }
 
 // returns true on End of Transmission Signal encountered
+// fills input_data and terminates it with \0
 // returns false if data still needs to be read
 bool read_serial_in() {
   if (Serial.available() > 0) {
@@ -122,8 +123,8 @@ bool read_serial_in() {
   return false;
 }
 
-// reaches out to each connected sensor and waits for data to see if any issues exist
-// Sometimes this will incorrectly say BAD, but sending the command multiple times will yield the actual status of the sensors
+// Reaches out to each connected sensor and waits for data to see if any issues exist
+// Somestimes two calls in a row will have to be made for a sensor to rest to an OK state
 void check_all_sensors(){
   // flowSerial maintains an internal buffer of 16bytes
   // the only way to clear this buffer is to read all chars from it
