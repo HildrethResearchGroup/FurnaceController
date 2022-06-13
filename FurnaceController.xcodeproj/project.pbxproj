@@ -36,6 +36,7 @@
 		3FB499212853E52D00C3B565 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB499092853E52D00C3B565 /* ContentView.swift */; };
 		3FB499222853E52D00C3B565 /* MeasurementRateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4990A2853E52D00C3B565 /* MeasurementRateView.swift */; };
 		3FB499232853E52D00C3B565 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB4990B2853E52D00C3B565 /* ErrorView.swift */; };
+		3FBB044E28579E3700CD7FAC /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 3FBB044D28579E3700CD7FAC /* Documentation.docc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		3FB499092853E52D00C3B565 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3FB4990A2853E52D00C3B565 /* MeasurementRateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeasurementRateView.swift; sourceTree = "<group>"; };
 		3FB4990B2853E52D00C3B565 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		3FBB044D28579E3700CD7FAC /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				3FB498F32853E52D00C3B565 /* DataGraph.framework */,
 				3FB498F72853E52D00C3B565 /* Preview Content */,
 				3FB499082853E52D00C3B565 /* DataGraphFramework.dmg */,
+				3FBB044D28579E3700CD7FAC /* Documentation.docc */,
 			);
 			path = FurnaceController;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				3FB4990E2853E52D00C3B565 /* ArduinoController.swift in Sources */,
 				3FB4991B2853E52D00C3B565 /* XZData.swift in Sources */,
 				3FB499122853E52D00C3B565 /* FurnaceControllerApp.swift in Sources */,
+				3FBB044E28579E3700CD7FAC /* Documentation.docc in Sources */,
 				3FB499132853E52D00C3B565 /* StopwatchView.swift in Sources */,
 				3FB4990C2853E52D00C3B565 /* DataController.swift in Sources */,
 				3FB4991D2853E52D00C3B565 /* GraphController.swift in Sources */,

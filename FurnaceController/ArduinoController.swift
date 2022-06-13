@@ -7,7 +7,9 @@ import SwiftUI
 ///
 /// This class relies heavily on the ORSSerial library created by armadsen. For more in-depth documentation, go to [their github repository](https://github.com/armadsen/ORSSerialPort).
 ///
-/// ArduinoController implmenets the NSObject, ObservableObject, and ORSSerialPortDelegate protocols.
+/// ArduinoController implements the  ObservableObject and ORSSerialPortDelegate protocols. It is also a subclass of NSObject. The ObservableObject protocol indicates that the view may need to be updated if certain properties, marked with the @Published property wrapper, are updated. The ORSSerialPortDelegate protocol makes it so that the ArduinoController class is informed whenever the port receives data, whenever the port is opened/closed, whenever an error with the port is detected, and whenever the port is disconnected. The serialPort:didReceiveData method is part of this protocol.
+///
+///
 
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
