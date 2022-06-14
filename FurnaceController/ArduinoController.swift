@@ -9,7 +9,19 @@ import SwiftUI
 ///
 /// ArduinoController implements the  ObservableObject and ORSSerialPortDelegate protocols. It is also a subclass of NSObject. The ObservableObject protocol indicates that the view may need to be updated if certain properties, marked with the @Published property wrapper, are updated. The ORSSerialPortDelegate protocol makes it so that the ArduinoController class is informed whenever the port receives data, whenever the port is opened/closed, whenever an error with the port is detected, and whenever the port is disconnected. The serialPort:didReceiveData method is part of this protocol.
 ///
+/// Within ArduinoController, the Command struct is defined along with an enumerated type, CommandType, which is used to identify different types of commands.
 ///
+/// This class stores the information needed for creating commands as well as the temperature and flowrate values received from the Arduino. The temperature and flowrate values stored in this class are the values that are displayed in the TemperatureView, ArgonFlowView, and NitrogenFlowView.
+///
+/// The functions that exist in this class include functions for:
+/// * requesting the temperature value from the Arduino
+/// * requesting an Argon flowrate data packet from the Arduino
+/// * requesting a Nitrogen flowrate data packet from the Arduino
+/// * requesting a connection status check from the Arduino
+/// * commanding the Arduino to set the setpoint of the Argon flow meter
+/// * commanding the Arduino to set the setpoint of the Nitrogen flow meter
+/// * opening/closing a port
+/// * parsing a datapacket received from the Arduino
 
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
@@ -51,11 +63,11 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     /// Types of commands that require handling a response
     ///
     /// Meaning for each command type:
-    /// * QUERY_TEMP =
-    /// * QUERY_ARGON =
-    /// * QUERY_NITROGEN =
-    /// * GENERAL =
-    /// * STATUS =
+    /// * QUERY_TEMP = Request temperature data from the arduino
+    /// * QUERY_ARGON = Request a data packet from the Argon flowrate sensor
+    /// * QUERY_NITROGEN = Request a data packet from the Nitrogen flow sensor
+    /// * GENERAL = A debugging type of request
+    /// * STATUS = Command the Arduino to perform a status check on its connection to the sensors and return the result
     enum CommandType {
         case QUERY_TEMP
         case QUERY_ARGON
@@ -74,11 +86,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     // All of these published variables are used to keep the app display updated.
     // The @Published modifier makes the view watch the variable to see if it
     // needs to be updated on the display
-    
-    // TODO: Complete Documentation
-    @Published var nextCommand = ""
-    
-    @Published var lastResponse = ""
     
     /// A dictionary that stores command history by command ID.
     private var commands: [Int: Command] = [:]
@@ -118,8 +125,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     /// This indicator is used for determining if the open or close function should be used when the openOrClosePort function is callled. It also acts as the Text for the button next to the port selection dropdown in InfoView
     @Published var nextPortState = "Open"
     
-    // TODO: Clarify with Josh when getStatus is called
-    
     /// Current status of the connection between the application and the Arduino
     ///
     /// A true value indicates that the Arduino is connected and that all sensors are sending appropriate signals to the Arduino. This value will change when an Arduino unit is connected, when an Arduino unit is closed or disconnected, and when the status command returns a bad value.
@@ -144,9 +149,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     
     // MARK: Functions
     
-    // TODO: Check specifics with Josh
-    // sends a generic command type, using the request field as the `Data` of the command (see Command language specs)
-    
     
     /// Send a GENERIC type command to the Arduino
     /// - Parameter command: The command that should be sent to the Arduino
@@ -163,15 +165,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
             self.nextID += 1                           // increment the command ID
         }
     }
-    
-/*
- The below function is used for testing
- */
-//    Sends whatever command is entered into the textbox. Currently triggered by a button. Used for debugging
-//    func sendCommand() {
-//        let command = Command(request: self.nextCommand, type: .GENERAL)
-//        self.sendCommand(command: command)
-//    }
     
     // Next 3 functions are to read in sensor data
     
@@ -214,8 +207,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
         let command = Command(request: self.nitrogenFlowID + "s" + String(flow), type: .GENERAL)
         self.sendCommand(command: command)
     }
-    
-    // TODO: Confirm when this function is called
     
     /// Send a status check command to the Arduino
     ///
@@ -330,12 +321,6 @@ class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
                             return
                         }
                     }
-                    // Process for handling a data packet returned from a GENERAL command
-                    else if command.type == .GENERAL {
-                        self.lastResponse = command.response
-                        //print(command.response)
-                    }
-                    
                     // Check that the values have been updated
                     if values[0] != -1 && values[1] != -1 && values[2] != -1 {
                         AppController.shared.recordData(temp: values[0], flowAr: values[1], flowN2: values[2])

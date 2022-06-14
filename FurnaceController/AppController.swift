@@ -2,10 +2,13 @@
 import Foundation
 import SwiftUI
 
-/**
+
+/*
  AppController is the brains behind the furnace controller app. It handles both timers used, tells the arduino when to poll for data, handles graphing and saving the sensor data, and has the main logic for starting and stopping recording. It is a singleton class because we were having some issues getting sensor data from the ArduinoController back to the AppController after polling. 
  */
-
+/// Contains almost all of the backend logic for the FurnaceController app.
+///
+///
 class AppController: ObservableObject {
     
     /// Singleton instance of AppController
@@ -13,7 +16,9 @@ class AppController: ObservableObject {
     /// By declaring a static, constant instance of AppController within the AppController class, AppController is made into a singleton. If an init method is created for AppController, it should be set to private
     static let shared = AppController()
     
-    ///  The  interface between the Arduino and the rest of the program which contains the 
+    /// The  interface between the Arduino and the rest of the program
+    ///
+    /// 
     var arduino = ArduinoController()
     
     /// instance of the graph controller
