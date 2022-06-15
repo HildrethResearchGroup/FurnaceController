@@ -8,6 +8,9 @@
 import Foundation
 import SwiftUI
 
+/// The actual view of the graph which is used in the GUI.
+///
+/// Uses the NSViewRepresentable wrapper to integrate an AppKit view into the NSView GraphView.
 struct GraphViewRepresentable: NSViewRepresentable {
     typealias NSViewType = GraphView
     

@@ -27,7 +27,6 @@
 		3FB499172853E52D00C3B565 /* ArgonFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB498FE2853E52D00C3B565 /* ArgonFlowView.swift */; };
 		3FB499182853E52D00C3B565 /* NitrogenFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB498FF2853E52D00C3B565 /* NitrogenFlowView.swift */; };
 		3FB499192853E52D00C3B565 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB499002853E52D00C3B565 /* AppController.swift */; };
-		3FB4991B2853E52D00C3B565 /* XZData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB499032853E52D00C3B565 /* XZData.swift */; };
 		3FB4991C2853E52D00C3B565 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB499042853E52D00C3B565 /* DataModel.swift */; };
 		3FB4991D2853E52D00C3B565 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB499052853E52D00C3B565 /* GraphController.swift */; };
 		3FB4991E2853E52D00C3B565 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB499062853E52D00C3B565 /* GraphView.swift */; };
@@ -93,7 +92,6 @@
 		3FB498FE2853E52D00C3B565 /* ArgonFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonFlowView.swift; sourceTree = "<group>"; };
 		3FB498FF2853E52D00C3B565 /* NitrogenFlowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NitrogenFlowView.swift; sourceTree = "<group>"; };
 		3FB499002853E52D00C3B565 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
-		3FB499032853E52D00C3B565 /* XZData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZData.swift; sourceTree = "<group>"; };
 		3FB499042853E52D00C3B565 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		3FB499052853E52D00C3B565 /* GraphController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
 		3FB499062853E52D00C3B565 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -219,7 +217,6 @@
 		3FB499022853E52D00C3B565 /* DataGraph Views */ = {
 			isa = PBXGroup;
 			children = (
-				3FB499032853E52D00C3B565 /* XZData.swift */,
 				3FB499042853E52D00C3B565 /* DataModel.swift */,
 				3FB499052853E52D00C3B565 /* GraphController.swift */,
 				3FB499062853E52D00C3B565 /* GraphView.swift */,
@@ -380,7 +377,6 @@
 				3FB499222853E52D00C3B565 /* MeasurementRateView.swift in Sources */,
 				3FB4991C2853E52D00C3B565 /* DataModel.swift in Sources */,
 				3FB4990E2853E52D00C3B565 /* ArduinoController.swift in Sources */,
-				3FB4991B2853E52D00C3B565 /* XZData.swift in Sources */,
 				3FB499122853E52D00C3B565 /* FurnaceControllerApp.swift in Sources */,
 				3FBB044E28579E3700CD7FAC /* Documentation.docc in Sources */,
 				3FB499132853E52D00C3B565 /* StopwatchView.swift in Sources */,

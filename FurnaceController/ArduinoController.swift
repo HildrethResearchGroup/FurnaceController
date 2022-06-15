@@ -22,6 +22,8 @@ import SwiftUI
 /// * commanding the Arduino to set the setpoint of the Nitrogen flow meter
 /// * opening/closing a port
 /// * parsing a datapacket received from the Arduino
+///
+/// If you need help with how this class works, feel free to email Josh at JoshMendels@gmail.com
 
 class ArduinoController: NSObject, ObservableObject, ORSSerialPortDelegate {
     

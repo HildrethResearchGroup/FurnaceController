@@ -18,7 +18,7 @@ class AppController: ObservableObject {
     
     /// The  interface between the Arduino and the rest of the program
     ///
-    /// 
+    ///
     var arduino = ArduinoController()
     
     /// instance of the graph controller
@@ -53,7 +53,6 @@ class AppController: ObservableObject {
         let nextLine = String(self.progressTime) + "," + String(temp) + "," + String(flowAr) + "," + String(flowN2)
         dataController!.writeLine(data: nextLine)
         
-        // TODO: graph that data
         graph.updateData(time: Double(self.progressTime) / 60, temp: temp, flowAr: flowAr, flowN2: flowN2)
     }
     
