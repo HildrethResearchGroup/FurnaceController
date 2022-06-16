@@ -2,13 +2,11 @@
 import Foundation
 import SwiftUI
 
-
-/*
- AppController is the brains behind the furnace controller app. It handles both timers used, tells the arduino when to poll for data, handles graphing and saving the sensor data, and has the main logic for starting and stopping recording. It is a singleton class because we were having some issues getting sensor data from the ArduinoController back to the AppController after polling. 
- */
 /// Contains almost all of the backend logic for the FurnaceController app. Contains the timer objects and communicates with ArduinoController, DataController and GraphController.
 ///
-/// This class contains both of the timers that are used in the FurnaceController application: one for displaying on the GUI and the other for determining when the sensors are polled. To poll the sensors, AppController communicates with ArduinoController. The data received is then communicated to GraphController and DataController to update the graph and CSV, respectively.
+/// This class contains both of the timers that are used in the FurnaceController application: one for displaying on the GUI and the other for determining when the sensors are polled. To poll the sensors, AppController communicates with ArduinoController. The data received is then communicated to GraphController and DataController to update the graph and CSV, respectively. AppController also has the main logic for starting and stopping the data recording.
+///
+/// AppController is currently a singleton class because there were some issues getting sensor data from the ArduinoController back to AppController after polling. It may be valuable for testing to update AppController with dependency injection instead.
 class AppController: ObservableObject {
     
     /// Singleton instance of AppController
@@ -133,7 +131,7 @@ class AppController: ObservableObject {
     }
     
     /// Displays the savepanel
-    /// 
+    ///
     /// A generic save panel is displayed to the user allowing them and moves the saved CSV data to the specified filepath
     func showSavePanel(){
         let panel = NSSavePanel()
