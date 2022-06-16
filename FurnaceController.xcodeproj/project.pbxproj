@@ -183,8 +183,9 @@
 			children = (
 				3FB498F92853E52D00C3B565 /* FurnaceControllerApp.swift */,
 				3FB499092853E52D00C3B565 /* ContentView.swift */,
-				3FB498F22853E52D00C3B565 /* ArduinoController.swift */,
 				3FB499002853E52D00C3B565 /* AppController.swift */,
+				3FB498F22853E52D00C3B565 /* ArduinoController.swift */,
+				3FB498F02853E52D00C3B565 /* DataController.swift */,
 				3FB498F12853E52D00C3B565 /* InfoView.swift */,
 				3FB498FB2853E52D00C3B565 /* TemperatureView.swift */,
 				3FB498FF2853E52D00C3B565 /* NitrogenFlowView.swift */,
@@ -192,7 +193,6 @@
 				3FB498FA2853E52D00C3B565 /* StopwatchView.swift */,
 				3FB4990A2853E52D00C3B565 /* MeasurementRateView.swift */,
 				3FB4990B2853E52D00C3B565 /* ErrorView.swift */,
-				3FB498F02853E52D00C3B565 /* DataController.swift */,
 				3FB499022853E52D00C3B565 /* DataGraph Views */,
 				3FB498FD2853E52D00C3B565 /* Basic Script.dgraph */,
 				3FB498F62853E52D00C3B565 /* FurnaceController.entitlements */,
