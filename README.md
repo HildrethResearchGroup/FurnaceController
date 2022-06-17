@@ -110,7 +110,7 @@ Here are some useful docs for learning about UART, RS-232, and TTL
 ### System Architecture
 
 Here is a high-level overview of all of the components of our project and how they interact. 
-![Architecture Diagram](https://user-images.githubusercontent.com/63746522/173135280-58aab64d-c667-485b-831b-c4a724d6ab8b.jpg)
+![Architecture Diagram](https://github.com/HildrethResearchGroup/FurnaceController/blob/main/Images/FurnaceControllerArchitecture.png?raw=true)
 
 ### Configuring the Apex Flow Sensor devices
 - Set Baud rate to 9600
