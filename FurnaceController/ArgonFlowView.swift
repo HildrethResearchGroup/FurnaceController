@@ -1,20 +1,21 @@
-//
-//  ArgonFlowView.swift
-//  FurnaceController
-//
-//  Created by Mines Student on 6/6/22.
-//
 
 import SwiftUI
 
-/*
- * ArgonFlowView contains the display of the current flowrate of Argon, the TextField for updating the
- * flowrate, and the button for confirming an update
- */
+/// Subview containing the display of the current Argon flowrate, the textfield for updating the Argon flowrate, and the button for confirming an update.
+///
+/// The Argon flowrate which is displayed in the text following the "Argon Flowrate (L/min)" label exists within ArduinoController.
+///
+/// The textfield and button initiate the sending of a command to the Arduino, through the ArduinoController, which will update the Argon flow meter's flowrate according to the value entered by the user. If the value entered is less than the minimum flowrate, it will be rounded up to the minimum flowrate. If the value entered is greater than the maximum flowrate, it will be rounded down to the maximum flowrate. The textfield and button are disabled if the connection status of the application with the Arduino and sensors is bad.
 struct ArgonFlowView: View {
     
+    /// A string that appears within the textfield
+    ///
+    /// I am not entirely sure how the Property Wrappers of this variable work.
     @State private var flow: String = ""               // last measured flowrate
     
+    /// Reference to the ArduinoController object, arduino, that exists in AppController.
+    ///
+    /// The ArduinoController contains the last measured Argon flowrate data which is displayed in this subview. It also contains the functionality for sending commands to the Arduino which update the Argon flowrate.
     @ObservedObject var controller: ArduinoController = AppController.shared.arduino
     
     var body: some View {
@@ -23,7 +24,7 @@ struct ArgonFlowView: View {
             HStack {
                 
                 // MARK: Display Flowrate
-                // Displays the flowrate measured at the last request in ...
+                // Displays the flowrate measured at the last request in L/min
                 Text("Argon Flowrate (L/min)")
                 Text(String(controller.lastFlowAr))
                 

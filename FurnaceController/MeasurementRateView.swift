@@ -1,14 +1,16 @@
 //
-//  MeasurementRateView.swift
-//  FurnaceController
-//
-//  Created by Mines Student on 6/6/22.
-//
+
 
 import SwiftUI
 
+/// Subview containing the textfield for updating the sampling rate
+///
+/// The textfield can be used to update the sampling rate at which the application polls the sensors. The value is read from the textfield when an experiment is started and the textfield will be disabled.
 struct MeasurementRateView: View {
     
+    /// Reference to the singleton instance of AppController.
+    ///
+    /// AppController contains the value being used for the sampling rate.
     @ObservedObject var controller: AppController = AppController.shared
     
     var body: some View {

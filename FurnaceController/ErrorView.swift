@@ -1,14 +1,14 @@
-//
-//  SwiftUIView.swift
-//  FurnaceController
-//
-//  Created by Mines Student on 6/9/22.
-//
 
 import SwiftUI
 
+/// Subview containing the text item for error messages.
+///
+/// The error messages are passed from the Arduino into the AppController by the ArduinoController. These error messages, which exist in AppController are what are displayed by this class
 struct ErrorView: View {
     
+    /// Reference to the singleton instance of AppController.
+    ///
+    /// AppController contains the error message that will be displayed. The default value of this error message is an empty string.
     @ObservedObject var controller = AppController.shared
     
     
